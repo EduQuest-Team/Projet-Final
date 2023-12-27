@@ -10,6 +10,7 @@ import com.pharma.IntegrationTest;
 import com.pharma.domain.Pharmacie;
 import com.pharma.repository.PharmacieRepository;
 import jakarta.persistence.EntityManager;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,8 +44,8 @@ class PharmacieResourceIT {
     private static final String DEFAULT_ADRESSE = "AAAAAAAAAA";
     private static final String UPDATED_ADRESSE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_IMAGE = "AAAAAAAAAA";
-    private static final String UPDATED_IMAGE = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_IMAGE = null;
+    private static final byte[] UPDATED_IMAGE = null;
 
     private static final Double DEFAULT_LATITUDE = 1D;
     private static final Double UPDATED_LATITUDE = 2D;
