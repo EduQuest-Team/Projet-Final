@@ -1,0 +1,26 @@
+{
+  "pharmaAiApp": {
+    "garde": {
+      "home": {
+        "title": "Gardes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Garde",
+        "createOrEditLabel": "Create or edit a Garde",
+        "notFound": "No Gardes found"
+      },
+      "created": "A new Garde is created with identifier {{ param }}",
+      "updated": "A Garde is updated with identifier {{ param }}",
+      "deleted": "A Garde is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Garde {{ id }}?"
+      },
+      "detail": {
+        "title": "Garde"
+      },
+      "id": "ID",
+      "type": "Type",
+      "pharmacie": "Pharmacie",
+      "pharmaciegarde": "Pharmaciegarde"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity PharmacieGarde.
+    -->
+    <changeSet id="20231227121354-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="pharmacie_garde_id"
+                                 baseTableName="rel_pharmacie_garde__pharmacie"
+                                 constraintName="fk_rel_pharmacie_garde__pharmacie__pharmacie_garde_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pharmacie_garde"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="pharmacie_id"
+                                 baseTableName="rel_pharmacie_garde__pharmacie"
+                                 constraintName="fk_rel_pharmacie_garde__pharmacie__pharmacie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pharmacie"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="pharmacie_garde_id"
+                                 baseTableName="rel_pharmacie_garde__garde"
+                                 constraintName="fk_rel_pharmacie_garde__garde__pharmacie_garde_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pharmacie_garde"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="garde_id"
+                                 baseTableName="rel_pharmacie_garde__garde"
+                                 constraintName="fk_rel_pharmacie_garde__garde__garde_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garde"
+                                 />
+    </changeSet>
+</databaseChangeLog>

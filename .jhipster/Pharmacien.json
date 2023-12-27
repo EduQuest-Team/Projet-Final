@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20231227121454"
+  },
+  "applications": "*",
+  "entityTableName": "pharmacien",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Pharmacien",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "pharmacie",
+      "relationshipName": "pharmacie",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

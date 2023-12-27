@@ -1,0 +1,36 @@
+{
+  "pharmaAiApp": {
+    "pharmacie": {
+      "home": {
+        "title": "Pharmacies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pharmacie",
+        "createOrEditLabel": "Create or edit a Pharmacie",
+        "notFound": "No Pharmacies found"
+      },
+      "created": "A new Pharmacie is created with identifier {{ param }}",
+      "updated": "A Pharmacie is updated with identifier {{ param }}",
+      "deleted": "A Pharmacie is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pharmacie {{ id }}?"
+      },
+      "detail": {
+        "title": "Pharmacie"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "adresse": "Adresse",
+      "image": "Image",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "status": "Status",
+      "zone": "Zone",
+      "garde": "Garde",
+      "pharmaciegarde": "Pharmaciegarde",
+      "pharmacien": "Pharmacien",
+      "position": "Position",
+      "activated": "Activated",
+      "deactivated": "Deactivated"
+    }
+  }
+}

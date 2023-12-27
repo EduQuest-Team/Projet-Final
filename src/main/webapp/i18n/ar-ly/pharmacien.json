@@ -1,0 +1,29 @@
+{
+  "pharmaAiApp": {
+    "pharmacien": {
+      "home": {
+        "title": "Pharmaciens",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pharmacien",
+        "createOrEditLabel": "Create or edit a Pharmacien",
+        "notFound": "No Pharmaciens found"
+      },
+      "created": "A new Pharmacien is created with identifier {{ param }}",
+      "updated": "A Pharmacien is updated with identifier {{ param }}",
+      "deleted": "A Pharmacien is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pharmacien {{ id }}?"
+      },
+      "detail": {
+        "title": "Pharmacien"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "email": "Email",
+      "password": "Password",
+      "pharmacie": "Pharmacie",
+      "historique": "Historique"
+    }
+  }
+}

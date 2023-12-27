@@ -1,0 +1,29 @@
+{
+  "pharmaAiApp": {
+    "pharmacien": {
+      "home": {
+        "title": "Pharmaciens",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Pharmacien",
+        "createOrEditLabel": "Créer ou éditer un Pharmacien",
+        "notFound": "Aucun Pharmacien trouvé"
+      },
+      "created": "Un nouveau Pharmacien a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Pharmacien avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Pharmacien avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Pharmacien {{ id }} ?"
+      },
+      "detail": {
+        "title": "Pharmacien"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "email": "Email",
+      "password": "Password",
+      "pharmacie": "Pharmacie",
+      "historique": "Historique"
+    }
+  }
+}

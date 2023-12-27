@@ -48,6 +48,20 @@ public class CacheConfiguration {
             createCache(cm, com.pharma.domain.User.class.getName());
             createCache(cm, com.pharma.domain.Authority.class.getName());
             createCache(cm, com.pharma.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.pharma.domain.Pharmacie.class.getName());
+            createCache(cm, com.pharma.domain.Pharmacie.class.getName() + ".gardes");
+            createCache(cm, com.pharma.domain.Pharmacie.class.getName() + ".pharmaciegardes");
+            createCache(cm, com.pharma.domain.Garde.class.getName());
+            createCache(cm, com.pharma.domain.Garde.class.getName() + ".pharmacies");
+            createCache(cm, com.pharma.domain.Garde.class.getName() + ".pharmaciegardes");
+            createCache(cm, com.pharma.domain.PharmacieGarde.class.getName());
+            createCache(cm, com.pharma.domain.PharmacieGarde.class.getName() + ".pharmacies");
+            createCache(cm, com.pharma.domain.PharmacieGarde.class.getName() + ".gardes");
+            createCache(cm, com.pharma.domain.Pharmacien.class.getName());
+            createCache(cm, com.pharma.domain.Zone.class.getName());
+            createCache(cm, com.pharma.domain.Ville.class.getName());
+            createCache(cm, com.pharma.domain.Historique.class.getName());
+            createCache(cm, com.pharma.domain.Position.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

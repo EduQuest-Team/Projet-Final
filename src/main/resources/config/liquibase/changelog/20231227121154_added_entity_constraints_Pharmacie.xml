@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Pharmacie.
+    -->
+    <changeSet id="20231227121154-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="zone_id"
+                                 baseTableName="pharmacie"
+                                 constraintName="fk_pharmacie__zone_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="zone"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="pharmacie_id"
+                                 baseTableName="rel_pharmacie__garde"
+                                 constraintName="fk_rel_pharmacie__garde__pharmacie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pharmacie"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="garde_id"
+                                 baseTableName="rel_pharmacie__garde"
+                                 constraintName="fk_rel_pharmacie__garde__garde_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garde"
+                                 />
+    </changeSet>
+</databaseChangeLog>
