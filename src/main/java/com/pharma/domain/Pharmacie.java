@@ -30,8 +30,9 @@ public class Pharmacie implements Serializable {
     @Column(name = "adresse")
     private String adresse;
 
-    @Column(name = "image")
-    private String image;
+    @Lob
+    @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
+    private byte[] image;
 
     @Column(name = "latitude")
     private Double latitude;
@@ -110,16 +111,16 @@ public class Pharmacie implements Serializable {
         this.adresse = adresse;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return this.image;
     }
 
-    public Pharmacie image(String image) {
+    public Pharmacie image(byte[] image) {
         this.setImage(image);
         return this;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

@@ -1,11 +1,11 @@
 id;nom;adresse;image;latitude;longitude;status
-1;loosely;fooey wording fly;if helpfully;16521.19;17311.99;true
-2;deafening towards amount;subtle striped pfft;likely;9458.09;16205.66;false
-3;every abnormally bah;coke injunction day;immediately when;7399.85;2554.99;true
-4;if considering;con;space jam lest;12041;21585.91;false
-5;parliament;pike notoriety;ah;21474.31;1054.63;true
-6;parcel hm instead;worried;whether minty including;1470.59;14499.55;false
-7;although atop hm;who seriously;an;17718.75;25221.96;true
-8;husband easy-going concerned;astride scaly brightly;father geez;11243.8;23891.77;false
-9;minus;meantime courteous;unbearably joyously reprocess;25425.44;18047.25;false
-10;identical phew french;but bakeware canoe;mild pish;10216.66;9196.88;true
+1;loosely;fooey wording fly;null;16521.19;17311.99;true
+2;deafening towards amount;subtle striped pfft;null;9458.09;16205.66;false
+3;every abnormally bah;coke injunction day;null;7399.85;2554.99;true
+4;if considering;con;null;12041;21585.91;false
+5;parliament;pike notoriety;null;21474.31;1054.63;true
+6;parcel hm instead;worried;null;1470.59;14499.55;false
+7;although atop hm;who seriously;null;17718.75;25221.96;true
+8;husband easy-going concerned;astride scaly brightly;null;11243.8;23891.77;false
+9;minus;meantime courteous;null;25425.44;18047.25;false
+10;identical phew french;but bakeware canoe;null;10216.66;9196.88;true

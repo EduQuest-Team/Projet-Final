@@ -136,6 +136,18 @@ export const PharmacieUpdate = () => {
                 id="pharmacie-image"
                 name="image"
                 data-cy="image"
+                type="file"
+                accept="image/*"
+              />
+              {/*<input type="file" id="pharmacie-image"*/}
+              {/*       name="image"*/}
+              {/*       data-cy="image"*/}
+              {/*       accept="image/png, image/jpeg"/>*/}
+              <ValidatedField
+                label={translate('pharmaAiApp.pharmacie.longitude')}
+                id="pharmacie-longitude"
+                name="longitude"
+                data-cy="longitude"
                 type="text"
               />
               <ValidatedField
@@ -143,13 +155,6 @@ export const PharmacieUpdate = () => {
                 id="pharmacie-latitude"
                 name="latitude"
                 data-cy="latitude"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('pharmaAiApp.pharmacie.longitude')}
-                id="pharmacie-longitude"
-                name="longitude"
-                data-cy="longitude"
                 type="text"
               />
               <ValidatedField
