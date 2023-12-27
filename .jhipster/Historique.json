@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20231227121754"
+  },
+  "applications": "*",
+  "entityTableName": "historique",
+  "fields": [
+    {
+      "fieldName": "path",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Historique",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "pharmacieGarde",
+      "relationshipName": "pharmaciegarde",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "pharmacien",
+      "relationshipName": "pharmacien",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

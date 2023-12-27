@@ -1,0 +1,20 @@
+{
+  "annotations": {
+    "changelogDate": "20231227121654"
+  },
+  "applications": "*",
+  "entityTableName": "ville",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Ville",
+  "relationships": [],
+  "searchEngine": "no"
+}

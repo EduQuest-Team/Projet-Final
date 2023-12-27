@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20231227121254"
+  },
+  "applications": "*",
+  "entityTableName": "garde",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Garde",
+  "relationships": [
+    {
+      "otherEntityName": "pharmacie",
+      "otherEntityRelationshipName": "garde",
+      "relationshipName": "pharmacie",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "pharmacieGarde",
+      "otherEntityRelationshipName": "garde",
+      "relationshipName": "pharmaciegarde",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

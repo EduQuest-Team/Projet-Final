@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20231227121854"
+  },
+  "applications": "*",
+  "entityTableName": "position",
+  "fields": [
+    {
+      "fieldName": "latitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "Position",
+  "relationships": [
+    {
+      "otherEntityField": "id",
+      "otherEntityName": "pharmacie",
+      "relationshipName": "pharmacie",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,34 @@
+{
+  "pharmaAiApp": {
+    "pharmacie": {
+      "home": {
+        "title": "Pharmacies",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Pharmacie",
+        "createOrEditLabel": "Créer ou éditer un Pharmacie",
+        "notFound": "Aucun Pharmacie trouvé"
+      },
+      "created": "Un nouveau Pharmacie a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Pharmacie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Pharmacie avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Pharmacie {{ id }} ?"
+      },
+      "detail": {
+        "title": "Pharmacie"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "adresse": "Adresse",
+      "image": "Image",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "status": "Status",
+      "zone": "Zone",
+      "garde": "Garde",
+      "pharmaciegarde": "Pharmaciegarde",
+      "pharmacien": "Pharmacien",
+      "position": "Position"
+    }
+  }
+}

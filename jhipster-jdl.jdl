@@ -1,0 +1,67 @@
+entity Pharmacie {
+  nom String,
+  adresse String,
+  image String,
+  latitude Double,
+  longitude Double
+  status Boolean
+}
+
+entity Garde {
+  type Boolean
+}
+
+entity PharmacieGarde {
+    dateDebut LocalDate,
+    dateFin LocalDate
+}
+
+entity Pharmacien{
+  nom String,
+  prenom String,
+  email String,
+  password String
+}
+
+entity Zone{
+  nom String
+}
+
+entity Ville{
+  nom String,
+  image String
+}
+entity Historique{
+  path String
+  date LocalDate
+}
+entity Position {
+  latitude Double
+  longitude Double
+}
+
+// Define relationships
+relationship ManyToOne {
+  Pharmacie{zone(id)} to Zone
+  Zone{ville(id)} to Ville
+
+}
+
+relationship ManyToMany {
+  Pharmacie{garde} to Garde{pharmacie}
+  PharmacieGarde{pharmacie} to Pharmacie{pharmaciegarde}
+  PharmacieGarde{garde} to Garde{pharmaciegarde}
+ 
+}
+
+relationship OneToOne {
+    Pharmacien{pharmacie(id)} to Pharmacie
+    Position{pharmacie(id)} to  Pharmacie
+    Historique{pharmaciegarde(id)} to PharmacieGarde 
+    Historique{pharmacien(id)} to Pharmacien
+}
+
+paginate Pharmacie with pagination
+paginate Pharmacien, Historique with infinite-scroll
+
+
