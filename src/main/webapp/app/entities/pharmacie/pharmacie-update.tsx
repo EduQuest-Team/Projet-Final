@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -28,6 +28,7 @@ export const PharmacieUpdate = () => {
 
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
+  const [imageUrl, setImageUrl] = useState<string>('pharma.png');
 
   const zones = useAppSelector(state => state.zone.entities);
   const gardes = useAppSelector(state => state.garde.entities);
@@ -131,18 +132,17 @@ export const PharmacieUpdate = () => {
                 data-cy="adresse"
                 type="text"
               />
-              <ValidatedField
+              <ValidatedBlobField
                 label={translate('pharmaAiApp.pharmacie.image')}
                 id="pharmacie-image"
                 name="image"
                 data-cy="image"
-                type="file"
+                isImage
                 accept="image/*"
+                onChange={file => {
+                  setImageUrl(file.target.files.length > 0 ? file.target.files[0].name : 'pharma.png');
+                }}
               />
-              {/*<input type="file" id="pharmacie-image"*/}
-              {/*       name="image"*/}
-              {/*       data-cy="image"*/}
-              {/*       accept="image/png, image/jpeg"/>*/}
               <ValidatedField
                 label={translate('pharmaAiApp.pharmacie.longitude')}
                 id="pharmacie-longitude"
