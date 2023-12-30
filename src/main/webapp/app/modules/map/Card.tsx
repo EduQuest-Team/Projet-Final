@@ -7,8 +7,8 @@ function Cards({ data }) {
     <Carousel cols={3} rows={3} gap={10} loop>
       {data.map(item => {
         return (
-          <Carousel.Item>
-            <Card key={item._id} style={{ width: '18rem', margin: '5px' }}>
+          <Carousel.Item key={item._id}>
+            <Card style={{ width: '18rem', margin: '5px' }}>
               <Card.Body>
                 <Card.Title>{item.name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{item.garde}</Card.Subtitle>

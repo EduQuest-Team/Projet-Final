@@ -1,6 +1,7 @@
 {
   "generator-jhipster": {
     "applicationType": "monolith",
+    "appsFolders": ["Pharma-Jhispter"],
     "authenticationType": "jwt",
     "baseName": "pharmaAi",
     "buildTool": "maven",
@@ -12,6 +13,7 @@
     "databaseType": "sql",
     "devDatabaseType": "mysql",
     "devServerPort": 9060,
+    "directoryPath": "../",
     "enableGradleEnterprise": null,
     "enableHibernateCache": true,
     "enableSwaggerCodegen": true,
@@ -26,6 +28,7 @@
     "messageBroker": false,
     "microfrontend": null,
     "microfrontends": [],
+    "monitoring": "no",
     "nativeLanguage": "en",
     "packageName": "com.pharma",
     "prodDatabaseType": "mysql",
@@ -33,7 +36,7 @@
     "searchEngine": false,
     "serverPort": null,
     "serverSideOptions": ["enableSwaggerCodegen:true"],
-    "serviceDiscoveryType": false,
+    "serviceDiscoveryType": "no",
     "testFrameworks": ["cucumber"],
     "websocket": false,
     "withAdminUi": true
