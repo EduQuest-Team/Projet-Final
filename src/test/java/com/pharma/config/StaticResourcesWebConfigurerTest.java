@@ -7,6 +7,9 @@ import static org.mockito.Mockito.*;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+// import org.junit.jupiter.api.Timeout;
+// import org.junit.Rule;
+// import org.junit.rules.Timeout;
 import org.springframework.http.CacheControl;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.WebApplicationContext;
@@ -23,6 +26,9 @@ class StaticResourcesWebConfigurerTest {
     private MockServletContext servletContext;
     private WebApplicationContext applicationContext;
     private JHipsterProperties props;
+
+    // @Rule
+    // public Timeout globalTimeout = Timeout.seconds(30); // Set a longer timeout (in seconds)
 
     @BeforeEach
     void setUp() {
@@ -45,6 +51,7 @@ class StaticResourcesWebConfigurerTest {
     }
 
     @Test
+    // @Timeout(30) // Set a longer timeout (in seconds)
     void shouldInitializeResourceHandlerWithCacheControlAndLocations() {
         CacheControl ccExpected = CacheControl.maxAge(5, TimeUnit.DAYS).cachePublic();
         when(staticResourcesWebConfiguration.getCacheControl()).thenReturn(ccExpected);

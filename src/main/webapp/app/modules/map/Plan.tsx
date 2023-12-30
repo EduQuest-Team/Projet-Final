@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useEffect, useState, useReducer } from 'react';
 import { DNA } from 'react-loader-spinner';
 import Select from 'react-select';
@@ -57,6 +55,7 @@ const Plan = () => {
         const options = data.map(item => ({
           value: item._id,
           label: item.name,
+          key: item._id,
         }));
         dispatch({ type: 'SET_CITIES', payload: options });
       })
@@ -68,6 +67,7 @@ const Plan = () => {
         const options = data.map(item => ({
           value: item._id,
           label: item.name,
+          key: item._id,
         }));
         dispatch({ type: 'SET_ZONES', payload: options });
       })
@@ -99,19 +99,21 @@ const Plan = () => {
     // fetch(`${URL}/api/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
     fetch(`${URL}/api/pharmacies/nuit/${state.zone.value}/${state.city.value}`)
       .then(response => response.json())
-      .then(data => {
-        if (data.length) {
-          setPharmacies(data);
+      .then(responseData => {
+        if (responseData.length) {
+          setPharmacies(responseData);
         } else {
           dispatch({ type: 'SET_CITY', payload: null });
           dispatch({ type: 'SET_ZONE', payload: null });
           dispatch({ type: 'SET_GARDE', payload: null });
-          console.log('empty');
+          // console.log('empty');
         }
         setLoading(false);
         setGetData(true);
       })
-      .catch(error => console.log(error));
+      /* eslint-disable no-console */
+      // .catch(error => console.log(error));
+      .catch(error => console.error(error));
   };
 
   const handleRestPharmacies = data => {
