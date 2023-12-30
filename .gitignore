@@ -149,3 +149,9 @@ Desktop.ini
 ######################
 /coverage/
 /.nyc_output/
+
+######################
+# Code History
+######################
+.history/
+
