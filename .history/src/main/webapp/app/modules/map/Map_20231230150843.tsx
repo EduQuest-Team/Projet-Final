@@ -30,14 +30,13 @@ export interface IMapProps {
   data: any[];
   latitude: number;
   longitude: number;
-  name: string;
-  address: string;
+  // data[0].longitude: number;
 }
 
 // const Map = props => {
 // const Map = (props: IMapProps) => {
-const Map = ({ data }) => {
-  // const { latitude, longitude, name, address } = props;
+const Map = ({data}) => {
+    // const { latitude, longitude } = props;
   return (
     <Container fluid="sm" className="my-3">
       <Row>
@@ -54,8 +53,8 @@ const Map = ({ data }) => {
             // Use 'as' to assert the type of the props
           />
 
-          {/* {props.data.map(item => { */}
-          {data.map(item => {
+          {props.data.map(item => {
+          {props.data.map(item => {
             console.log(item);
             return (
               <Marker position={[item.latitude, item.longitude]}>

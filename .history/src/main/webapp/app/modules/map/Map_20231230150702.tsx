@@ -30,20 +30,19 @@ export interface IMapProps {
   data: any[];
   latitude: number;
   longitude: number;
-  name: string;
-  address: string;
+  // data[0].longitude: number;
 }
 
 // const Map = props => {
 // const Map = (props: IMapProps) => {
-const Map = ({ data }) => {
-  // const { latitude, longitude, name, address } = props;
+const Map = ({data}) => {
+    // const { latitude, longitude } = props;
   return (
     <Container fluid="sm" className="my-3">
       <Row>
         <CustomMapContainer
           // center={[props.data[0].latitude, props.data[0].longitude]}
-          center={[data[0].latitude, data[0].longitude]}
+          center={[props.data[0].latitude, props.data[0].longitude]}
           zoom={13}
           scrollWheelZoom={true}
           style={{ width: '100%', height: '80vh' }}
@@ -54,8 +53,7 @@ const Map = ({ data }) => {
             // Use 'as' to assert the type of the props
           />
 
-          {/* {props.data.map(item => { */}
-          {data.map(item => {
+          {props.data.map(item => {
             console.log(item);
             return (
               <Marker position={[item.latitude, item.longitude]}>
