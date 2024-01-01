@@ -42,7 +42,8 @@ export const VilleDetail = () => {
               <Translate contentKey="pharmaAiApp.ville.image">Image</Translate>
             </span>
           </dt>
-          <dd>{villeEntity.image}</dd>
+          {/*<dd>{villeEntity.image}</dd>*/}
+          <img alt="villeImage" src={`data:image/png;base64,${villeEntity.image}`} style={{ maxHeight: '120px' }} />
         </dl>
         <Button tag={Link} to="/ville" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}
