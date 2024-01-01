@@ -48,7 +48,8 @@ export const PharmacieDetail = () => {
               <Translate contentKey="pharmaAiApp.pharmacie.image">Image</Translate>
             </span>
           </dt>
-          <dd>{pharmacieEntity.image}</dd>
+          {/*<dd>{pharmacieEntity.image}</dd>*/}
+          <img alt="PharmaImage" src={`data:image/png;base64,${pharmacieEntity.image}`} style={{ maxHeight: '120px' }} />
           <dt>
             <span id="latitude">
               <Translate contentKey="pharmaAiApp.pharmacie.latitude">Latitude</Translate>
