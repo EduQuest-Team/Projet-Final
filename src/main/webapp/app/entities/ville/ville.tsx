@@ -106,7 +106,9 @@ export const Ville = () => {
                     </Button>
                   </td>
                   <td>{ville.nom}</td>
-                  <td>{ville.image}</td>
+                  <td>
+                    <img src={`data:image/jpeg;base64,${ville.image}`} alt="  villeImg" width="100px" height="100px" />
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/ville/${ville.id}`} color="info" size="sm" data-cy="entityDetailsButton">
