@@ -48,7 +48,20 @@ export const PharmacieDetail = () => {
               <Translate contentKey="pharmaAiApp.pharmacie.image">Image</Translate>
             </span>
           </dt>
-          <dd>{pharmacieEntity.image}</dd>
+          <dd>
+            {pharmacieEntity.image ? (
+              <div>
+                {pharmacieEntity.imageContentType ? (
+                  <a onClick={openFile(pharmacieEntity.imageFrontContentType, pharmacieEntity.image)}>
+                    <img src={`data:${pharmacieEntity.imageContentType};base64,${pharmacieEntity.image}`} style={{ maxHeight: '120px' }} />
+                  </a>
+                ) : null}
+                {/* <span>
+                  {pharmacieEntity.imageContentType}, {byteSize(pharmacieEntity.image)}
+                </span> */}
+              </div>
+            ) : null}
+          </dd>
           <dt>
             <span id="latitude">
               <Translate contentKey="pharmaAiApp.pharmacie.latitude">Latitude</Translate>
