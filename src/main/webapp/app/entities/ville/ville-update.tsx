@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedBlobField, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
@@ -18,7 +17,7 @@ export const VilleUpdate = () => {
 
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
-
+  const [imageUrl, setImageUrl] = useState<string>('pharma.png');
   const villeEntity = useAppSelector(state => state.ville.entity);
   const loading = useAppSelector(state => state.ville.loading);
   const updating = useAppSelector(state => state.ville.updating);
@@ -93,7 +92,17 @@ export const VilleUpdate = () => {
                 />
               ) : null}
               <ValidatedField label={translate('pharmaAiApp.ville.nom')} id="ville-nom" name="nom" data-cy="nom" type="text" />
-              <ValidatedField label={translate('pharmaAiApp.ville.image')} id="ville-image" name="image" data-cy="image" type="text" />
+              <ValidatedBlobField
+                label={translate('pharmaAiApp.ville.image')}
+                id="pharmacie-image"
+                name="image"
+                data-cy="image"
+                isImage
+                accept="image/*"
+                onChange={file => {
+                  setImageUrl(file.target.files.length > 0 ? file.target.files[0].name : 'pharma.png');
+                }}
+              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/ville" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
