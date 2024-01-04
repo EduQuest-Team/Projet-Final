@@ -15,6 +15,7 @@ import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Plan from 'app/modules/map/Plan';
+import Position from 'app/entities/position';
 
 const loading = <div>loading ...</div>;
 
@@ -35,6 +36,7 @@ const AppRoutes = () => {
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="map" element={<Plan />} />
+        <Route path="position/*" element={<Position />} />
         <Route path="account">
           <Route
             path="*"

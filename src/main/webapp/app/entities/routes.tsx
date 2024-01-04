@@ -25,7 +25,7 @@ export default () => {
         <Route path="zone/*" element={<Zone />} />
         <Route path="ville/*" element={<Ville />} />
         <Route path="historique/*" element={<Historique />} />
-        <Route path="position/*" element={<Position />} />
+
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>
