@@ -14,7 +14,8 @@ const initialState: EntityState<IPosition> = {
   updateSuccess: false,
 };
 
-const apiUrl = 'api/positions';
+// const apiUrl = 'api/positions';
+const apiUrl = 'positions';
 
 // Actions
 

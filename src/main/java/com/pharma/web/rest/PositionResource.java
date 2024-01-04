@@ -2,6 +2,7 @@ package com.pharma.web.rest;
 
 import com.pharma.domain.Position;
 import com.pharma.repository.PositionRepository;
+import com.pharma.security.AuthoritiesConstants;
 import com.pharma.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -21,7 +23,9 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.pharma.domain.Position}.
  */
 @RestController
-@RequestMapping("/api/positions")
+//@RequestMapping("/api/positions")
+@RequestMapping("/positions")
+//@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ANONYMOUS + "\")")
 @Transactional
 public class PositionResource {
 
