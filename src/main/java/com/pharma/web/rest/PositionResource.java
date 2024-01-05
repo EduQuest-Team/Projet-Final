@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,10 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.pharma.domain.Position}.
  */
 @RestController
-//@RequestMapping("/api/positions")
-@RequestMapping("/positions")
+@RequestMapping("/api/positions")
+//@RequestMapping("/positions")
 //@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ANONYMOUS + "\")")
+// @PreAuthorize("permitAll()")
 @Transactional
 public class PositionResource {
 
@@ -50,6 +52,7 @@ public class PositionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Position> createPosition(@RequestBody Position position) throws URISyntaxException {
         log.debug("REST request to save Position : {}", position);
         if (position.getId() != null) {
@@ -73,6 +76,7 @@ public class PositionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Position> updatePosition(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Position position
@@ -108,6 +112,7 @@ public class PositionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Position> partialUpdatePosition(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Position position
@@ -150,6 +155,8 @@ public class PositionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of positions in body.
      */
     @GetMapping("")
+    @PreAuthorize("permitAll()")
+    @PostAuthorize("permitAll()")
     public List<Position> getAllPositions() {
         log.debug("REST request to get all Positions");
         return positionRepository.findAll();
@@ -162,6 +169,7 @@ public class PositionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the position, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Position> getPosition(@PathVariable("id") Long id) {
         log.debug("REST request to get Position : {}", id);
         Optional<Position> position = positionRepository.findById(id);
@@ -175,6 +183,7 @@ public class PositionResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<Void> deletePosition(@PathVariable("id") Long id) {
         log.debug("REST request to delete Position : {}", id);
         positionRepository.deleteById(id);

@@ -10,6 +10,7 @@ const EntitiesMenu = () => {
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
   const isPharmacien = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.PHARMACIEN]));
   const isUser = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.USER]));
+  const isAnonymous = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ANONYMOUS]));
 
   return (
     <>
@@ -55,9 +56,11 @@ const EntitiesMenu = () => {
               </MenuItem>
             </>
           )}
-          <MenuItem icon="asterisk" to="/position">
-            <Translate contentKey="global.menu.entities.position" />
-          </MenuItem>
+          {isAnonymous && (
+            <MenuItem icon="asterisk" to="/position">
+              <Translate contentKey="global.menu.entities.position" />
+            </MenuItem>
+          )}
         </>
       ) : (
         <>
