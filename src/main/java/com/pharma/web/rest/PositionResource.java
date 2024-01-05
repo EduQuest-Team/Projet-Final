@@ -24,10 +24,10 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.pharma.domain.Position}.
  */
 @RestController
-@RequestMapping("/api/positions")
+@RequestMapping("api/positions")
 //@RequestMapping("/positions")
 //@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ANONYMOUS + "\")")
-// @PreAuthorize("permitAll()")
+//@PreAuthorize("permitAll()")
 @Transactional
 public class PositionResource {
 
@@ -156,7 +156,7 @@ public class PositionResource {
      */
     @GetMapping("")
     @PreAuthorize("permitAll()")
-    @PostAuthorize("permitAll()")
+    // @PostAuthorize("permitAll()")
     public List<Position> getAllPositions() {
         log.debug("REST request to get all Positions");
         return positionRepository.findAll();
