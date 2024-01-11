@@ -1,6 +1,8 @@
 package com.pharma.web.rest;
 
 import com.pharma.domain.Pharmacie;
+import com.pharma.domain.Ville;
+import com.pharma.domain.Zone;
 import com.pharma.repository.PharmacieRepository;
 import com.pharma.security.AuthoritiesConstants;
 import com.pharma.web.rest.errors.BadRequestAlertException;
@@ -20,7 +22,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -51,7 +62,9 @@ public class PharmacieResource {
      * {@code POST  /pharmacies} : Create a new pharmacie.
      *
      * @param pharmacie the pharmacie to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new pharmacie, or with status {@code 400 (Bad Request)} if the pharmacie has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new pharmacie, or with status {@code 400 (Bad Request)} if
+     *         the pharmacie has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
@@ -70,11 +83,14 @@ public class PharmacieResource {
     /**
      * {@code PUT  /pharmacies/:id} : Updates an existing pharmacie.
      *
-     * @param id the id of the pharmacie to save.
+     * @param id        the id of the pharmacie to save.
      * @param pharmacie the pharmacie to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated pharmacie,
-     * or with status {@code 400 (Bad Request)} if the pharmacie is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the pharmacie couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated pharmacie,
+     *         or with status {@code 400 (Bad Request)} if the pharmacie is not
+     *         valid,
+     *         or with status {@code 500 (Internal Server Error)} if the pharmacie
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
@@ -102,14 +118,18 @@ public class PharmacieResource {
     }
 
     /**
-     * {@code PATCH  /pharmacies/:id} : Partial updates given fields of an existing pharmacie, field will ignore if it is null
+     * {@code PATCH  /pharmacies/:id} : Partial updates given fields of an existing
+     * pharmacie, field will ignore if it is null
      *
-     * @param id the id of the pharmacie to save.
+     * @param id        the id of the pharmacie to save.
      * @param pharmacie the pharmacie to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated pharmacie,
-     * or with status {@code 400 (Bad Request)} if the pharmacie is not valid,
-     * or with status {@code 404 (Not Found)} if the pharmacie is not found,
-     * or with status {@code 500 (Internal Server Error)} if the pharmacie couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated pharmacie,
+     *         or with status {@code 400 (Bad Request)} if the pharmacie is not
+     *         valid,
+     *         or with status {@code 404 (Not Found)} if the pharmacie is not found,
+     *         or with status {@code 500 (Internal Server Error)} if the pharmacie
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
@@ -164,10 +184,12 @@ public class PharmacieResource {
     /**
      * {@code GET  /pharmacies} : get all the pharmacies.
      *
-     * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @param filter the filter of the request.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pharmacies in body.
+     * @param pageable  the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is
+     *                  applicable for many-to-many).
+     * @param filter    the filter of the request.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of pharmacies in body.
      */
     @GetMapping("")
     public ResponseEntity<List<Pharmacie>> getAllPharmacies(
@@ -207,11 +229,66 @@ public class PharmacieResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    // @GetMapping("/{garde}/{zone}/{city}")
+    // @PostMapping("/byGardeAndZoneAndVille")
+    // public List<Pharmacie> findByGardesAndVille(@RequestParam("villeId") int
+    // villeId, @RequestParam("j") boolean j,
+    // @RequestParam("n") boolean n)
+    // {
+    // Ville ville = new Ville();
+    // ville.setId(villeId);
+    // return pharmacieRepository.getPharmaciesByVilleAndGarde(ville, j ?
+    // GardeType.J : GardeType.N,
+    // n ? GardeType.N : GardeType.J);
+    // }
+    @GetMapping("/{garde}/{zone}/{city}")
+    public List<Pharmacie> findByVilleAndZone(
+        // @PathVariable("garde") Garde gardeId,
+        // @PathVariable("zone") Zone zoneId, @PathVariable("city") Ville villeId),
+        @PathVariable("garde") Long gardeId,
+        @PathVariable("zone") Long zoneId,
+        @PathVariable("city") Long villeId
+    ) {
+        Zone zone = new Zone();
+        zone.setId(zoneId);
+        Ville ville = new Ville();
+        ville.setId(villeId);
+        return pharmacieRepository.getPharmaciesByVilleAndZone(
+            ville,
+            zone
+            // , j ? GardeType.J : GardeType.N,
+            // n ? GardeType.N : GardeType.J
+        );
+        // pharmacieRouter.get('/pharmacies/:garde/:zone/:city', async (req, res) => {
+        // const garde = req.params.garde;
+        // const zone = req.params.zone;
+        // const city = req.params.city;
+
+        // try {
+        // const pharmacies = await Pharmacie.find({ garde: garde, zone: zone })
+        // .populate({
+        // path: 'zone',
+        // match: { city: city }
+        // })
+        // .exec();
+
+        // const filteredPharmacies = pharmacies.filter((pharmacy) => {
+        // return pharmacy.zone !== null;
+        // });
+
+        // res.json(filteredPharmacies);
+        // } catch (err) {
+        // console.error(err.message);
+        // res.status(500).send('Server Error');
+        // }
+    }
+
     /**
      * {@code GET  /pharmacies/:id} : get the "id" pharmacie.
      *
      * @param id the id of the pharmacie to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the pharmacie, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the pharmacie, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
     public ResponseEntity<Pharmacie> getPharmacie(@PathVariable("id") Long id) {

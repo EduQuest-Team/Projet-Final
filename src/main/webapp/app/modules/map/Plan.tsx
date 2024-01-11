@@ -1,21 +1,27 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import 'leaflet/dist/leaflet.css';
+import React, { useEffect, useReducer, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import { DNA } from 'react-loader-spinner';
 import Select from 'react-select';
-import Button from 'react-bootstrap/Button';
-import Map from './Map';
-import 'leaflet/dist/leaflet.css';
 import Cards from './Card';
+import Map from './Map';
+import './Plan.css';
 
 const gardeData = [
-  { vale: 'jour', label: 'Jour' },
-  { value: 'nuit', label: 'Nuit' },
+  { value: 0, label: 'Jour' },
+  { value: 1, label: 'Nuit' },
 ];
 
-const URL = 'https://pharma.cyclic.app';
+// const URL = 'https://pharma.cyclic.app';
+// const apiUrl = 'api';
+const URL = 'api';
 
-const defaultCity = { value: 'city', label: 'Select City' };
-const defaultZone = { value: 'zone', label: 'Select City' };
-const defaultGarde = { value: 'garde', label: 'Select Garde' };
+// const defaultCity = { value: 'city', label: 'Select City' };
+// const defaultZone = { value: 'zone', label: 'Select Zone' };
+// const defaultGarde = { value: 'garde', label: 'Select Garde' };
+const defaultCity = { value: 0, label: 'Select City' };
+const defaultZone = { value: 0, label: 'Select Zone' };
+const defaultGarde = { value: 0, label: 'Select Garde' };
 
 const initialState = {
   cities: null,
@@ -49,31 +55,35 @@ const Plan = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`${URL}/api/cities`)
+    //fetch(`${URL}/api/cities`)
+    fetch(`${URL}/villes`)
       .then(response => response.json())
       .then(data => {
         const options = data.map(item => ({
-          value: item._id,
-          label: item.name,
-          key: item._id,
+          value: item.id,
+          //label: item.name,
+          label: item.nom,
+          key: item.id,
         }));
         dispatch({ type: 'SET_CITIES', payload: options });
+        // handleGetZoneByVille();
       })
       .catch(error => console.error(error));
 
-    fetch(`${URL}/api/zones`)
+    // fetch(`${URL}/zones/ville/3`)
+    fetch(`${URL}/zones`)
       .then(response => response.json())
       .then(data => {
         const options = data.map(item => ({
-          value: item._id,
-          label: item.name,
-          key: item._id,
+          value: item.id,
+          //label: item.name,
+          label: item.nom,
+          key: item.id,
         }));
         dispatch({ type: 'SET_ZONES', payload: options });
       })
       .catch(error => console.error(error));
   }, []);
-
   const isCity = !state.city;
   const isZone = !state.zone;
   const isGarde = !state.garde;
@@ -82,6 +92,7 @@ const Plan = () => {
     dispatch({ type: 'SET_CITY', payload: data });
     dispatch({ type: 'SET_ZONE', payload: null });
     setGetData(false);
+    handleGetZoneByVille(data);
   };
 
   const handleZoneChange = data => {
@@ -93,11 +104,27 @@ const Plan = () => {
     dispatch({ type: 'SET_GARDE', payload: data });
   };
 
+  const handleGetZoneByVille = data => {
+    fetch(`${URL}/zones/ville/${state.city.value}`)
+      // fetch(`${URL}/zones`)
+      .then(response => response.json())
+      .then(data => {
+        const options = data.map(item => ({
+          value: item.id,
+          //label: item.name,
+          label: item.nom,
+          key: item.id,
+        }));
+        dispatch({ type: 'SET_ZONES', payload: options });
+      })
+      .catch(error => console.error(error));
+  };
+
   const handleGetPharmacies = data => {
     setLoading(true);
     // get pharmacies from mongodb
-    // fetch(`${URL}/api/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
-    fetch(`${URL}/api/pharmacies/nuit/${state.zone.value}/${state.city.value}`)
+    // fetch(`${URL}/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
+    fetch(`${URL}/pharmacies/1/${state.zone.value}/${state.city.value}`)
       .then(response => response.json())
       .then(responseData => {
         if (responseData.length) {
@@ -125,7 +152,7 @@ const Plan = () => {
   };
   return (
     <div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center container mainApp my-3 py-3 flex-fill">
         <div className="mx-3 flex-grow-1">
           <Select options={state.cities} defaultValue={defaultCity} value={state.city} onChange={handleCityChange} />
         </div>
