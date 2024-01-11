@@ -3,8 +3,9 @@ import L from 'leaflet';
 import { MapContainer, MapContainerProps, Marker, Popup, TileLayer, TileLayerProps } from 'react-leaflet';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AttributionControl } from 'react-leaflet';
+import LRouting from 'app/modules/map/Routing';
 
 // Extend the TileLayerProps type to include the attribution property
 type CustomTileLayerProps = TileLayerProps & { attribution: string };
@@ -22,6 +23,9 @@ function CustomMapContainer(props: CustomMapContainerProps) {
 const DefaultIcon = L.icon({
   iconUrl: 'content/images/leaflet/marker-icon.png',
   shadowUrl: 'content/images/leaflet/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [10, 41],
+  popupAnchor: [2, 40],
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
@@ -58,18 +62,19 @@ const Map = ({ data }) => {
           {data.map(item => {
             // console.log(item);
             return (
-              <Marker key={item._id} position={[item.latitude, item.longitude]}>
+              <Marker key={item.id} position={[item.latitude, item.longitude]}>
                 <Popup>
                   <p>
-                    <strong>Nom:</strong> {item.name}
+                    <strong>Nom:</strong> {item.nom}
                   </p>
                   <p>
-                    <strong>Address:</strong> {item.address}
+                    <strong>Address:</strong> {item.adresse}
                   </p>
                 </Popup>
               </Marker>
             );
           })}
+          <LRouting />
           <AttributionControl position="bottomright" prefix={false} />
         </CustomMapContainer>
       </Row>
