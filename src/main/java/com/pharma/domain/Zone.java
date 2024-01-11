@@ -1,5 +1,6 @@
 package com.pharma.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import org.hibernate.annotations.Cache;
@@ -25,6 +26,7 @@ public class Zone implements Serializable {
     private String nom;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "ville" }, allowSetters = true)
     private Ville ville;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

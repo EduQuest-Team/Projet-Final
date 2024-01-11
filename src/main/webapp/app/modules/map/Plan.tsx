@@ -24,11 +24,11 @@ const defaultZone = { value: 0, label: 'Select Zone' };
 const defaultGarde = { value: 0, label: 'Select Garde' };
 
 const initialState = {
-  cities: null,
-  city: null,
-  zones: null,
-  zone: null,
-  garde: null,
+  cities: [],
+  city: 0,
+  zones: [],
+  zone: 0,
+  garde: 0,
 };
 
 function reducer(state, action) {
@@ -54,6 +54,10 @@ const Plan = () => {
   const [getData, setGetData] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const isCity = !state.city;
+  const isZone = !state.zone;
+  const isGarde = !state.garde;
+
   useEffect(() => {
     //fetch(`${URL}/api/cities`)
     fetch(`${URL}/villes`)
@@ -66,11 +70,9 @@ const Plan = () => {
           key: item.id,
         }));
         dispatch({ type: 'SET_CITIES', payload: options });
-        // handleGetZoneByVille();
       })
       .catch(error => console.error(error));
 
-    // fetch(`${URL}/zones/ville/3`)
     fetch(`${URL}/zones`)
       .then(response => response.json())
       .then(data => {
@@ -84,9 +86,6 @@ const Plan = () => {
       })
       .catch(error => console.error(error));
   }, []);
-  const isCity = !state.city;
-  const isZone = !state.zone;
-  const isGarde = !state.garde;
 
   const handleCityChange = data => {
     dispatch({ type: 'SET_CITY', payload: data });
@@ -105,6 +104,7 @@ const Plan = () => {
   };
 
   const handleGetZoneByVille = data => {
+    // if (isCity) {
     fetch(`${URL}/zones/ville/${state.city.value}`)
       // fetch(`${URL}/zones`)
       .then(response => response.json())
@@ -118,6 +118,7 @@ const Plan = () => {
         dispatch({ type: 'SET_ZONES', payload: options });
       })
       .catch(error => console.error(error));
+    // }
   };
 
   const handleGetPharmacies = data => {
