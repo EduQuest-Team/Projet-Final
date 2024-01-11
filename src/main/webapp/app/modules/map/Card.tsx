@@ -7,12 +7,12 @@ function Cards({ data }) {
     <Carousel cols={3} rows={3} gap={10} loop>
       {data.map(item => {
         return (
-          <Carousel.Item key={item._id}>
+          <Carousel.Item key={item.id}>
             <Card style={{ width: '18rem', margin: '5px' }}>
               <Card.Body>
-                <Card.Title>{item.name}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{item.garde}</Card.Subtitle>
-                <Card.Text>{item.address}</Card.Text>
+                <Card.Title>{item.nom}</Card.Title>
+                {/*<Card.Subtitle className="mb-2 text-muted">{item.garde}</Card.Subtitle>*/}
+                <Card.Text>{item.adresse}</Card.Text>
               </Card.Body>
             </Card>
           </Carousel.Item>

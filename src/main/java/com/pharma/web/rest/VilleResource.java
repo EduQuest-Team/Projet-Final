@@ -13,7 +13,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -42,7 +50,9 @@ public class VilleResource {
      * {@code POST  /villes} : Create a new ville.
      *
      * @param ville the ville to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new ville, or with status {@code 400 (Bad Request)} if the ville has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new ville, or with status {@code 400 (Bad Request)} if the
+     *         ville has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
@@ -61,11 +71,13 @@ public class VilleResource {
     /**
      * {@code PUT  /villes/:id} : Updates an existing ville.
      *
-     * @param id the id of the ville to save.
+     * @param id    the id of the ville to save.
      * @param ville the ville to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated ville,
-     * or with status {@code 400 (Bad Request)} if the ville is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the ville couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated ville,
+     *         or with status {@code 400 (Bad Request)} if the ville is not valid,
+     *         or with status {@code 500 (Internal Server Error)} if the ville
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
@@ -91,14 +103,17 @@ public class VilleResource {
     }
 
     /**
-     * {@code PATCH  /villes/:id} : Partial updates given fields of an existing ville, field will ignore if it is null
+     * {@code PATCH  /villes/:id} : Partial updates given fields of an existing
+     * ville, field will ignore if it is null
      *
-     * @param id the id of the ville to save.
+     * @param id    the id of the ville to save.
      * @param ville the ville to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated ville,
-     * or with status {@code 400 (Bad Request)} if the ville is not valid,
-     * or with status {@code 404 (Not Found)} if the ville is not found,
-     * or with status {@code 500 (Internal Server Error)} if the ville couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated ville,
+     *         or with status {@code 400 (Bad Request)} if the ville is not valid,
+     *         or with status {@code 404 (Not Found)} if the ville is not found,
+     *         or with status {@code 500 (Internal Server Error)} if the ville
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
@@ -139,7 +154,8 @@ public class VilleResource {
     /**
      * {@code GET  /villes} : get all the villes.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of villes in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of villes in body.
      */
     @GetMapping("")
     public List<Ville> getAllVilles() {
@@ -151,7 +167,8 @@ public class VilleResource {
      * {@code GET  /villes/:id} : get the "id" ville.
      *
      * @param id the id of the ville to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the ville, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the ville, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
     public ResponseEntity<Ville> getVille(@PathVariable("id") Long id) {
