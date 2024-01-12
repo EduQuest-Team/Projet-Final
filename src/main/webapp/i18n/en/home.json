@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
+    "title": "Welcome in PharmaAI platform !",
+    "subtitle": "This is your Gate for Pharmacies Locations",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import L from 'leaflet'; // Import L from leaflet to start using the plugin
+// import L from 'leaflet'; // Import L from leaflet to start using the plugin
+import 'leaflet'; // Import L from leaflet to start using the plugin
+declare let L;
 import { useMap } from 'react-leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
@@ -107,7 +109,7 @@ const LRouting = () => {
   };
   const error = err => {
     if (err.code === 1) {
-      alert('Please allow geolocation access');
+      // alert('Please allow geolocation access');
     }
     // else {
     //     alert("Cannot get current location")

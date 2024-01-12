@@ -109,13 +109,15 @@ const Plan = () => {
       // fetch(`${URL}/zones`)
       .then(response => response.json())
       .then(data => {
-        const options = data.map(item => ({
-          value: item.id,
-          //label: item.name,
-          label: item.nom,
-          key: item.id,
-        }));
-        dispatch({ type: 'SET_ZONES', payload: options });
+        if (Array.isArray(data)) {
+          const options = data.map(item => ({
+            value: item.id,
+            //label: item.name,
+            label: item.nom,
+            key: item.id,
+          }));
+          dispatch({ type: 'SET_ZONES', payload: options });
+        }
       })
       .catch(error => console.error(error));
     // }
@@ -128,16 +130,21 @@ const Plan = () => {
     fetch(`${URL}/pharmacies/1/${state.zone.value}/${state.city.value}`)
       .then(response => response.json())
       .then(responseData => {
-        if (responseData.length) {
-          setPharmacies(responseData);
+        if (Array.isArray(responseData)) {
+          if (responseData.length) {
+            setPharmacies(responseData);
+          } else {
+            dispatch({ type: 'SET_CITY', payload: null });
+            dispatch({ type: 'SET_ZONE', payload: null });
+            dispatch({ type: 'SET_GARDE', payload: null });
+            // console.log('empty');
+          }
+
+          setLoading(false);
+          setGetData(true);
         } else {
-          dispatch({ type: 'SET_CITY', payload: null });
-          dispatch({ type: 'SET_ZONE', payload: null });
-          dispatch({ type: 'SET_GARDE', payload: null });
-          // console.log('empty');
+          console.error('API response is not an array:', responseData);
         }
-        setLoading(false);
-        setGetData(true);
       })
       /* eslint-disable no-console */
       // .catch(error => console.log(error));

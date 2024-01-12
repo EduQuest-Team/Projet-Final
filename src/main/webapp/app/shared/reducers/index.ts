@@ -13,8 +13,10 @@ import applicationProfile from './application-profile';
 import authentication from './authentication';
 import locale from './locale';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
+import dashboard from 'app/modules/home/home.reducer';
 
 const rootReducer: ReducersMapObject = {
+  dashboard,
   authentication,
   locale,
   applicationProfile,

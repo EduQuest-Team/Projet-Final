@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import React, { useEffect } from 'react';
 import { AttributionControl } from 'react-leaflet';
-import LRouting from 'app/modules/map/Routing';
+import LRouting from './LRouting';
 
 // Extend the TileLayerProps type to include the attribution property
 type CustomTileLayerProps = TileLayerProps & { attribution: string };
