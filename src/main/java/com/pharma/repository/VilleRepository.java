@@ -12,7 +12,15 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface VilleRepository extends JpaRepository<Ville, Long> {
-    @Query("SELECT v.nom, COUNT(s) FROM Ville v JOIN v.zones s GROUP BY v.nom")
-    @Query("SELECT v.nom, COUNT(z.id) FROM ville v\n" + "" + "" + "JOIN zone z WHERE v.id = z.ville_id\n" + "GROUP BY\n" + "    v.nom")
+    @Query("SELECT v.nom, COUNT(z.id) FROM Ville v JOIN Zone z ON v.id = z.ville.id GROUP BY v.nom")
     List<Object[]> countZonePerVille();
+    //    @Query("SELECT
+    //    v.nom,
+    //    COUNT(z.id)
+    //FROM
+    //    ville v
+    //JOIN zone z ON
+    //    v.id = z.ville_id
+    //GROUP BY
+    //    v.nom")
 }

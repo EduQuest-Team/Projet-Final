@@ -6,7 +6,7 @@ public class CountStatsDTO {
     private Long zoneCount;
     private Long pharmacieCount;
 
-    public CountStatsDTO(Long villeCount, Long zoneCount, Long pharmacieCount) {
+    public CountStatsDTO(Long villeCount, Long zoneCount, long pharmacieCount) {
         this.villeCount = villeCount;
         this.zoneCount = zoneCount;
         this.pharmacieCount = pharmacieCount;

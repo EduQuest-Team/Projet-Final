@@ -67,6 +67,7 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern("/api/positions/**")).permitAll()
                     .requestMatchers(mvc.pattern("/api/villes/**")).permitAll()
                     .requestMatchers(mvc.pattern("/api/zones/**")).permitAll()
+                    .requestMatchers(mvc.pattern("/api/stats/**")).permitAll()
                     .requestMatchers(mvc.pattern("/api/pharmacies/**")).permitAll()
                     .requestMatchers(mvc.pattern("/swagger-ui/**")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/authenticate")).permitAll()
