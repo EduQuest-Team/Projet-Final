@@ -11,6 +11,7 @@ import Zone from './zone';
 import Ville from './ville';
 import Historique from './historique';
 import Position from './position';
+import MyStudents from 'app/entities/my-students';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -25,7 +26,7 @@ export default () => {
         <Route path="zone/*" element={<Zone />} />
         <Route path="ville/*" element={<Ville />} />
         <Route path="historique/*" element={<Historique />} />
-
+        <Route path="my-students/*" element={<MyStudents />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

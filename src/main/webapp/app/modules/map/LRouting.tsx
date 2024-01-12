@@ -85,7 +85,7 @@ const LRouting = () => {
       }, 5000);
     }
   }, []);
-  var circle;
+  let circle;
   const succes = pos => {
     var lat = pos.coords.latitude;
     var long = pos.coords.longitude;
@@ -93,7 +93,7 @@ const LRouting = () => {
 
     if (marker1) {
       map.removeLayer(marker1);
-      map.removeLayer(circle);
+      // map.removeLayer(circle);
     }
 
     // marker = L.marker([lat, long])
@@ -135,7 +135,7 @@ const LRouting = () => {
     marker1 = L.marker([lat, long]);
     circle1 = L.circle([lat, long], { radius: accuracy });
 
-    var featureGroup = L.featureGroup([marker1, circle]).addTo(map);
+    var featureGroup = L.featureGroup([marker1, circle1]).addTo(map);
 
     map.fitBounds(featureGroup.getBounds());
 

@@ -92,6 +92,10 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
+    public boolean hasRole(String role) {
+        return this.authorities.stream().map(Authority::getName).anyMatch(a -> a.equals(role));
+    }
+
     public Long getId() {
         return id;
     }
