@@ -5,9 +5,11 @@ import com.pharma.domain.Ville;
 import com.pharma.domain.Zone;
 import com.pharma.repository.PharmacieRepository;
 import com.pharma.security.AuthoritiesConstants;
+import com.pharma.service.UserService;
 import com.pharma.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -53,9 +55,11 @@ public class PharmacieResource {
     private String applicationName;
 
     private final PharmacieRepository pharmacieRepository;
+    private final UserService userService;
 
-    public PharmacieResource(PharmacieRepository pharmacieRepository) {
+    public PharmacieResource(PharmacieRepository pharmacieRepository, UserService userService) {
         this.pharmacieRepository = pharmacieRepository;
+        this.userService = userService;
     }
 
     /**
@@ -312,5 +316,24 @@ public class PharmacieResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/myPharmacies/{yearId}/{groupId}")
+    public List<Pharmacie> getPharmaciesByAcademicYearAndGroup(@PathVariable("yearId") Long yearId, @PathVariable("groupId") Long groupId) {
+        // System.out.println(yearId);
+        // System.out.println(groupId);
+        List<Pharmacie> Pharmacies = new ArrayList<>();
+        for (Pharmacie Pharmacie : PharmacieRepository.findByGroupIdAndAcademicYearId(groupId, yearId)) {
+            var user = userService.getUserWithAuthoritiesByLogin(Pharmacien.getUser().getLogin()).orElse(null);
+            if (user != null) {
+                // System.out.println(user.getAuthorities());
+                // System.out.println(user.hasRole(AuthoritiesConstants.ADMIN));
+                // System.out.println(user.hasRole(AuthoritiesConstants.PROFESSOR));
+                if (!user.hasRole(AuthoritiesConstants.PHARMACIEN) && !user.hasRole(AuthoritiesConstants.ADMIN)) {
+                    Pharmacies.add(Pharmacie);
+                }
+            }
+        }
+        return Pharmacies;
     }
 }
