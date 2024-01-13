@@ -4,12 +4,12 @@ import com.pharma.domain.Pharmacie;
 import com.pharma.domain.Ville;
 import com.pharma.domain.Zone;
 import com.pharma.repository.PharmacieRepository;
+import com.pharma.repository.PharmacienRepository;
 import com.pharma.security.AuthoritiesConstants;
 import com.pharma.service.UserService;
 import com.pharma.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,16 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -55,11 +46,13 @@ public class PharmacieResource {
     private String applicationName;
 
     private final PharmacieRepository pharmacieRepository;
+    private final PharmacienRepository pharmacienRepository;
     private final UserService userService;
 
-    public PharmacieResource(PharmacieRepository pharmacieRepository, UserService userService) {
+    public PharmacieResource(PharmacieRepository pharmacieRepository, UserService userService, PharmacienRepository pharmacienRepository) {
         this.pharmacieRepository = pharmacieRepository;
         this.userService = userService;
+        this.pharmacienRepository = pharmacienRepository;
     }
 
     /**
@@ -67,8 +60,8 @@ public class PharmacieResource {
      *
      * @param pharmacie the pharmacie to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
-     *         body the new pharmacie, or with status {@code 400 (Bad Request)} if
-     *         the pharmacie has already an ID.
+     * body the new pharmacie, or with status {@code 400 (Bad Request)} if
+     * the pharmacie has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
@@ -90,11 +83,11 @@ public class PharmacieResource {
      * @param id        the id of the pharmacie to save.
      * @param pharmacie the pharmacie to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-     *         the updated pharmacie,
-     *         or with status {@code 400 (Bad Request)} if the pharmacie is not
-     *         valid,
-     *         or with status {@code 500 (Internal Server Error)} if the pharmacie
-     *         couldn't be updated.
+     * the updated pharmacie,
+     * or with status {@code 400 (Bad Request)} if the pharmacie is not
+     * valid,
+     * or with status {@code 500 (Internal Server Error)} if the pharmacie
+     * couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
@@ -128,12 +121,12 @@ public class PharmacieResource {
      * @param id        the id of the pharmacie to save.
      * @param pharmacie the pharmacie to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-     *         the updated pharmacie,
-     *         or with status {@code 400 (Bad Request)} if the pharmacie is not
-     *         valid,
-     *         or with status {@code 404 (Not Found)} if the pharmacie is not found,
-     *         or with status {@code 500 (Internal Server Error)} if the pharmacie
-     *         couldn't be updated.
+     * the updated pharmacie,
+     * or with status {@code 400 (Bad Request)} if the pharmacie is not
+     * valid,
+     * or with status {@code 404 (Not Found)} if the pharmacie is not found,
+     * or with status {@code 500 (Internal Server Error)} if the pharmacie
+     * couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
@@ -193,7 +186,7 @@ public class PharmacieResource {
      *                  applicable for many-to-many).
      * @param filter    the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
-     *         of pharmacies in body.
+     * of pharmacies in body.
      */
     @GetMapping("")
     public ResponseEntity<List<Pharmacie>> getAllPharmacies(
@@ -292,7 +285,7 @@ public class PharmacieResource {
      *
      * @param id the id of the pharmacie to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
-     *         the pharmacie, or with status {@code 404 (Not Found)}.
+     * the pharmacie, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
     public ResponseEntity<Pharmacie> getPharmacie(@PathVariable("id") Long id) {
@@ -318,22 +311,45 @@ public class PharmacieResource {
             .build();
     }
 
-    @GetMapping("/myPharmacies/{yearId}/{groupId}")
-    public List<Pharmacie> getPharmaciesByAcademicYearAndGroup(@PathVariable("yearId") Long yearId, @PathVariable("groupId") Long groupId) {
-        // System.out.println(yearId);
-        // System.out.println(groupId);
-        List<Pharmacie> Pharmacies = new ArrayList<>();
-        for (Pharmacie Pharmacie : PharmacieRepository.findByGroupIdAndAcademicYearId(groupId, yearId)) {
-            var user = userService.getUserWithAuthoritiesByLogin(Pharmacien.getUser().getLogin()).orElse(null);
-            if (user != null) {
-                // System.out.println(user.getAuthorities());
-                // System.out.println(user.hasRole(AuthoritiesConstants.ADMIN));
-                // System.out.println(user.hasRole(AuthoritiesConstants.PROFESSOR));
-                if (!user.hasRole(AuthoritiesConstants.PHARMACIEN) && !user.hasRole(AuthoritiesConstants.ADMIN)) {
-                    Pharmacies.add(Pharmacie);
-                }
-            }
+    @GetMapping("pharmacyst/{pharmacieId}")
+    public Optional<Pharmacie> getPharmacieByPharmacyst(@PathVariable("pharmacieId") Long pharmacieId) {
+        //        log.debug("REST request to get Pharmacie : {}", id);
+        Optional<Pharmacie> pharmacie = pharmacieRepository.findById(pharmacieId);
+
+        if (pharmacie == null) {
+            // Log a message indicating that no results were found
+            log.debug("No Pharmacy found for pharmacyst: {}", pharmacieId);
+            return null; // or return an empty list if null is not desirable
         }
-        return Pharmacies;
+        return pharmacie;
     }
+    //    @GetMapping("/myPharmaciens/{zoneId}/{villeId}")
+    //    public List<Pharmacien> getPharmaciensByZoneAndVille(@PathVariable("zoneId") Long zoneId, @PathVariable("villeId") Long villeId) {
+    //        // System.out.println(yearId);
+    //        // System.out.println(groupId);
+    //        List<Pharmacien> pharmaciens = new ArrayList<Pharmacien>();
+    //        List<Pharmacien> pharmacienList = pharmacienRepository.findByZoneAndVille(zoneId, villeId);
+    //        if (pharmacienList != null) {
+    ////        assert PharmacieRepository.findByGroupIdAndAcademicYearId(villeId, zoneId) != null;
+    ////            for (Pharmacie Pharmacie : pharmacieRepository.findByGroupIdAndAcademicYearId(villeId, zoneId)) {
+    //            for (Pharmacien pharmacien : pharmacienList) {
+    //                if (pharmacien.getUser() != null) {
+    //                    var user = userService.getUserWithAuthoritiesByLogin(pharmacien.getUser().getLogin()).orElse(null);
+    //                    if (user != null) {
+    //                        // System.out.println(user.getAuthorities());
+    //                        // System.out.println(user.hasRole(AuthoritiesConstants.ADMIN));
+    //                        // System.out.println(user.hasRole(AuthoritiesConstants.PROFESSOR));
+    //                        if (!user.hasRole(AuthoritiesConstants.PHARMACIEN) && !user.hasRole(AuthoritiesConstants.ADMIN)) {
+    //                            pharmaciens.add(pharmacien);
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        } else {
+    //            // Log a message indicating that no results were found
+    //            log.debug("No Pharmacien found for zoneId: {} and villeId: {}", zoneId, villeId);
+    //        }
+    //        return pharmaciens;
+    //
+    //    }
 }

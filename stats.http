@@ -1,2 +1,0 @@
-#GET http://localhost:8080/api/stats/zones-per-ville
-GET http://localhost:8080/api/stats

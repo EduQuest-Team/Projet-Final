@@ -104,23 +104,23 @@ const Plan = () => {
   };
 
   const handleGetZoneByVille = data => {
-    // if (isCity) {
-    fetch(`${URL}/zones/ville/${state.city.value}`)
-      // fetch(`${URL}/zones`)
-      .then(response => response.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          const options = data.map(item => ({
-            value: item.id,
-            //label: item.name,
-            label: item.nom,
-            key: item.id,
-          }));
-          dispatch({ type: 'SET_ZONES', payload: options });
-        }
-      })
-      .catch(error => console.error(error));
-    // }
+    if (state.city.value !== null) {
+      fetch(`${URL}/zones/ville/${state.city.value}`)
+        // fetch(`${URL}/zones`)
+        .then(response => response.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            const options = data.map(item => ({
+              value: item.id,
+              //label: item.name,
+              label: item.nom,
+              key: item.id,
+            }));
+            dispatch({ type: 'SET_ZONES', payload: options });
+          }
+        })
+        .catch(error => console.error(error));
+    }
   };
 
   const handleGetPharmacies = data => {

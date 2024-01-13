@@ -1,10 +1,16 @@
 package com.pharma.web.rest;
 
+import com.pharma.domain.Pharmacie;
 import com.pharma.domain.Pharmacien;
+import com.pharma.repository.PharmacieRepository;
 import com.pharma.repository.PharmacienRepository;
+import com.pharma.security.AuthoritiesConstants;
+import com.pharma.service.UserService;
 import com.pharma.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.AccessDeniedException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -40,9 +46,14 @@ public class PharmacienResource {
     private String applicationName;
 
     private final PharmacienRepository pharmacienRepository;
+    private final PharmacieRepository pharmacieRepository;
 
-    public PharmacienResource(PharmacienRepository pharmacienRepository) {
+    private final UserService userService;
+
+    public PharmacienResource(PharmacienRepository pharmacienRepository, UserService userService, PharmacieRepository pharmacieRepository) {
         this.pharmacienRepository = pharmacienRepository;
+        this.pharmacieRepository = pharmacieRepository;
+        this.userService = userService;
     }
 
     /**
@@ -68,7 +79,7 @@ public class PharmacienResource {
     /**
      * {@code PUT  /pharmaciens/:id} : Updates an existing pharmacien.
      *
-     * @param id the id of the pharmacien to save.
+     * @param id         the id of the pharmacien to save.
      * @param pharmacien the pharmacien to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated pharmacien,
      * or with status {@code 400 (Bad Request)} if the pharmacien is not valid,
@@ -102,7 +113,7 @@ public class PharmacienResource {
     /**
      * {@code PATCH  /pharmaciens/:id} : Partial updates given fields of an existing pharmacien, field will ignore if it is null
      *
-     * @param id the id of the pharmacien to save.
+     * @param id         the id of the pharmacien to save.
      * @param pharmacien the pharmacien to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated pharmacien,
      * or with status {@code 400 (Bad Request)} if the pharmacien is not valid,
@@ -157,7 +168,7 @@ public class PharmacienResource {
      * {@code GET  /pharmaciens} : get all the pharmaciens.
      *
      * @param pageable the pagination information.
-     * @param filter the filter of the request.
+     * @param filter   the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of pharmaciens in body.
      */
     @GetMapping("")
@@ -209,4 +220,90 @@ public class PharmacienResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("pharmacie/{pharmacienId}")
+    public Optional<Pharmacie> getPharmacieByPharmacyst(@PathVariable("pharmacienId") Long pharmacienId) {
+        //        log.debug("REST request to get Pharmacie : {}", id);
+        Pharmacie pharmacie = pharmacienRepository.findByPharmacy(pharmacienId);
+
+        if (pharmacie == null) {
+            // Log a message indicating that no results were found
+            log.debug("No Pharmacy found for pharmacyst: {}", pharmacienId);
+            return Optional.empty(); // or return an empty list if null is not desirable
+        }
+        return Optional.of(pharmacie);
+    }
+
+    //    @GetMapping("pharmacy/{pharmacienId}")
+    //    public Pharmacie getPharmacie(@PathVariable("pharmacienId") Long pharmacienId) {
+    ////        log.debug("REST request to get Pharmacie : {}", id);
+    //        Pharmacie pharmacie = pharmacienRepository.getPharmacieByPharmacien(pharmacienId);
+    //
+    //        if (pharmacie == null) {
+    //            // Log a message indicating that no results were found
+    //            log.debug("No Pharmacy found for pharmacyst: {}", pharmacienId);
+    //            return null; // or return an empty list if null is not desirable
+    //        }
+    //        return pharmacie;
+    //    }
+
+    @GetMapping("/myPharmaciens/{zoneId}/{villeId}")
+    public List<Pharmacien> getPharmaciensByZoneAndVille(@PathVariable("zoneId") Long zoneId, @PathVariable("villeId") Long villeId) {
+        List<Pharmacien> pharmaciens = new ArrayList<>();
+        List<Pharmacien> pharmacienList = pharmacienRepository.findByZoneAndVille(villeId, zoneId);
+
+        if (pharmacienList.isEmpty()) {
+            // Log a message indicating that no results were found
+            log.debug("No Pharmacien found for zoneId: {} and villeId: {}", zoneId, villeId);
+            return null; // or return an empty list if null is not desirable
+        }
+        //        List<Pharmacien> pharmacienList = pharmacienRepository.findByZoneAndVille(zoneId, villeId);
+        //        if (pharmacienList != null) {
+        //        assert PharmacieRepository.findByGroupIdAndAcademicYearId(villeId, zoneId) != null;
+        //        for (Pharmacien pharmacien : pharmacienRepository.findByZoneAndVille(villeId, zoneId)) {
+        for (Pharmacien pharmacien : pharmacienList) {
+            if (pharmacien.getUser() != null) {
+                var user = userService.getUserWithAuthoritiesByLogin(pharmacien.getUser().getLogin()).orElse(null);
+                //                if (user != null && !user.hasRole(AuthoritiesConstants.PHARMACIEN)) {
+                if (user != null) {
+                    pharmaciens.add(pharmacien);
+                }
+            }
+        }
+        return pharmaciens;
+    }
+
+    //    @GetMapping("/my-pharmacie")
+    //    public ResponseEntity<Pharmacie> getPharmacieForAuthenticatedPharmacien() {
+    //        try {
+    //            // Call the service method to get the Pharmacie associated with the authenticated Pharmacien
+    //            Pharmacie pharmacie = PharmacieRepository.getPharmacieForAuthenticatedPharmacien();
+    //            return ResponseEntity.ok(pharmacie);
+    //        } catch (Exception e) {
+    //            // Handle other exceptions
+    //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //        }
+    //    }
+    @GetMapping("/{pharmacienId}/my-pharmacie")
+    public ResponseEntity<Pharmacie> getPharmacieForAuthenticatedPharmacien(@PathVariable("pharmacienId") Long pharmacienId) {
+        try {
+            // Call the service method to get the Pharmacie associated with the authenticated Pharmacien
+            Pharmacie pharmacie = pharmacieRepository.getPharmacieForAuthenticatedPharmacien(pharmacienId);
+            return ResponseEntity.ok(pharmacie);
+        } catch (AccessDeniedException e) {
+            // Handle unauthorized access
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            // Handle other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    //    @Override
+    //    public Pharmacien save(Pharmacien pharmacien) {
+    //        // Assign the role to the user
+    //        pharmacien.getUser().addRole("PHARMACIEN");
+    //        // Save the user
+    //        return super.save(pharmacien);
+    //    }
+
 }

@@ -2,8 +2,11 @@ package com.pharma.service;
 
 import com.pharma.config.Constants;
 import com.pharma.domain.Authority;
+import com.pharma.domain.Pharmacien;
 import com.pharma.domain.User;
 import com.pharma.repository.AuthorityRepository;
+import com.pharma.repository.PharmacieRepository;
+import com.pharma.repository.PharmacienRepository;
 import com.pharma.repository.UserRepository;
 import com.pharma.security.AuthoritiesConstants;
 import com.pharma.security.SecurityUtils;
@@ -41,16 +44,20 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    private final PharmacienRepository pharmacienRepository;
+
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        PharmacienRepository pharmacienRepository
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.pharmacienRepository = pharmacienRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -217,6 +224,31 @@ public class UserService {
                 return user;
             })
             .map(AdminUserDTO::new);
+    }
+
+    public void updatePharmacienUser(
+        String firstName,
+        String lastName,
+        String email,
+        String langKey,
+        String imageUrl,
+        Pharmacien pharmacien
+    ) {
+        SecurityUtils
+            .getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .ifPresent(user -> {
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                if (email != null) {
+                    user.setEmail(email.toLowerCase());
+                }
+                user.setLangKey(langKey);
+                user.setImageUrl(imageUrl);
+                userRepository.save(user);
+                pharmacienRepository.save(pharmacien);
+                log.debug("Changed Information for User and prof: {} , {}", user, pharmacien);
+            });
     }
 
     public void deleteUser(String login) {

@@ -26,6 +26,7 @@ export const GardeUpdate = () => {
   const pharmacies = useAppSelector(state => state.pharmacie.entities);
   const pharmacieGardes = useAppSelector(state => state.pharmacieGarde.entities);
   const gardeEntity = useAppSelector(state => state.garde.entity);
+  const garde = useAppSelector(state => state.garde.entity);
   const loading = useAppSelector(state => state.garde.loading);
   const updating = useAppSelector(state => state.garde.updating);
   const updateSuccess = useAppSelector(state => state.garde.updateSuccess);
@@ -69,6 +70,12 @@ export const GardeUpdate = () => {
     }
   };
 
+  const gardeTypes = {
+    type1: true,
+    type2: false,
+    // type1: 'Day',
+    // type2: 'Night',
+  };
   const defaultValues = () =>
     isNew
       ? {}
@@ -101,14 +108,17 @@ export const GardeUpdate = () => {
                   validate={{ required: true }}
                 />
               ) : null}
-              <ValidatedField
-                label={translate('pharmaAiApp.garde.type')}
-                id="garde-type"
-                name="type"
-                data-cy="type"
-                check
-                type="checkbox"
-              />
+              <ValidatedField id="garde-type" name="type" data-cy="type" label={translate('pharmaAiApp.garde.type')} type="select">
+                {/*<option value="" key="0"/>*/}
+                {gardeEntity
+                  ? Object.entries(gardeTypes).map(([key, value]) => (
+                      <option key={key} value={value.toString()}>
+                        {/*{value ? 'Jour' : 'Nuit'}*/}
+                        {value ? 'Day' : 'Night'}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/garde" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

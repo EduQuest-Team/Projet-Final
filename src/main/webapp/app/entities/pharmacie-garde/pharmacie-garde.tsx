@@ -67,7 +67,7 @@ export const PharmacieGarde = () => {
   return (
     <div>
       <h2 id="pharmacie-garde-heading" data-cy="PharmacieGardeHeading">
-        <Translate contentKey="pharmaAiApp.pharmacieGarde.home.title">Pharmacie Gardes</Translate>
+        <Translate contentKey="pharmaAiApp.pharmacieGarde.home.title">Historique Pharmacie Gardes</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}

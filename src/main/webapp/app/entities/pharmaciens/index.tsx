@@ -1,12 +1,12 @@
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import React from 'react';
 import { Route } from 'react-router';
-import MyStudents from './my-students';
+import Pharmaciens from './pharmaciens';
 
-const MyStudentsRoutes = () => (
+const PharmaciensRoutes = () => (
   <ErrorBoundaryRoutes>
-    <Route index element={<MyStudents />} />
+    <Route index element={<Pharmaciens />} />
   </ErrorBoundaryRoutes>
 );
 
-export default MyStudentsRoutes;
+export default PharmaciensRoutes;
