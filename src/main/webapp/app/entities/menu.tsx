@@ -19,9 +19,6 @@ const EntitiesMenu = () => {
         <>
           {isAdmin && (
             <>
-              <MenuItem icon="asterisk" to="pharmacie/statistics">
-                {/*<Translate contentKey="global.menu.entities.position" />*/}Statistics
-              </MenuItem>
               <MenuItem icon="asterisk" to="/ville">
                 <Translate contentKey="global.menu.entities.ville" />
               </MenuItem>
@@ -34,11 +31,18 @@ const EntitiesMenu = () => {
               <MenuItem icon="asterisk" to="/pharmacie">
                 <Translate contentKey="global.menu.entities.pharmacie" />
               </MenuItem>
-              <MenuItem icon="asterisk" to="/historique">
-                <Translate contentKey="global.menu.entities.historique" />
-              </MenuItem>
+              {/*<MenuItem icon="asterisk" to="/historique">*/}
+              {/*    <Translate contentKey="global.menu.entities.historique"/>*/}
+              {/*</MenuItem>*/}
               <MenuItem icon="asterisk" to="/pharmacien">
                 <Translate contentKey="global.menu.entities.pharmacien" />
+              </MenuItem>
+              <MenuItem icon="asterisk" to="/pharmaciens">
+                Pharmaciens
+              </MenuItem>
+              <MenuItem icon="asterisk" to="/pharmacie-garde">
+                {/*<Translate contentKey="global.menu.entities.pharmacieGarde"/>*/}
+                <Translate contentKey="global.menu.entities.historique" />
               </MenuItem>
             </>
           )}
@@ -51,8 +55,8 @@ const EntitiesMenu = () => {
               <MenuItem icon="asterisk" to="/pharmacie">
                 <Translate contentKey="global.menu.entities.pharmacie" />
               </MenuItem>
-              <MenuItem icon="asterisk" to="/pharmacie-garde">
-                <Translate contentKey="global.menu.entities.pharmacieGarde" />
+              <MenuItem icon="asterisk" to="/pharmacy">
+                MyPharmacie
               </MenuItem>
             </>
           )}

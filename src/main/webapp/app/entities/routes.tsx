@@ -10,8 +10,8 @@ import Pharmacien from './pharmacien';
 import Zone from './zone';
 import Ville from './ville';
 import Historique from './historique';
-import Position from './position';
-import MyStudents from 'app/entities/my-students';
+import Pharmaciens from 'app/entities/pharmaciens/pharmaciens';
+import Pharmacy from 'app/entities/my-pharmacy/pharmacy';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -19,14 +19,15 @@ export default () => {
     <div>
       <ErrorBoundaryRoutes>
         {/* prettier-ignore */}
-        <Route path="pharmacie/*" element={<Pharmacie />} />
+        <Route path="pharmacie/*" element={<Pharmacie/>}/>
         <Route path="garde/*" element={<Garde />} />
         <Route path="pharmacie-garde/*" element={<PharmacieGarde />} />
         <Route path="pharmacien/*" element={<Pharmacien />} />
         <Route path="zone/*" element={<Zone />} />
         <Route path="ville/*" element={<Ville />} />
         <Route path="historique/*" element={<Historique />} />
-        <Route path="my-students/*" element={<MyStudents />} />
+        <Route path="pharmaciens/*" element={<Pharmaciens />} />
+        <Route path="pharmacy/*" element={<Pharmacy />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

@@ -67,7 +67,7 @@ export const PharmacieDetail = () => {
               <Translate contentKey="pharmaAiApp.pharmacie.status">Status</Translate>
             </span>
           </dt>
-          <dd>{pharmacieEntity.status ? 'true' : 'false'}</dd>
+          <dd>{pharmacieEntity.status ? 'Activated' : 'Desactivated'}</dd>
           <dt>
             <Translate contentKey="pharmaAiApp.pharmacie.zone">Zone</Translate>
           </dt>
@@ -79,7 +79,10 @@ export const PharmacieDetail = () => {
             {pharmacieEntity.gardes
               ? pharmacieEntity.gardes.map((val, i) => (
                   <span key={val.id}>
-                    <a>{val.id}</a>
+                    {/*<a>{val.id}</a> &nbsp;*/}
+                    {val.id == 1 && 'Day'}
+                    {val.id == 2 && 'Night'}
+                    {/*<a>{val.type}</a>*/}
                     {pharmacieEntity.gardes && i === pharmacieEntity.gardes.length - 1 ? '' : ', '}
                   </span>
                 ))

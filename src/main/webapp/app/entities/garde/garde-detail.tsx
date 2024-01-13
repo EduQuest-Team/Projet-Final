@@ -36,7 +36,7 @@ export const GardeDetail = () => {
               <Translate contentKey="pharmaAiApp.garde.type">Type</Translate>
             </span>
           </dt>
-          <dd>{gardeEntity.type ? 'true' : 'false'}</dd>
+          <dd>{gardeEntity.type ? 'Day' : 'Night'}</dd>
         </dl>
         <Button tag={Link} to="/garde" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

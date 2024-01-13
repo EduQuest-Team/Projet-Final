@@ -16,6 +16,7 @@ import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Plan from 'app/modules/map/Plan';
 import Position from 'app/entities/position';
+import Pharmaciens from 'app/entities/pharmaciens/pharmaciens';
 
 const loading = <div>loading ...</div>;
 

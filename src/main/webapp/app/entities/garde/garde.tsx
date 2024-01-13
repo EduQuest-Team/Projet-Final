@@ -101,7 +101,7 @@ export const Garde = () => {
                       {garde.id}
                     </Button>
                   </td>
-                  <td>{garde.type ? 'true' : 'false'}</td>
+                  <td>{garde.type ? 'Day' : 'Night'}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/garde/${garde.id}`} color="info" size="sm" data-cy="entityDetailsButton">

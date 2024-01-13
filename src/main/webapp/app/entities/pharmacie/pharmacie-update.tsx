@@ -20,6 +20,8 @@ import { IPosition } from 'app/shared/model/position.model';
 import { getEntities as getPositions } from 'app/entities/position/position.reducer';
 import { IPharmacie } from 'app/shared/model/pharmacie.model';
 import { getEntity, updateEntity, createEntity, reset } from './pharmacie.reducer';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
 export const PharmacieUpdate = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +41,7 @@ export const PharmacieUpdate = () => {
   const loading = useAppSelector(state => state.pharmacie.loading);
   const updating = useAppSelector(state => state.pharmacie.updating);
   const updateSuccess = useAppSelector(state => state.pharmacie.updateSuccess);
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
 
   const handleClose = () => {
     navigate('/pharmacie' + location.search);
@@ -157,14 +160,16 @@ export const PharmacieUpdate = () => {
                 data-cy="latitude"
                 type="text"
               />
-              <ValidatedField
-                label={translate('pharmaAiApp.pharmacie.status')}
-                id="pharmacie-status"
-                name="status"
-                data-cy="status"
-                check
-                type="checkbox"
-              />
+              {isAdmin && (
+                <ValidatedField
+                  label={translate('pharmaAiApp.pharmacie.status')}
+                  id="pharmacie-status"
+                  name="status"
+                  data-cy="status"
+                  check
+                  type="checkbox"
+                />
+              )}
               <ValidatedField id="pharmacie-zone" name="zone" data-cy="zone" label={translate('pharmaAiApp.pharmacie.zone')} type="select">
                 <option value="" key="0" />
                 {zones

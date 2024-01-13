@@ -2,7 +2,7 @@
   "pharmaAiApp": {
     "pharmacieGarde": {
       "home": {
-        "title": "Pharmacie Gardes",
+        "title": "Historique Pharmacie Gardes",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Pharmacie Garde",
         "createOrEditLabel": "Create or edit a Pharmacie Garde",

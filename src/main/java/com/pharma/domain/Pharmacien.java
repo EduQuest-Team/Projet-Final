@@ -2,6 +2,7 @@ package com.pharma.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -38,6 +39,20 @@ public class Pharmacien implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Pharmacie pharmacie;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @NotNull
+    @JoinColumn(unique = true)
+    private User user;
+
+    //    public static User getUser() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @JsonIgnoreProperties(value = { "pharmaciegarde", "pharmacien" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "pharmacien")
