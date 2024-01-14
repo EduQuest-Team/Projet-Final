@@ -1,14 +1,12 @@
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import React, { useEffect, useState } from 'react';
-import { Translate, getSortState } from 'react-jhipster';
-import { Button, CardTitle, Col, Input, Label, Row } from 'reactstrap';
+import { Button, Col, Input, Label, Row } from 'reactstrap';
 import { getEntities as getZoneEntities } from '../zone/zone.reducer';
 import { useNavigate } from 'react-router';
 import { getEntities as getVilleEntities } from '../ville/ville.reducer';
 import LoadingSpinner from 'app/shared/components/LoadingSpinner';
 import { getPharmaciens } from './pharmaciens.reducer';
 import PharmacienTable from './pharmacien-table';
-import pharmaciens from 'app/entities/pharmaciens/index';
 
 const Pharmaciens = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,7 @@
 package com.pharma.web.rest;
 
 import com.pharma.domain.Pharmacie;
+import com.pharma.domain.Pharmacien;
 import com.pharma.domain.Ville;
 import com.pharma.domain.Zone;
 import com.pharma.repository.PharmacieRepository;
@@ -311,18 +312,70 @@ public class PharmacieResource {
             .build();
     }
 
-    @GetMapping("pharmacyst/{pharmacieId}")
-    public Optional<Pharmacie> getPharmacieByPharmacyst(@PathVariable("pharmacieId") Long pharmacieId) {
-        //        log.debug("REST request to get Pharmacie : {}", id);
-        Optional<Pharmacie> pharmacie = pharmacieRepository.findById(pharmacieId);
+    //    @GetMapping("pharmacyst/{pharmacieId}")
+    //    public Optional<Pharmacie> getPharmacieByPharmacyst(@PathVariable("pharmacieId") Long pharmacieId) {
+    //        //        log.debug("REST request to get Pharmacie : {}", id);
+    //        Optional<Pharmacie> pharmacie = pharmacieRepository.findById(pharmacieId);
+    //
+    //        if (pharmacie == null) {
+    //            // Log a message indicating that no results were found
+    //            log.debug("No Pharmacy found for pharmacyst: {}", pharmacieId);
+    //            return null; // or return an empty list if null is not desirable
+    //        }
+    //        return pharmacie;
+    //    }
 
-        if (pharmacie == null) {
-            // Log a message indicating that no results were found
-            log.debug("No Pharmacy found for pharmacyst: {}", pharmacieId);
-            return null; // or return an empty list if null is not desirable
-        }
-        return pharmacie;
+    //    @GetMapping("pharmacyst/{pharmacienId}")
+    //    public Optional<Pharmacie> getPharmacyByPharmacyst(@PathVariable("pharmacienId") Long pharmacienId) {
+    ////    public Optional<Pharmacie> getPharmacyByPharmacyst(@PathVariable("pharmacienId") Long pharmacienId) {
+    //        //        log.debug("REST request to get Pharmacie : {}", id);
+    //
+    //        Optional<Pharmacien> pharmacien = pharmacienRepository.findById(pharmacienId);
+    ////        Pharmacien pharmacien = pharmacienRepository.findById(pharmacienId);
+    ////        Pharmacie pharmacie = pharmacienRepository.findByPharmacie().orElseThrow(() -> new AccountResourceException("User could not be found"));
+    //
+    ////        Optional<Pharmacien> pharmacieId = pharmacienRepository.findByPharmacie(pharmacienId);
+    //        Long pharmacieId = pharmacien.get().getPharmacie().getId();
+    ////        Long pharmacieId = pharmacienRepository.getPharmacyIdByPharmacienId(pharmacien.findOneWithEagerRelationships(pharmacien));
+    ////        Optional<Pharmacie> pharmacie = pharmacieRepository.findById(pharmacieId);
+    //        Long pharmacyId = pharmacienRepository.getPharmacyIdByPharmacienId(pharmacien.get().getId());
+    //        Optional<Pharmacie> pharmacie = pharmacieRepository.findById(pharmacyId);
+    //
+    ////        Optional<Pharmacie> pharmacie = pharmacieRepository.findById(pharmacieId);
+    //
+    ////        if (pharmacie == null) {
+    ////            // Log a message indicating that no results were found
+    ////            log.debug("No Pharmacy found for pharmacyst: {}", pharmacyId);
+    ////            return Optional.empty(); // or return an empty list if null is not desirable
+    ////        }
+    ////        return pharmacie;
+    //        return pharmacieRepository.findById((pharmacienRepository.findById(pharmacienId)).get().getPharmacie().getId());
+    //    }
+
+    @GetMapping("/pharmacyst/{pharmacienId}")
+    public Optional<Pharmacie> getPharmacyByPharmacyst(@PathVariable("pharmacienId") Long pharmacienId) {
+        Optional<Pharmacien> pharmacienOptional = pharmacienRepository.findById(pharmacienId);
+
+        return pharmacienOptional
+            .map(pharmacien -> {
+                Long pharmacieId = pharmacien.getPharmacie().getId();
+                return pharmacieRepository.findById(pharmacieId);
+            })
+            .orElse(Optional.empty());
     }
+    //    @GetMapping("/pharmacyst/{pharmacienId}")
+    //    public Optional<Pharmacie> getPharmacieByPharmacien(@PathVariable("pharmacienId") Long pharmacienId) {
+    //        Optional<Pharmacien> pharmacien = pharmacienRepository.findById(pharmacienId);
+    //
+    //        if (pharmacien.isPresent()) {
+    //            Long pharmacieId = pharmacien.get().getPharmacie().getId();
+    //            return pharmacieRepository.findById(pharmacieId);
+    //        } else {
+    //            // Log a message indicating that no results were found
+    //            log.debug("No Pharmacien found with id: {}", pharmacienId);
+    //            return Optional.empty();
+    //        }
+    //    }
     //    @GetMapping("/myPharmaciens/{zoneId}/{villeId}")
     //    public List<Pharmacien> getPharmaciensByZoneAndVille(@PathVariable("zoneId") Long zoneId, @PathVariable("villeId") Long villeId) {
     //        // System.out.println(yearId);

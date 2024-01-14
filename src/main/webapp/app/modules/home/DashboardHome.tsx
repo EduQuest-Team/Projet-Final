@@ -76,11 +76,11 @@ const DashboardHome = () => {
             {/*  <BarChart title="Number of practice work per groups" subtitle="Overview" chartData={pwsPerGroupChart} />*/}
             {/*</div>*/}
           </div>
-          {/*<div className="row">*/}
-          {/*  <div className="col-xl-6">*/}
-          {/*    <LineChart title="Learning curve" subtitle="Overview" />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+          <div className="row">
+            <div className="col-xl-6">
+              <LineChart title="Learning curve" subtitle="Overview" />
+            </div>
+          </div>
         </>
       )}
     </>

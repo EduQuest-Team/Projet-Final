@@ -5,7 +5,7 @@ import { Bar, Line } from 'react-chartjs-2';
 import { Input, Label } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import axios from 'axios';
-import { getEntities } from 'app/entities/zone/zone.reducer';
+import { getEntities } from 'app/entities/pharmacien/pharmacien.reducer';
 
 Chart.register(CategoryScale);
 
@@ -16,9 +16,15 @@ interface ChartCardProps {
 
 const LineChart = ({ subtitle, title }: ChartCardProps) => {
   const dispatch = useAppDispatch();
-  const studentList = useAppSelector(state => state.student.entities);
-  const loading = useAppSelector(state => state.student.loading);
-  const [student, setStudent] = useState(null);
+  const pharmacienList = useAppSelector(state => state.pharmacien.entities);
+  const loading = useAppSelector(state => state.pharmacien.loading);
+
+  // const loading = useAppSelector(state => state.pharmaciens.loading);
+
+  // const pharmacien = useAppSelector(state => state.pharmacien.entity);
+  // const pharmacy = useAppSelector(state => state.pharmaciens.pharmacie);
+
+  const [pharmacien, setPharmacien] = useState(null);
   const [chartData, setChartData] = useState<any>(null);
 
   const getAllEntities = () => {
@@ -35,8 +41,8 @@ const LineChart = ({ subtitle, title }: ChartCardProps) => {
 
   useEffect(() => {
     if (!loading) {
-      if (studentList.length > 0) {
-        setStudent(studentList[0].id);
+      if (pharmacienList.length > 0) {
+        setPharmacien(pharmacienList[0].id);
       }
     }
     return () => {};
@@ -44,7 +50,7 @@ const LineChart = ({ subtitle, title }: ChartCardProps) => {
 
   const handleChange = async event => {
     console.log(event.target.value);
-    const resp = await axios.get<any>(`/api/stats/notes/${event.target.value}`);
+    const resp = await axios.get<any>(`/api/stats/pharmacies/${event.target.value}`);
     console.log(resp.data);
     setChartData(resp.data);
   };
@@ -65,10 +71,11 @@ const LineChart = ({ subtitle, title }: ChartCardProps) => {
               // value={student}
               onChange={handleChange}
             >
-              {studentList &&
-                studentList.map((std, i) => (
-                  <option value={std.id} key={std.id}>
-                    {`${std.user.firstName} ${std.user.lastName}`}
+              {pharmacienList &&
+                pharmacienList.map((pharmacien, i) => (
+                  <option value={pharmacien.id} key={pharmacien.id}>
+                    {`${pharmacien.nom} ${pharmacien.prenom}`}
+                    {/*{`${pharmacien.user?.firstName} ${pharmacien.user?.lastName}`}*/}
                   </option>
                 ))}
             </Input>

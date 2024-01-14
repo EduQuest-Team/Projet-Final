@@ -17,7 +17,7 @@ const PharmacienTable = ({ pharmaciens }: { pharmaciens: any }) => {
               <th>Nom</th>
               <th>Prenom</th>
               <th>Email</th>
-              {/*<th></th>*/}
+              <th></th>
             </tr>
           </thead>
           <tbody>

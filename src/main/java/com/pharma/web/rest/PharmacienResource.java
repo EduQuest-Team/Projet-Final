@@ -221,18 +221,18 @@ public class PharmacienResource {
             .build();
     }
 
-    @GetMapping("pharmacie/{pharmacienId}")
-    public Optional<Pharmacie> getPharmacieByPharmacyst(@PathVariable("pharmacienId") Long pharmacienId) {
-        //        log.debug("REST request to get Pharmacie : {}", id);
-        Pharmacie pharmacie = pharmacienRepository.findByPharmacy(pharmacienId);
-
-        if (pharmacie == null) {
-            // Log a message indicating that no results were found
-            log.debug("No Pharmacy found for pharmacyst: {}", pharmacienId);
-            return Optional.empty(); // or return an empty list if null is not desirable
-        }
-        return Optional.of(pharmacie);
-    }
+    //    @GetMapping("pharmacie/{pharmacienId}")
+    //    public Optional<Pharmacie> getPharmacieByPharmacyst(@PathVariable("pharmacienId") Long pharmacienId) {
+    //        //        log.debug("REST request to get Pharmacie : {}", id);
+    //        Pharmacie pharmacie = pharmacienRepository.findByPharmacy(pharmacienId);
+    //
+    //        if (pharmacie == null) {
+    //            // Log a message indicating that no results were found
+    //            log.debug("No Pharmacy found for pharmacyst: {}", pharmacienId);
+    //            return Optional.empty(); // or return an empty list if null is not desirable
+    //        }
+    //        return Optional.of(pharmacie);
+    //    }
 
     //    @GetMapping("pharmacy/{pharmacienId}")
     //    public Pharmacie getPharmacie(@PathVariable("pharmacienId") Long pharmacienId) {
@@ -247,7 +247,7 @@ public class PharmacienResource {
     //        return pharmacie;
     //    }
 
-    @GetMapping("/myPharmaciens/{zoneId}/{villeId}")
+    @GetMapping("/{zoneId}/{villeId}")
     public List<Pharmacien> getPharmaciensByZoneAndVille(@PathVariable("zoneId") Long zoneId, @PathVariable("villeId") Long villeId) {
         List<Pharmacien> pharmaciens = new ArrayList<>();
         List<Pharmacien> pharmacienList = pharmacienRepository.findByZoneAndVille(villeId, zoneId);
@@ -284,20 +284,20 @@ public class PharmacienResource {
     //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     //        }
     //    }
-    @GetMapping("/{pharmacienId}/my-pharmacie")
-    public ResponseEntity<Pharmacie> getPharmacieForAuthenticatedPharmacien(@PathVariable("pharmacienId") Long pharmacienId) {
-        try {
-            // Call the service method to get the Pharmacie associated with the authenticated Pharmacien
-            Pharmacie pharmacie = pharmacieRepository.getPharmacieForAuthenticatedPharmacien(pharmacienId);
-            return ResponseEntity.ok(pharmacie);
-        } catch (AccessDeniedException e) {
-            // Handle unauthorized access
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } catch (Exception e) {
-            // Handle other exceptions
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+    //    @GetMapping("/{pharmacienId}/my-pharmacie")
+    //    public ResponseEntity<Pharmacie> getPharmacieForAuthenticatedPharmacien(@PathVariable("pharmacienId") Long pharmacienId) {
+    //        try {
+    //            // Call the service method to get the Pharmacie associated with the authenticated Pharmacien
+    //            Pharmacie pharmacie = pharmacieRepository.getPharmacieForAuthenticatedPharmacien(pharmacienId);
+    //            return ResponseEntity.ok(pharmacie);
+    //        } catch (AccessDeniedException e) {
+    //            // Handle unauthorized access
+    //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    //        } catch (Exception e) {
+    //            // Handle other exceptions
+    //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //        }
+    //    }
     //    @Override
     //    public Pharmacien save(Pharmacien pharmacien) {
     //        // Assign the role to the user
@@ -306,4 +306,9 @@ public class PharmacienResource {
     //        return super.save(pharmacien);
     //    }
 
+    @GetMapping("/{id}/pharmacy")
+    public List<Pharmacie> getPharmacieByPharmacien(@PathVariable("id") Long id) {
+        log.debug("REST request to get Pharmacy : {}", id);
+        return pharmacieRepository.findByPharmacienId(id);
+    }
 }
