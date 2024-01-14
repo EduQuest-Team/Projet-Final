@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import AdminCards from 'app/shared/components/cards/AdminCards';
 import BarChart, { generateRandomColors } from 'app/shared/components/charts/BarChart';
-import { Data } from 'app/shared/components/charts/Test';
+// import { Data } from 'app/shared/components/charts/Test';
 import React, { useEffect, useState } from 'react';
 // import { fetchStatsData, getCountStats, getZonesPerCity } from './home.reducer';
 import { fetchStatsData } from './home.reducer';
@@ -13,9 +13,11 @@ const DashboardHome = () => {
   const loading = useAppSelector(state => state.dashboard.loading);
   const countStats = useAppSelector(state => state.dashboard.countStats);
   const zonesPerCity = useAppSelector(state => state.dashboard.zonesPerCity);
-  // const pwsPerGroup = useAppSelector(state => state.dashboard.pwsPerGroup);
+  const pharmaciesPerVille = useAppSelector(state => state.dashboard.pharmacyPerCity);
 
   const [zonesPerCityChart, setZonesPerCityChart] = useState({});
+
+  const [PharmaciesPerVilleChart, setPharmaciesPerVilleChart] = useState({});
   // const [pwsPerGroupChart, setPwsPerGroupChart] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,10 +27,11 @@ const DashboardHome = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (zonesPerCity && zonesPerCity.length > 0 && !loading) {
+    if (zonesPerCity && zonesPerCity.length > 0 && pharmaciesPerVille && pharmaciesPerVille.length > 0 && !loading) {
       const names = zonesPerCity.map(item => item.name);
       const counts = zonesPerCity.map(item => item.count);
-      // const pwsNames = pwsPerGroup.map(item => item.name);
+      const ville = pharmaciesPerVille.map(item => item.name);
+      const counties = pharmaciesPerVille.map(item => item.count);
       // const pwsCounts = pwsPerGroup.map(item => item.count);
       setZonesPerCityChart({
         labels: names,
@@ -42,18 +45,18 @@ const DashboardHome = () => {
           },
         ],
       });
-      // setPwsPerGroupChart({
-      //   labels: pwsNames,
-      //   datasets: [
-      //     {
-      //       label: 'Practice work',
-      //       data: pwsCounts,
-      //       backgroundColor: generateRandomColors(pwsCounts.length),
-      //       borderColor: 'black',
-      //       borderWidth: 1,
-      //     },
-      //   ],
-      // });
+      setPharmaciesPerVilleChart({
+        labels: ville,
+        datasets: [
+          {
+            label: 'pharmacies',
+            data: counties,
+            backgroundColor: generateRandomColors(counties.length),
+            borderColor: 'black',
+            borderWidth: 1,
+          },
+        ],
+      });
       setIsLoading(false);
     }
     return () => {};
@@ -70,11 +73,11 @@ const DashboardHome = () => {
           </div>
           <div className="row">
             <div className="col-xl-6">
-              <BarChart title="Number of zones per city" subtitle="Overview" chartData={zonesPerCityChart} />
+              <BarChart title="Number of pharmacies per zones" subtitle="Overview" chartData={zonesPerCityChart} />
             </div>
-            {/*<div className="col-xl-6">*/}
-            {/*  <BarChart title="Number of practice work per groups" subtitle="Overview" chartData={pwsPerGroupChart} />*/}
-            {/*</div>*/}
+            <div className="col-xl-6">
+              <BarChart title="Number of pharmacies per villes" subtitle="Overview" chartData={PharmaciesPerVilleChart} />
+            </div>
           </div>
           <div className="row">
             <div className="col-xl-6">
