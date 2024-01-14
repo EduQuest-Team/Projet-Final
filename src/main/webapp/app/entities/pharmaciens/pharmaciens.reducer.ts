@@ -6,12 +6,12 @@ import axios from 'axios';
 const initialState = {
   loading: true,
   pharmaciens: [],
-  // pws: [],
+  pharmacie: [],
 };
 
 export type MyPharmaciensState = Readonly<typeof initialState>;
 
-const apiUrl = 'api/pharmaciens/myPharmaciens';
+const apiUrl = 'api/pharmaciens';
 
 export const getPharmaciens = createAsyncThunk(
   'pharmaciens/get_pharmaciens',
@@ -21,13 +21,13 @@ export const getPharmaciens = createAsyncThunk(
   },
 );
 
-// export const getPWsByStudentId = createAsyncThunk(
-//   'myPharmaciens/get_pws_by_student_id',
-//   async ({ studentId }: { studentId: any }) => axios.get<any>(`api/Pharmaciens/${studentId}/pws`),
-//   {
-//     serializeError: serializeAxiosError,
-//   },
-// );
+export const getPharmacyByPharmacistId = createAsyncThunk(
+  'pharmaciens/get_pharmacy_by_pharmacist_id',
+  async ({ pharmacistId }: { pharmacistId: any }) => axios.get<any>(`${apiUrl}/${pharmacistId}/pharmacy`),
+  {
+    serializeError: serializeAxiosError,
+  },
+);
 
 export const MyPharmaciensSlice = createSlice({
   name: 'pharmaciens',
@@ -44,17 +44,17 @@ export const MyPharmaciensSlice = createSlice({
           loading: false,
           pharmaciens: action.payload.data,
         };
+      })
+      .addCase(getPharmacyByPharmacistId.pending, state => {
+        state.loading = true;
+      })
+      .addCase(getPharmacyByPharmacistId.fulfilled, (state, action) => {
+        return {
+          ...state,
+          loading: false,
+          pharmacie: action.payload.data,
+        };
       });
-    // .addCase(getPWsByStudentId.pending, state => {
-    //   state.loading = true;
-    // })
-    // .addCase(getPWsByStudentId.fulfilled, (state, action) => {
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     pws: action.payload.data,
-    //   };
-    // });
   },
 });
 

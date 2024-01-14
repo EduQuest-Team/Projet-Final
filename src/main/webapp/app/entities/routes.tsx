@@ -12,6 +12,7 @@ import Ville from './ville';
 import Historique from './historique';
 import Pharmaciens from 'app/entities/pharmaciens/pharmaciens';
 import Pharmacy from 'app/entities/my-pharmacy/pharmacy';
+import Profile from 'app/modules/profile';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -28,6 +29,8 @@ export default () => {
         <Route path="historique/*" element={<Historique />} />
         <Route path="pharmaciens/*" element={<Pharmaciens />} />
         <Route path="pharmacy/*" element={<Pharmacy />} />
+        <Route path="profile/*" element={<Profile />} />
+
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

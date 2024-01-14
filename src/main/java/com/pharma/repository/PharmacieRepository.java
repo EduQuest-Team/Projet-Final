@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.*;
+//import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
@@ -89,17 +90,19 @@ public interface PharmacieRepository extends PharmacieRepositoryWithBagRelations
     //            throw new AccessDeniedException("Access is denied");
     //        }
     //    }
-    default Pharmacie getPharmacieForAuthenticatedPharmacien(Long pharmacienId) throws AccessDeniedException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof Pharmacien) {
-            Pharmacien authenticatedPharmacien = (Pharmacien) authentication.getPrincipal();
-            if (authenticatedPharmacien.getId().equals(pharmacienId)) {
-                return authenticatedPharmacien.getPharmacie();
-            } else {
-                throw new AccessDeniedException("Access is denied");
-            }
-        } else {
-            throw new AccessDeniedException("Access is denied");
-        }
-    }
+    //    default Pharmacie getPharmacieForAuthenticatedPharmacien(Long pharmacienId) throws AccessDeniedException {
+    //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //        if (authentication != null && authentication.getPrincipal() instanceof Pharmacien) {
+    //            Pharmacien authenticatedPharmacien = (Pharmacien) authentication.getPrincipal();
+    //            if (authenticatedPharmacien.getId().equals(pharmacienId)) {
+    //                return authenticatedPharmacien.getPharmacie();
+    //            } else {
+    //                throw new AccessDeniedException("Access is denied");
+    //            }
+    //        } else {
+    //            throw new AccessDeniedException("Access is denied");
+    //        }
+    //    }
+
+    List<Pharmacie> findByPharmacienId(Long id);
 }
