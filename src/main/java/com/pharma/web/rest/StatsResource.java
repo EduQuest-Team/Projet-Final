@@ -6,10 +6,7 @@ import com.pharma.repository.PharmacieRepository;
 import com.pharma.repository.PharmacienRepository;
 import com.pharma.repository.VilleRepository;
 import com.pharma.repository.ZoneRepository;
-import com.pharma.service.dto.CountStatsDTO;
-import com.pharma.service.dto.PharmacistLineChartDTO;
-import com.pharma.service.dto.PharmacyLineChartDTO;
-import com.pharma.service.dto.ZoneVilleCountDTO;
+import com.pharma.service.dto.*;
 import com.pharma.web.rest.errors.BadRequestAlertException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,6 +57,12 @@ public class StatsResource {
     public List<ZoneVilleCountDTO> getZoneCountPerVille() {
         List<Object[]> result = villeRepository.countZonePerVille();
         return result.stream().map(objarr -> new ZoneVilleCountDTO((String) objarr[0], (Long) objarr[1])).collect(Collectors.toList());
+    }
+
+    @GetMapping("/get_phar_per_ville")
+    public List<PharmacieVilleCountDTO> getPharmaCountPerVille() {
+        List<Object[]> result = pharmacieRepository.countPharmaciesPerVille();
+        return result.stream().map(objarr -> new PharmacieVilleCountDTO((String) objarr[0], (Long) objarr[1])).collect(Collectors.toList());
     }
 
     @GetMapping("/pharmacies/{id}")
