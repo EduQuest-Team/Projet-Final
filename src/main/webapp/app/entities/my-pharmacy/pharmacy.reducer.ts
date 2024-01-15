@@ -17,6 +17,7 @@ const initialState: EntityState<IPharmacie> = {
 const apiUrl = 'api/pharmacies';
 // const apiUrl = 'api/pharmacies/pharmacyst';
 // http://localhost:8080/api/pharmacies/pharmacyst/1
+// GET http://localhost:8080/api/pharmaciens/user/1050
 
 // Actions
 
@@ -32,6 +33,16 @@ export const getEntity = createAsyncThunk(
   },
   { serializeError: serializeAxiosError },
 );
+
+export const getPharmacist = createAsyncThunk(
+  'pharmacist/fetch_pharmacist_by_userId',
+  async (id: string | number) => {
+    const requestUrl = `${apiUrl}/user/${id}`;
+    return axios.get<IPharmacie>(requestUrl);
+  },
+  { serializeError: serializeAxiosError },
+);
+
 export const createEntity = createAsyncThunk(
   'pharmacie/create_entity',
   async (entity: IPharmacie, thunkAPI) => {

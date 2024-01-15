@@ -17,7 +17,7 @@ import dashboard from 'app/modules/home/home.reducer';
 import pharmaciens from 'app/entities/pharmaciens/pharmaciens.reducer';
 
 const rootReducer: ReducersMapObject = {
-  pharmaciens,
+  // pharmaciens,
   dashboard,
   authentication,
   locale,

@@ -73,10 +73,10 @@ const DashboardHome = () => {
           </div>
           <div className="row">
             <div className="col-xl-6">
-              <BarChart title="Number of pharmacies per zones" subtitle="Overview" chartData={zonesPerCityChart} />
+              <BarChart title="Number of Zones Per City" subtitle="Overview" chartData={zonesPerCityChart} />
             </div>
             <div className="col-xl-6">
-              <BarChart title="Number of pharmacies per villes" subtitle="Overview" chartData={PharmaciesPerVilleChart} />
+              <BarChart title="Number of Pharmacies Per City" subtitle="Overview" chartData={PharmaciesPerVilleChart} />
             </div>
           </div>
           <div className="row">
