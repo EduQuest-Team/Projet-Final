@@ -6,7 +6,6 @@ import Profile from './Profile';
 const ProfileRoutes = () => {
   return (
     <ErrorBoundaryRoutes>
-      <Route index element={<span>hello</span>} />
       <Route path=":id">
         <Route index element={<Profile />} />
       </Route>

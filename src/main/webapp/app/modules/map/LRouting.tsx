@@ -206,7 +206,7 @@ const LRouting = () => {
 
         // map.setView([lat, long], 15); // Set view to current location
 
-        console.log('Your coordinate is: Lat: ' + lat + ' Long: ' + long + ' Accuracy: ' + accuracy);
+        // console.log('Your coordinate is: Lat: ' + lat + ' Long: ' + long + ' Accuracy: ' + accuracy);
         // console.log(currentLocation.map((l, i) => {
         //     {
         //         l.latitude
@@ -236,11 +236,10 @@ const LRouting = () => {
     };
     const error = err => {
       if (err.code === 1) {
-        // alert('Please allow geolocation access');
+        alert('Please allow geolocation access');
+      } else {
+        alert('Cannot get current location');
       }
-      // else {
-      //     alert("Cannot get current location")
-      // }
     };
     const watchId = navigator.geolocation.watchPosition(success, error);
 

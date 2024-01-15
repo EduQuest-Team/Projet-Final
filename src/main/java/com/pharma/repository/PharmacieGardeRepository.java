@@ -1,5 +1,6 @@
 package com.pharma.repository;
 
+import com.pharma.domain.Pharmacie;
 import com.pharma.domain.PharmacieGarde;
 import java.util.List;
 import java.util.Optional;
@@ -27,4 +28,7 @@ public interface PharmacieGardeRepository extends PharmacieGardeRepositoryWithBa
     default Page<PharmacieGarde> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    @Override
+    List<PharmacieGarde> findAllById(Iterable<Long> longs);
 }

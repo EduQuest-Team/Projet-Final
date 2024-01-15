@@ -11,7 +11,7 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import LandingHome from 'app/modules/home/LandingHome';
 import DashboardHome from 'app/modules/home/DashboardHome';
-import Pharmacy from 'app/entities/my-pharmacy/pharmacy';
+import PharmacistHome from 'app/entities/pharmacist-home';
 
 export const Home = () => {
   const loading = useAppSelector(state => state.authentication.loading);
@@ -21,10 +21,7 @@ export const Home = () => {
   // );
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
   const isPharmacien = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.PHARMACIEN]));
-
   const isUser = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.USER]));
-
-  const uId = account?.id;
 
   return (
     <Row>
@@ -64,13 +61,7 @@ export const Home = () => {
                       &nbsp;
                       {account.lastName && <span>{`${account.lastName} `}</span>}
                     </h1>
-                    {/*<Pharmacy />*/}
-                    {/*<Link to={`pharmacy/${uId}/pharmacy`}>{uId}</Link>*/}
-                    {/*<Pharmacy/>*/}
-
-                    <Link to={`/pharmacy/${uId}`}>
-                      <Pharmacy />
-                    </Link>
+                    <PharmacistHome />
                   </Col>
                 </>
               )}

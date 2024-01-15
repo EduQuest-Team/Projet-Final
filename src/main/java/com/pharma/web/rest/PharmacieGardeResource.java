@@ -196,4 +196,9 @@ public class PharmacieGardeResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping
+    public ResponseEntity<Void> getPharmacieGardeByPharmacie(@PathVariable("id") Long id) {
+        pharmacieGardeRepository.findAllById(id);
+    }
 }

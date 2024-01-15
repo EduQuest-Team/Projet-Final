@@ -108,4 +108,7 @@ public interface PharmacieRepository extends PharmacieRepositoryWithBagRelations
 
     @Query("SELECT v.nom, COUNT(p.id) FROM Ville v JOIN Pharmacie p ON v.id = p.zone.ville.id GROUP BY v.nom")
     List<Object[]> countPharmaciesPerVille();
+
+    @Query("SELECT z.nom, COUNT(p.id) FROM Zone z JOIN Pharmacie p ON z.id = p.zone.id GROUP BY z.nom")
+    List<Object[]> countPharmaciesPerZone();
 }

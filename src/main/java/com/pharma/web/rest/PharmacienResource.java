@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -247,6 +248,7 @@ public class PharmacienResource {
     //        return pharmacie;
     //    }
     //    @GetMapping("/userId/{id}")
+    //    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.PHARMACIEN + "\")")
     @GetMapping("/user/{userId}")
     //    public List<Pharmacien> getPharmacienByUserId(@PathVariable("userId") Long userId) {
     public Pharmacien getPharmacienByUserId(@PathVariable("userId") Long userId) {
