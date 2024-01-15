@@ -246,6 +246,14 @@ public class PharmacienResource {
     //        }
     //        return pharmacie;
     //    }
+    //    @GetMapping("/userId/{id}")
+    @GetMapping("/user/{userId}")
+    //    public List<Pharmacien> getPharmacienByUserId(@PathVariable("userId") Long userId) {
+    public Pharmacien getPharmacienByUserId(@PathVariable("userId") Long userId) {
+        //    public List<Pharmacien> getPharmacienByUserId(@PathVariable("id") Long id) {
+        log.debug("REST request to get Pharmacist by userId : {}", userId);
+        return pharmacienRepository.findByUserId(userId);
+    }
 
     @GetMapping("/{zoneId}/{villeId}")
     public List<Pharmacien> getPharmaciensByZoneAndVille(@PathVariable("zoneId") Long zoneId, @PathVariable("villeId") Long villeId) {

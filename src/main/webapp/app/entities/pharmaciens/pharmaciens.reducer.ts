@@ -7,12 +7,13 @@ const initialState = {
   loading: true,
   pharmaciens: [],
   pharmacie: [],
+  pharmacist: {},
 };
 
 export type MyPharmaciensState = Readonly<typeof initialState>;
 
 const apiUrl = 'api/pharmaciens';
-
+// pharmaciens/user/1050
 export const getPharmaciens = createAsyncThunk(
   'pharmaciens/get_pharmaciens',
   async ({ zone, ville }: { zone: any; ville: any }) => axios.get<any>(`${apiUrl}/${zone}/${ville}`),
@@ -24,6 +25,16 @@ export const getPharmaciens = createAsyncThunk(
 export const getPharmacyByPharmacistId = createAsyncThunk(
   'pharmaciens/get_pharmacy_by_pharmacist_id',
   async ({ pharmacistId }: { pharmacistId: any }) => axios.get<any>(`${apiUrl}/${pharmacistId}/pharmacy`),
+  {
+    serializeError: serializeAxiosError,
+  },
+);
+
+export const getPharmacyByUserId = createAsyncThunk(
+  'pharmaciens/get_pharmacist_by_userId',
+
+  // async ({userId}: { userId: any }) => axios.get<any>(`${apiUrl}/user/${userId}`),
+  async ({ userId }: { userId: string | number }) => axios.get<any>(`${apiUrl}/user/${userId}`),
   {
     serializeError: serializeAxiosError,
   },
@@ -53,6 +64,16 @@ export const MyPharmaciensSlice = createSlice({
           ...state,
           loading: false,
           pharmacie: action.payload.data,
+        };
+      })
+      .addCase(getPharmacyByUserId.pending, state => {
+        state.loading = true;
+      })
+      .addCase(getPharmacyByUserId.fulfilled, (state, action) => {
+        return {
+          ...state,
+          loading: false,
+          pharmacist: action.payload.data,
         };
       });
   },

@@ -47,7 +47,13 @@ public interface PharmacienRepository extends PharmacienRepositoryWithBagRelatio
 
     //    @Query("SELECT p.pharmacie FROM Pharmacien p WHERE p.id = :pharmacienId")
     //    Pharmacie findByPharmacy(@Param("pharmacienId") Long pharmacienId);
+
     Pharmacien findByPharmacie(Pharmacie pharmacie);
+
+    //    @Query("SELECT p FROM pharmacien p WHERE pharmacien.user.id = :userId")
+
+    //    List<Pharmacien> findByUserId(Long id);
+    Pharmacien findByUserId(Long id);
 
     @Query("SELECT p.pharmacie.id from Pharmacien p where p.id = :pharmacienId")
     Long getPharmacyIdByPharmacienId(@Param("pharmacienId") Long pharmacienId);

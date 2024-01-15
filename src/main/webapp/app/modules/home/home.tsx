@@ -24,6 +24,8 @@ export const Home = () => {
 
   const isUser = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.USER]));
 
+  const uId = account?.id;
+
   return (
     <Row>
       {/*<Col md="3" className="pad">*/}
@@ -62,7 +64,13 @@ export const Home = () => {
                       &nbsp;
                       {account.lastName && <span>{`${account.lastName} `}</span>}
                     </h1>
-                    <Pharmacy />
+                    {/*<Pharmacy />*/}
+                    {/*<Link to={`pharmacy/${uId}/pharmacy`}>{uId}</Link>*/}
+                    {/*<Pharmacy/>*/}
+
+                    <Link to={`/pharmacy/${uId}`}>
+                      <Pharmacy />
+                    </Link>
                   </Col>
                 </>
               )}
