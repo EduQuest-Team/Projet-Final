@@ -14,10 +14,13 @@ const DashboardHome = () => {
   const countStats = useAppSelector(state => state.dashboard.countStats);
   const zonesPerCity = useAppSelector(state => state.dashboard.zonesPerCity);
   const pharmaciesPerVille = useAppSelector(state => state.dashboard.pharmacyPerCity);
+  const pharmaciesPerZone = useAppSelector(state => state.dashboard.pharmacyPerZone);
 
   const [zonesPerCityChart, setZonesPerCityChart] = useState({});
 
   const [PharmaciesPerVilleChart, setPharmaciesPerVilleChart] = useState({});
+  const [PharmaciesPerZoneChart, setPharmaciesPerZoneChart] = useState({});
+
   // const [pwsPerGroupChart, setPwsPerGroupChart] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,6 +35,9 @@ const DashboardHome = () => {
       const counts = zonesPerCity.map(item => item.count);
       const ville = pharmaciesPerVille.map(item => item.name);
       const counties = pharmaciesPerVille.map(item => item.count);
+      const zone = pharmaciesPerZone.map(item => item.name);
+      const counters = pharmaciesPerZone.map(item => item.count);
+
       // const pwsCounts = pwsPerGroup.map(item => item.count);
       setZonesPerCityChart({
         labels: names,
@@ -45,6 +51,19 @@ const DashboardHome = () => {
           },
         ],
       });
+      setPharmaciesPerZoneChart({
+        labels: zone,
+        datasets: [
+          {
+            label: 'Zones',
+            data: counters,
+            backgroundColor: generateRandomColors(counters.length),
+            borderColor: 'black',
+            borderWidth: 1,
+          },
+        ],
+      });
+
       setPharmaciesPerVilleChart({
         labels: ville,
         datasets: [
@@ -77,6 +96,9 @@ const DashboardHome = () => {
             </div>
             <div className="col-xl-6">
               <BarChart title="Number of Pharmacies Per City" subtitle="Overview" chartData={PharmaciesPerVilleChart} />
+            </div>
+            <div className="col-xl-6">
+              <BarChart title="Number of Pharmacies Per Zone" subtitle="Overview" chartData={PharmaciesPerZoneChart} />
             </div>
           </div>
           <div className="row">

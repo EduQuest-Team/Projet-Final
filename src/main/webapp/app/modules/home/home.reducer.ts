@@ -7,6 +7,8 @@ const initialState = {
   countStats: {} as any,
   zonesPerCity: [] as any[],
   pharmacyPerCity: [] as any[],
+  pharmacyPerZone: [] as any[],
+
   // pharmacyPerCity: {} as any,
 };
 
@@ -19,6 +21,7 @@ export const fetchStatsData = createAsyncThunk('dashboard/fetchData', async (_, 
     await dispatch(getCountStats());
     await dispatch(getZonesPerCity());
     await dispatch(getPharmaciesPerVille());
+    await dispatch(getPharmaciesPerZone());
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -39,7 +42,13 @@ export const getPharmaciesPerVille = createAsyncThunk(
     serializeError: serializeAxiosError,
   },
 );
-
+export const getPharmaciesPerZone = createAsyncThunk(
+  'dashboard/get-phar-per-zone',
+  async () => axios.get<any>(`${apiUrl}/get-phar-per-zone`),
+  {
+    serializeError: serializeAxiosError,
+  },
+);
 export const DashboardSlice = createSlice({
   name: 'dashboard',
   initialState: initialState as HomeState,
@@ -65,6 +74,12 @@ export const DashboardSlice = createSlice({
         return {
           ...state,
           zonesPerCity: action.payload.data,
+        };
+      })
+      .addCase(getPharmaciesPerZone.fulfilled, (state, action) => {
+        return {
+          ...state,
+          pharmacyPerZone: action.payload.data,
         };
       })
       .addCase(getPharmaciesPerVille.fulfilled, (state, action) => {

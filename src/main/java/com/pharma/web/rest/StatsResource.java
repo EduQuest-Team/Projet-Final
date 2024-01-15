@@ -65,6 +65,12 @@ public class StatsResource {
         return result.stream().map(objarr -> new PharmacieVilleCountDTO((String) objarr[0], (Long) objarr[1])).collect(Collectors.toList());
     }
 
+    @GetMapping("/get-phar-per-zone")
+    public List<PharmacieZoneCountDTO> getPharmaCountPerZone() {
+        List<Object[]> result = pharmacieRepository.countPharmaciesPerZone();
+        return result.stream().map(objarr -> new PharmacieZoneCountDTO((String) objarr[0], (Long) objarr[1])).collect(Collectors.toList());
+    }
+
     @GetMapping("/pharmacies/{id}")
     public PharmacyLineChartDTO getPharmacistsNote(@PathVariable(name = "id") Long id) {
         var pharmacist = pharmacienRepository.findOneWithEagerRelationships(id).orElse(null);

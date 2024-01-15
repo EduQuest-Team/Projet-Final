@@ -19,10 +19,12 @@ import { useStateManager } from 'react-select';
 // import {getPharmacist} from "app/entities/my-pharmacy/pharmacy.reducer";
 import { getSession } from 'app/shared/reducers/authentication';
 import { reset } from 'app/modules/account/settings/settings.reducer';
-// import {getEntity} from 'app/entities/pharmacien/pharmacien.reducer';
-import { getPharmacyByUserId } from 'app/entities/pharmaciens/pharmaciens.reducer';
+import { getEntity } from 'app/entities/pharmacien/pharmacien.reducer';
+import { getPharmacistByUserId } from 'app/entities/pharmaciens/pharmaciens.reducer';
+import LoadingSpinner from 'app/shared/components/LoadingSpinner';
+import PharmacienTable from 'app/entities/pharmaciens/pharmacien-table';
 
-const Pharmacy = () => {
+const PharmacistHome = () => {
   const dispatch = useAppDispatch();
 
   const pageLocation = useLocation();
@@ -43,27 +45,30 @@ const Pharmacy = () => {
 
   const loading = useAppSelector(state => state.pharmaciens.loading);
   const pharmacist = useAppSelector(state => state.pharmaciens.pharmacist);
+  const [isLoading, setIsLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const pharmacie = useAppSelector(state => state.pharmacie.entity);
 
   // const uId = account.id;
-  const userId = account?.id;
-  console.log('UserId:', userId);
+  // const userId = account?.id;
+  // console.log('UserId:', userId);
 
   // console.log(uId);
   // const [pharmacistId, setPharmacistId] = useState<number>(pId);
 
-  const { id } = useParams<'id'>();
-  useEffect(() => {
-    // dispatch(getPharmacyByUserId(uId));
-    // const uId = account.id;
-    const userId = account?.id;
+  // const {id} = useParams<'id'>();
 
-    // dispatch(getPharmacyByUserId(userId));
-    if (userId) {
-      dispatch(getPharmacyByUserId(userId));
-    }
-    // dispatch(getEntity(pharmacistId));
-    // dispatch(getPharmacyByPharmacienId({pharmacistId: pharmacistId}));
-  }, []);
+  // useEffect(() => {
+  //     // dispatch(getPharmacyByUserId(uId));
+  //     // const uId = account.id;
+  //     // const userId = account?.id;
+  //     // dispatch(getPharmacyByUserId(id));
+  //     // if (userId) {
+  //     //   dispatch(getPharmacyByUserId(userId));
+  //     // }
+  //     // dispatch(getEntity(pharmacistId));
+  //     // dispatch(getPharmacyByPharmacienId({pharmacistId: pharmacistId}));
+  // }, []);
 
   // useEffect(() => {
   //     dispatch(getSession());
@@ -71,7 +76,7 @@ const Pharmacy = () => {
   //         dispatch(reset());
   //     };
   // }, []);
-  const staticId = 1;
+  // const staticId = 1;
   // const staticId = account.id;
   // const staticId = pharmacieEntity.id;
   // const pharmacistId = 1500;
@@ -85,11 +90,33 @@ const Pharmacy = () => {
   // );
   // dispatch(getEntity(id));
   // };
+  // const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<number>(account.id);
 
   // useEffect(() => {
   //     dispatch(getEntity(pharmacistId));
-  //     dispatch(getPharmacyByPharmacienId({pharmacistId: pharmacistId}));
+  //     dispatch(getPharmacyByUserId({pharmacistId: pharmacistId}));
   // }, []);
+
+  const handleFetch = () => {
+    // console.log(zone, ville);
+    console.log(userId);
+    setUserId(account.id);
+    setIsLoading(true);
+    setCompleted(false);
+    dispatch(getPharmacistByUserId({ userId: userId }));
+  };
+
+  useEffect(() => {
+    if (!loading) {
+      setIsLoading(false);
+      setCompleted(true);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    handleFetch();
+  }, []);
 
   // const sortEntities = () => {
   //     getAllEntities();
@@ -151,60 +178,95 @@ const Pharmacy = () => {
       <h2 id="settings-title">
         Pharmacist settings for {account.login} {account.id}
       </h2>
-      <div className="order-xl-2">
-        <div className="card card-profile">
-          <img
-            src="/content/images/uploads/banner.jpg"
-            height="240px"
-            width="1080px"
-            alt="Image placeholder"
-            className="float-center rounded mx-auto d-block"
-          />
-          <div className="row justify-content-center">
-            <div className="col-lg-3 order-lg-2">
-              <div className="card-profile-image">
-                <a href="#">
-                  {pharmacist.user?.imageUrl ? (
-                    <img src={`/content/images/uploads/${pharmacist.user?.imageUrl}`} className="rounded-circle" />
-                  ) : (
-                    <img src={`/content/images/uploads/pharmacist.png`} className="rounded-circle" />
-                  )}
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></div>
-          <div className="card-body pt-0">
-            <div className="row">
-              <div className="col">
-                <div className="card-profile-stats d-flex justify-content-center">
-                  <div>
-                    <span className="heading">{pharmacist.nom}</span>
-                    <span className="description">Nom</span>
-                  </div>
-                  <div>
-                    <span className="heading">{pharmacist.prenom}</span>
-                    <span className="description">Prenom</span>
-                  </div>
-                  {/*<div>*/}
-                  {/*    <span className="heading">{formatInstantString(pharmacist.user?.createdDate)}</span>*/}
-                  {/*    /!*<span className="heading">{pharmacist.email}</span>*!/*/}
-                  {/*    /!*<span className="description">Email</span>*!/*/}
-                  {/*    <span className="description">Created Date</span>*/}
-                  {/*</div>*/}
-                </div>
-              </div>
-            </div>
-            <div className="text-center">
-              <h5 className="h3">{`${pharmacist.user?.firstName} ${pharmacist.user?.lastName}`}</h5>
-              <div className="h5 font-weight-300">
-                <i className="ni location_pin mr-2"></i>
-                {pharmacist.user?.email}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/*<Button color="primary" disabled={userId === ''} onClick={handleFetch}>*/}
+      {/*<Button color="primary" onClick={handleFetch}>*/}
+      {/*    Get PharmacistId*/}
+      {/*</Button>*/}
+
+      <Button tag={Link} to={`/pharmacist/${pharmacist.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View Profile</span>
+      </Button>
+      <Button tag={Link} to={`/pharmacist/${pharmacist.id}/pharmacy`} color="success" size="sm" data-cy="entityDetailsButton">
+        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View Pharmacy</span>
+      </Button>
+
+      <Button tag={Link} to={`/pharmacist/${pharmacist.id}/guard`} color="primary" size="sm" data-cy="entityEditButton">
+        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Mention a guard</span>
+      </Button>
+
+      {/*{isLoading && <LoadingSpinner/>}*/}
+      {/*{completed && <a*/}
+      {/*    href={`/profile/${pharmacist.id}`}*/}
+      {/*    style={{*/}
+      {/*        fontSize: '1.3rem',*/}
+      {/*    }}*/}
+      {/*    className="table-action"*/}
+      {/*    data-toggle="tooltip"*/}
+      {/*    data-original-title="Edit product"*/}
+      {/*>*/}
+      {/*    <i className="fas fa-user-edit"></i><h1>Profile</h1>*/}
+      {/*</a>}*/}
+      {/*<Button tag={Link} to={`/pharmacie/${pharmacie.id}`} color="info" size="sm" data-cy="entityDetailsButton">*/}
+      {/*    <FontAwesomeIcon icon="eye"/>{' '}*/}
+      {/*    <span className="d-none d-md-inline">*/}
+      {/*              <Translate contentKey="entity.action.view">View</Translate>*/}
+      {/*            </span>*/}
+      {/*</Button>*/}
+
+      {/*<div className="order-xl-2">*/}
+      {/*  <div className="card card-profile">*/}
+      {/*    <img*/}
+      {/*      src="/content/images/uploads/banner.jpg"*/}
+      {/*      height="240px"*/}
+      {/*      width="1080px"*/}
+      {/*      alt="Image placeholder"*/}
+      {/*      className="float-center rounded mx-auto d-block"*/}
+      {/*    />*/}
+      {/*    <div className="row justify-content-center">*/}
+      {/*      <div className="col-lg-3 order-lg-2">*/}
+      {/*        <div className="card-profile-image">*/}
+      {/*          <a href="#">*/}
+      {/*            {pharmacist.user?.imageUrl ? (*/}
+      {/*              <img src={`/content/images/uploads/${pharmacist.user?.imageUrl}`} className="rounded-circle" />*/}
+      {/*            ) : (*/}
+      {/*              <img src={`/content/images/uploads/pharmacist.png`} className="rounded-circle" />*/}
+      {/*            )}*/}
+      {/*          </a>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*    <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></div>*/}
+      {/*    <div className="card-body pt-0">*/}
+      {/*      <div className="row">*/}
+      {/*        <div className="col">*/}
+      {/*          <div className="card-profile-stats d-flex justify-content-center">*/}
+      {/*            <div>*/}
+      {/*              <span className="heading">{pharmacist.nom}</span>*/}
+      {/*              <span className="description">Nom</span>*/}
+      {/*            </div>*/}
+      {/*            <div>*/}
+      {/*              <span className="heading">{pharmacist.prenom}</span>*/}
+      {/*              <span className="description">Prenom</span>*/}
+      {/*            </div>*/}
+      {/*            /!*<div>*!/*/}
+      {/*            /!*    <span className="heading">{formatInstantString(pharmacist.user?.createdDate)}</span>*!/*/}
+      {/*            /!*    /!*<span className="heading">{pharmacist.email}</span>*!/*!/*/}
+      {/*            /!*    /!*<span className="description">Email</span>*!/*!/*/}
+      {/*            /!*    <span className="description">Created Date</span>*!/*/}
+      {/*            /!*</div>*!/*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*      <div className="text-center">*/}
+      {/*        <h5 className="h3">{`${pharmacist.user?.firstName} ${pharmacist.user?.lastName}`}</h5>*/}
+      {/*        <div className="h5 font-weight-300">*/}
+      {/*          <i className="ni location_pin mr-2"></i>*/}
+      {/*          {pharmacist.user?.email}*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
       {/*<h2 id="pharmacie-heading" data-cy="PharmacieHeading">*/}
       {/*    <Translate contentKey="pharmaAiApp.pharmacie.home.title">Pharmacies</Translate>*/}
       {/*    <div className="d-flex justify-content-end">*/}
@@ -458,4 +520,4 @@ const Pharmacy = () => {
   );
 };
 
-export default Pharmacy;
+export default PharmacistHome;

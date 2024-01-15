@@ -73,8 +73,6 @@ export const GardeUpdate = () => {
   const gardeTypes = {
     type1: true,
     type2: false,
-    // type1: 'Day',
-    // type2: 'Night',
   };
   const defaultValues = () =>
     isNew
