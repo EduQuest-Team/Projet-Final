@@ -237,24 +237,22 @@ public class PharmacieResource {
     // GardeType.J : GardeType.N,
     // n ? GardeType.N : GardeType.J);
     // }
-    @GetMapping("/{garde}/{zone}/{city}")
+    @GetMapping("/{gardeId}/{zoneId}/{villeId}")
     public List<Pharmacie> findByVilleAndZone(
-        // @PathVariable("garde") Garde gardeId,
-        // @PathVariable("zone") Zone zoneId, @PathVariable("city") Ville villeId),
-        @PathVariable("garde") Long gardeId,
-        @PathVariable("zone") Long zoneId,
-        @PathVariable("city") Long villeId
+        @PathVariable("gardeId") Long gardeId,
+        @PathVariable("zoneId") Long zoneId,
+        @PathVariable("villeId") Long villeId
     ) {
-        Zone zone = new Zone();
-        zone.setId(zoneId);
-        Ville ville = new Ville();
-        ville.setId(villeId);
+        //        Zone zone = new Zone();
+        //        zone.setId(zoneId);
+        //        Ville ville = new Ville();
+        //        ville.setId(villeId);
         //        Garde garde = new Garde();
         //        garde.setId(gardeId);
-        return pharmacieRepository.getPharmaciesByVilleAndZone(
-            ville,
-            zone,
-            gardeId
+        return pharmacieRepository.getPharmaciesByVilleAndZoneAndGarde(
+            gardeId,
+            zoneId,
+            villeId
             //                        j ? garde.type() : GardeType.N,
             //             n ? GardeType.N : GardeType.J
         );

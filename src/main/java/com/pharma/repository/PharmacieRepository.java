@@ -38,14 +38,26 @@ public interface PharmacieRepository extends PharmacieRepositoryWithBagRelations
     }
 
     @Query(
-        //            "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND( p.gardes.size = 0 OR pg.gardes.size = 1 ) AND (pg.garde.type = :J or pg.garde.type = :N) "
-        "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND (pg.gardes.type = :garde) "
-        //        "AND p.status = true"
+        "SELECT distinct p FROM Pharmacie p, Garde g join p.zone z join z.ville v " +
+        " WHERE z.id = :zoneId AND z.ville.id = :villeId AND g.id = 1 or g.id = 0 AND p.status = true"
     )
+    List<Pharmacie> getPharmaciesByVilleAndZoneAndGarde(
+        @Param("gardeId") Long gardeId,
+        @Param("zoneId") Long zoneId,
+        @Param("villeId") Long villeId
+    );
+
+    //
+    //    @Query(
+    //            //            "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND( p.gardes.size = 0 OR pg.gardes.size = 1 ) AND (pg.garde.type = :J or pg.garde.type = :N) "
+    //            "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND (pg.gardes.type = :garde) "
+    //            //        "AND p.status = true"
+    //    )
     //    default List<Pharmacie> getPharmaciesByVilleAndZone(@Param("ville") Ville ville, @Param("zone") Zone zone, @Param("garde") Garde garde) {
-    default List<Pharmacie> getPharmaciesByVilleAndZone(@Param("ville") Ville ville, @Param("zone") Zone zone, @Param("garde") Long garde) {
-        return this.fetchBagRelationships(this.findAll());
-    }
+    //    default List<Pharmacie> getPharmaciesByVilleAndZone(@Param("ville") Ville ville, @Param("zone") Zone zone, @Param("garde") Long garde) {
+    //        return this.fetchBagRelationships(this.findAll());
+    //    }
+    //@Query("SELECT ph FROM Pharmacien ph JOIN ph.pharmacie p LEFT JOIN p.zone z WHERE p.zone.id = :zoneId AND z.ville.id = :villeId")
 
     //    Pharmacie getPharmacieByPharmacien(@Param("pharmacienId") Long pharmacienId);
     // default
@@ -58,49 +70,7 @@ public interface PharmacieRepository extends PharmacieRepositoryWithBagRelations
     // ,@Param("J") GardeType J,
     // @Param("N") GardeType N
 
-    //    @Query("SELECT s FROM Student s LEFT JOIN FETCH s.groupes g WHERE g.id = :groupId AND g.academicYear.id = :academicYearId")
-    //    @Query("SELECT p FROM Pharmacie p LEFT JOIN Zone z ON p.zone z WHERE z.id = 1 AND z.ville_id = 1")
-
-    //    @Query("SELECT p FROM Pharmacie p LEFT JOIN p.zone z WHERE z.id = :zoneId AND z.ville.id = :villeId")
-    //    List<Pharmacie> findByGroupIdAndAcademicYearId(@Param("zoneId") Long zoneId, @Param("villeId") Long villeId);
-
     //    Pharmacie findByPharmacie(@Param("pharmacienId") Long  pharmacienId);
-
-    //    public static Pharmacie getPharmacieForAuthenticatedPharmacien(@Param("pharmacienId") Long pharmacienId) throws AccessDeniedException {
-    //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //        if (authentication != null && authentication.getPrincipal() instanceof Pharmacien) {
-    //            Pharmacien authenticatedPharmacien = (Pharmacien) authentication.getPrincipal();
-    //            return authenticatedPharmacien.getPharmacie();
-    //        } else {
-    //            throw new AccessDeniedException("Access is denied");
-    //        }
-    //    }
-    //    default Pharmacie getPharmacieForAuthenticatedPharmacien(@PathVariable("pharmacienId") Long pharmacienId) throws AccessDeniedException {
-    //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //        if (authentication != null && authentication.getPrincipal() instanceof Pharmacien) {
-    //            Pharmacien authenticatedPharmacien = (Pharmacien) authentication.getPrincipal();
-    //            if (authenticatedPharmacien.getId().equals(pharmacienId)) {
-    //                return authenticatedPharmacien.getPharmacie();
-    //            } else {
-    //                throw new AccessDeniedException("Access is denied");
-    //            }
-    //        } else {
-    //            throw new AccessDeniedException("Access is denied");
-    //        }
-    //    }
-    //    default Pharmacie getPharmacieForAuthenticatedPharmacien(Long pharmacienId) throws AccessDeniedException {
-    //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //        if (authentication != null && authentication.getPrincipal() instanceof Pharmacien) {
-    //            Pharmacien authenticatedPharmacien = (Pharmacien) authentication.getPrincipal();
-    //            if (authenticatedPharmacien.getId().equals(pharmacienId)) {
-    //                return authenticatedPharmacien.getPharmacie();
-    //            } else {
-    //                throw new AccessDeniedException("Access is denied");
-    //            }
-    //        } else {
-    //            throw new AccessDeniedException("Access is denied");
-    //        }
-    //    }
 
     List<Pharmacie> findByPharmacienId(Long id);
 
