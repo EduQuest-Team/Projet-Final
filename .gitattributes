@@ -3,7 +3,6 @@
 # Auto detect text files and perform LF normalization
 # http://davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
 * text=auto
-
 # The above will handle all files NOT found below
 # These files are text and should be normalized (Convert crlf => lf)
 *.bat           text eol=crlf
@@ -118,7 +117,7 @@ Procfile        text
 *.m4v           binary
 *.mng           binary
 *.mov           binary
-*.mp4           binary
+*.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mpeg          binary
 *.mpg           binary
 *.swc           binary
@@ -136,4 +135,3 @@ Procfile        text
 *.otf           binary
 *.woff          binary
 *.woff2         binary
-*.mp4 filter=lfs diff=lfs merge=lfs -text
