@@ -8,8 +8,8 @@ import Map from './Map';
 import './Plan.css';
 
 const gardeData = [
-  { value: 0, label: 'Jour' },
-  { value: 1, label: 'Nuit' },
+  { value: 1, label: 'Jour' },
+  { value: 2, label: 'Nuit' },
 ];
 
 // const URL = 'https://pharma.cyclic.app';
@@ -24,11 +24,16 @@ const defaultZone = { value: 0, label: 'Select Zone' };
 const defaultGarde = { value: 0, label: 'Select Garde' };
 
 const initialState = {
-  cities: [],
-  city: 0,
-  zones: [],
-  zone: 0,
-  garde: 0,
+  // cities: [],
+  // city: 0,
+  // zones: [],
+  // zone: 0,
+  // garde: 0,
+  cities: null,
+  city: null,
+  zones: null,
+  zone: null,
+  garde: null,
 };
 
 function reducer(state, action) {
@@ -72,26 +77,27 @@ const Plan = () => {
         dispatch({ type: 'SET_CITIES', payload: options });
       })
       .catch(error => console.error(error));
-
-    fetch(`${URL}/zones`)
-      .then(response => response.json())
-      .then(data => {
-        const options = data.map(item => ({
-          value: item.id,
-          //label: item.name,
-          label: item.nom,
-          key: item.id,
-        }));
-        dispatch({ type: 'SET_ZONES', payload: options });
-      })
-      .catch(error => console.error(error));
-  }, []);
+    state.city &&
+      fetch(`${URL}/zones/ville/${state.city.value}`)
+        .then(response => response.json())
+        .then(data => {
+          const options = data.map(item => ({
+            value: item.id,
+            //label: item.name,
+            label: item.nom,
+            key: item.id,
+          }));
+          dispatch({ type: 'SET_ZONES', payload: options });
+        })
+        .catch(error => console.error(error));
+  }, [state.city, state.zone, state.garde]);
 
   const handleCityChange = data => {
     dispatch({ type: 'SET_CITY', payload: data });
     dispatch({ type: 'SET_ZONE', payload: null });
     setGetData(false);
-    handleGetZoneByVille(data);
+    // handleGetZoneByVille(data);
+    setPharmacies(null);
   };
 
   const handleZoneChange = data => {
@@ -126,8 +132,8 @@ const Plan = () => {
   const handleGetPharmacies = data => {
     setLoading(true);
     // get pharmacies from mongodb
-    // fetch(`${URL}/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
-    fetch(`${URL}/pharmacies/1/${state.zone.value}/${state.city.value}`)
+    fetch(`${URL}/pharmacies/${state.garde.value}/${state.zone.value}/${state.city.value}`)
+      // fetch(`${URL}/pharmacies/1/${state.zone.value}/${state.city.value}`)
       .then(response => response.json())
       .then(responseData => {
         if (Array.isArray(responseData)) {
@@ -139,7 +145,6 @@ const Plan = () => {
             dispatch({ type: 'SET_GARDE', payload: null });
             // console.log('empty');
           }
-
           setLoading(false);
           setGetData(true);
         } else {
@@ -197,10 +202,10 @@ const Plan = () => {
               <Map data={pharmacies} />
             </>
           ) : (
-            <div>Not Found!</div>
+            <div className="flex-box">Not Found!</div>
           )
         ) : (
-          <div>Search a Pharmacy</div>
+          <div className="flex-box">Search a Pharmacy</div>
         )}
       </div>
     </div>

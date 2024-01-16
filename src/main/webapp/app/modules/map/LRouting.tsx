@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 // import L from 'leaflet'; // Import L from leaflet to start using the plugin
 import 'leaflet'; // Import L from leaflet to start using the plugin
-declare let L;
 import { useMap } from 'react-leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
@@ -14,17 +13,19 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'; // Import plugin
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.js';
 
-const LRouting = () => {
+declare let L;
+
+const LRouting = ({ data }) => {
   // const [currentLocation, setCurrentLocation] = useState([33.2456782, -8.4990917]);
   // const [currentLocation, setCurrentLocation] = useState<{ lat: number; long: number }[]>([]);
   // const [currentLocation, setCurrentLocation] = useState<Location[]>([]);
   // const [marker, setMarker] = useState(null);
 
   const map = useMap();
-  type Location = {
-    latitude: number;
-    longitude: number;
-  };
+  // type Location = {
+  //     latitude: number;
+  //     longitude: number;
+  // };
 
   useEffect(() => {
     const Icon = L.icon({
@@ -44,36 +45,37 @@ const LRouting = () => {
     });
     // const marker = L.marker([33.2500431, -8.5040995], {icon: DefaultIcon}).addTo(map);
 
-    // var marker = L.marker(currentLocation, {icon: Icon});
-    var marker = L.marker([], { icon: Icon });
-    // var marker1 = L.marker(currentLocation, {icon: DefaultIcon});
-    var marker1 = L.marker([], { icon: DefaultIcon });
+    // let marker = L.marker(currentLocation, {icon: Icon});
+    let marker = L.marker([], { icon: Icon });
+    // let marker1 = L.marker(currentLocation, {icon: DefaultIcon});
+    let marker1 = L.marker([], { icon: DefaultIcon });
     //
     // {
     //     currentLocation &&
     //     L.marker(currentLocation, {icon: DefaultIcon}).addTo(map)
     //
     // }
-    L.control.locate().addTo(map);
-    L.Control.geocoder({
-      defaultMarkGeocode: false,
-    })
-      .on('markgeocode', function (e) {
-        // var bbox = e.geocode.bbox;
-        // var lating = e.geocode.center;
-        // L.marker(lating).addTo(map).bindPopup(e.geocode.name).openPopup();
-        // var poly = L.polygon([
-        //     bbox.getSouthEast(),
-        //     bbox.getNorthEast(),
-        //     bbox.getNorthWest(),
-        //     bbox.getSouthWest()
-        // ]).addTo(map);
-        // map.fitBounds(poly.getBounds());
-        // map.fitBounds(e.geocode().poly);
+    data && L.control.locate().addTo(map);
+    data &&
+      L.Control.geocoder({
+        defaultMarkGeocode: false,
       })
-      .addTo(map);
+        .on('markgeocode', function (e) {
+          // let bbox = e.geocode.bbox;
+          let lating = e.geocode.center;
+          L.marker(lating).addTo(map).bindPopup(e.geocode.name).openPopup();
+          // let poly = L.polygon([
+          //     bbox.getSouthEast(),
+          //     bbox.getNorthEast(),
+          //     bbox.getNorthWest(),
+          //     bbox.getSouthWest()
+          // ]).addTo(map);
+          // map.fitBounds(poly.getBounds());
+          // map.fitBounds(e.geocode().poly);
+        })
+        .addTo(map);
     // map.on("click", (e) => {
-    // var route = L.Routing.control({
+    // let route = L.Routing.control({
     {
       // currentLocation &&
       // L.Routing.control({
@@ -111,25 +113,25 @@ const LRouting = () => {
       //     }).addTo(map);
     }
 
-    if (!navigator.geolocation) {
-      console.log("Your browser doesn't support geolocation feature!");
-    } else {
-      setInterval(() => {
-        // navigator.geolocation.getCurrentPosition(getPosition);
-        navigator.geolocation.watchPosition(success, error);
-      }, 5000);
-    }
+    // if (!navigator.geolocation) {
+    //     console.log("Your browser doesn't support geolocation feature!");
+    // } else {
+    //     setInterval(() => {
+    //         // navigator.geolocation.getCurrentPosition(getPosition);
+    //         navigator.geolocation.watchPosition(success, error);
+    //     }, 5000);
+    // }
     const success = pos => {
       if (pos && pos.coords) {
-        var lat = pos.coords.latitude;
-        var long = pos.coords.longitude;
-        const { latitude, longitude } = pos.coords;
+        let lat = pos.coords.latitude;
+        let long = pos.coords.longitude;
+        // const {latitude, longitude} = pos.coords;
 
-        var accuracy = pos.coords.accuracy;
+        let accuracy = pos.coords.accuracy;
         // L.marker([lat, long], {icon: DefaultIcon}).addTo(map)
 
         marker1.setLatLng([lat, long]);
-        var circle = L.circle([lat, long], { radius: accuracy });
+        let circle = L.circle([lat, long], { radius: accuracy });
 
         // setCurrentLocation([{latitude: lat, longitude: long}]);
         // setCurrentLocation(prevLocation => [
@@ -153,54 +155,56 @@ const LRouting = () => {
 
         setTimeout(() => {
           // console.log(updatedLocations)
-          L.Routing.control({
-            waypoints: [
-              L.latLng(lat, long),
-              // L.latLng(33.221904, -8.4919703),
-              L.latLng(33.2500431, -8.5040995),
+          data &&
+            L.Routing.control({
+              waypoints: [
+                L.latLng(lat, long),
+                // L.latLng(33.221904, -8.4919703),
+                // L.latLng(33.2500431, -8.5040995),
+                L.latLng(data[0].latitude, data[0].longitude),
 
-              // L.latLng(e.latlng.lat, e.latlng.lng),
-              // L.latLng(e.latlng.lat, e.latlng.lng),
-            ],
-            lineOptions: {
-              styles: [
-                {
-                  color: 'blue',
-                  weight: 6,
-                  opacity: 0.7,
-                },
+                // L.latLng(e.latlng.lat, e.latlng.lng),
+                // L.latLng(e.latlng.lat, e.latlng.lng),
               ],
-            },
-            routeWhileDragging: true,
-            geocoder: L.Control.Geocoder.nominatim(),
-            addWaypoints: false,
-            draggableWaypoints: false,
-            fitSelectedRoutes: true,
-            showAlternatives: true,
-          })
-            .on('routesfound', e => {
-              e.routes[0].coordinates.forEach((c, i) => {
-                setTimeout(() => {
-                  marker1.setLatLng([c.lat, c.lng]);
-                }, 500 * i);
-              });
+              lineOptions: {
+                styles: [
+                  {
+                    color: 'blue',
+                    weight: 6,
+                    opacity: 0.7,
+                  },
+                ],
+              },
+              routeWhileDragging: true,
+              geocoder: L.Control.Geocoder.nominatim(),
+              addWaypoints: false,
+              draggableWaypoints: false,
+              fitSelectedRoutes: true,
+              showAlternatives: true,
             })
-            .addTo(map);
+              .on('routesfound', e => {
+                e.routes[0].coordinates.forEach((c, i) => {
+                  setTimeout(() => {
+                    marker1.setLatLng([c.lat, c.lng]);
+                  }, 500 * i);
+                });
+              })
+              .addTo(map);
         }, 30000);
         // marker = L.marker([lat, long])
         // L.marker([lat, long]).addTo(map);
         // L.circle([lat, long], {radius: accuracy}).addTo(map);
-        circle.addTo(map);
+        data && circle.addTo(map);
         // if (marker1 && circle) {
         if (marker1) {
-          // map.removeLayer(marker1);
-          map.removeLayer(circle);
+          data && map.removeLayer(marker1);
+          // map.removeLayer(circle);
         }
 
         // map.fitBounds(circle.getBounds());
         if (marker) {
           // marker.setLatLng([lat, long]);
-          marker1.addTo(map);
+          data && marker1.addTo(map);
           // setCurrentLocation([lat, long]);
         }
 
@@ -246,16 +250,16 @@ const LRouting = () => {
     // Clean up resources when the component is unmounted
     return () => {
       navigator.geolocation.clearWatch(watchId);
-      marker.removeFrom(map);
+      data && marker.removeFrom(map);
     };
   }, []);
 
   // function getPosition(position) {
   //     // console.log(position)
-  //     var lat = position.coords.latitude;
-  //     var long = position.coords.longitude;
-  //     var accuracy = position.coords.accuracy;
-  //     var marker1, circle1;
+  //     let lat = position.coords.latitude;
+  //     let long = position.coords.longitude;
+  //     let accuracy = position.coords.accuracy;
+  //     let marker1, circle1;
   //     const {latitude, longitude} = position.coords;
   //
   //
@@ -270,7 +274,7 @@ const LRouting = () => {
   //     marker1 = L.marker([lat, long]);
   //     circle1 = L.circle([lat, long], {radius: accuracy});
   //
-  //     var featureGroup = L.featureGroup([marker1, circle1]).addTo(map);
+  //     let featureGroup = L.featureGroup([marker1, circle1]).addTo(map);
   //
   //     map.fitBounds(featureGroup.getBounds());
   //

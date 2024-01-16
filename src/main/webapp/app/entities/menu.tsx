@@ -15,6 +15,7 @@ import {
   faFilter,
   faClockRotateLeft,
   faHospital,
+  faEdit,
 } from '@fortawesome/free-solid-svg-icons'; // Assuming you want to use the map-marker icon
 
 const EntitiesMenu = () => {
@@ -56,18 +57,27 @@ const EntitiesMenu = () => {
           )}
           {isPharmacien && (
             <>
-              <MenuItem icon={faUserNurse} to={`/pharmacist/${pharmacist.id}/profile`}>
-                View Profile
-              </MenuItem>
-              <MenuItem icon={faMedkit} to={`/pharmacist/${pharmacist.id}/pharmacy`}>
-                View Pharmacy
-              </MenuItem>
-              <MenuItem icon={faHospital} to={`/pharmacist/${pharmacist.id}/guard`}>
-                Mention a Guard
-              </MenuItem>
-              <MenuItem icon={faClockRotateLeft} to={`/pharmacist/${pharmacist.id}/history`}>
-                History of Guard
-              </MenuItem>
+              {!pharmacist.pharmacie ? (
+                <MenuItem icon={faEdit} to={`/pharmacie/new`}>
+                  Create Pharmacy
+                </MenuItem>
+              ) : (
+                <>
+                  <MenuItem icon={faUserNurse} to={`/pharmacist/${pharmacist.id}/profile`}>
+                    View Profile
+                  </MenuItem>
+
+                  <MenuItem icon={faMedkit} to={`/pharmacist/${pharmacist.id}/pharmacy`}>
+                    View Pharmacy
+                  </MenuItem>
+                  <MenuItem icon={faHospital} to={`/pharmacist/${pharmacist.id}/guard`}>
+                    Mention a Guard
+                  </MenuItem>
+                  <MenuItem icon={faClockRotateLeft} to={`/pharmacist/${pharmacist.id}/history`}>
+                    History of Guard
+                  </MenuItem>
+                </>
+              )}
             </>
           )}
           {isAnonymous && (

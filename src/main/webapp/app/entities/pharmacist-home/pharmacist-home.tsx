@@ -51,32 +51,43 @@ const PharmacistHome = () => {
   return (
     <div>
       <div className="header-body mt-6 mb-5"></div>
+      {!pharmacist.pharmacie ? (
+        <div className="flex-box py-3">
+          <Button tag={Link} to={`/pharmacie/new`} color="danger" size="lg" data-cy="entityDetailsButton">
+            <FontAwesomeIcon icon="person" /> <span className="d-none d-md-inline">Create Pharmacy</span>
+          </Button>
+        </div>
+      ) : (
+        <>
+          <div className="row text-center align-items-center justify-center ">
+            <div className="col-xl-6 row-cols-2 py-3">
+              <Button tag={Link} to={`/pharmacist/${pharmacist.id}/profile`} color="info" size="lg" data-cy="entityDetailsButton">
+                <FontAwesomeIcon icon="pray" /> <span className="d-none d-md-inline">View Profile</span>
+              </Button>
+            </div>
 
-      <div className="row text-center align-items-center justify-center ">
-        <div className="col-xl-6 row-cols-2 py-3">
-          <Button tag={Link} to={`/pharmacist/${pharmacist.id}/profile`} color="info" size="lg" data-cy="entityDetailsButton">
-            <FontAwesomeIcon icon="pray" /> <span className="d-none d-md-inline">View Profile</span>
-          </Button>
-        </div>
-        <div className="col-xl-6 row-cols-2">
-          <Button tag={Link} to={`/pharmacist/${pharmacist.id}/pharmacy`} color="success" size="lg" data-cy="entityDetailsButton">
-            <FontAwesomeIcon icon="person" /> <span className="d-none d-md-inline">View Pharmacy</span>
-          </Button>
-        </div>
-      </div>
+            <div className="col-xl-6 row-cols-2">
+              <Button tag={Link} to={`/pharmacist/${pharmacist.id}/pharmacy`} color="success" size="lg" data-cy="entityDetailsButton">
+                <FontAwesomeIcon icon="person" /> <span className="d-none d-md-inline">View Pharmacy</span>
+              </Button>
+            </div>
+          </div>
 
-      <div className="row text-center align-items-center justify-center ">
-        <div className="col-xl-6 row-cols-2 py-3">
-          <Button tag={Link} to={`/pharmacist/${pharmacist.id}/guard`} color="primary" size="lg" data-cy="entityEditButton">
-            <FontAwesomeIcon icon="commenting" /> <span className="d-none d-md-inline">Mention a guard</span>
-          </Button>
-        </div>
-        <div className="col-xl-6 row-cols-2">
-          <Button tag={Link} to={`/pharmacist/${pharmacist.id}/history`} color="secondary" size="lg" data-cy="entityEditButton">
-            <FontAwesomeIcon icon="history" /> <span className="d-none d-md-inline">History of Guard</span>
-          </Button>
-        </div>
-      </div>
+          <div className="row text-center align-items-center justify-center ">
+            <div className="col-xl-6 row-cols-2 py-3">
+              <Button tag={Link} to={`/pharmacist/${pharmacist.id}/guard`} color="primary" size="lg" data-cy="entityEditButton">
+                <FontAwesomeIcon icon="commenting" /> <span className="d-none d-md-inline">Mention a guard</span>
+              </Button>
+            </div>
+
+            <div className="col-xl-6 row-cols-2">
+              <Button tag={Link} to={`/pharmacist/${pharmacist.id}/history`} color="secondary" size="lg" data-cy="entityEditButton">
+                <FontAwesomeIcon icon="history" /> <span className="d-none d-md-inline">History of Guard</span>
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

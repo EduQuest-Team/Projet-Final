@@ -74,7 +74,7 @@ const Map = ({ data }) => {
               </Marker>
             );
           })}
-          <LRouting />
+          <LRouting data={data} />
           <AttributionControl position="bottomright" prefix={false} />
         </CustomMapContainer>
       </Row>
