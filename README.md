@@ -1,4 +1,31 @@
-# pharmaAi
+
+# Objectif du Projet  pharmaAi
+- Ce projet vise à fournir une solution complète de gestion de pharmacies, facilitant la tâche des professionnels de la santé dans le suivi et la gestion de leurs établissements. En mettant l'accent sur la gestion des pharmacies et  gardes planifiées, l'application vise à offrir une interface conviviale pour améliorer l'efficacité des activités pharmaceutiques
+# Technologies Utilisées
+  # Backend
+ - [ ] Jhipster 
+ - [ ] Spring boot 
+ - [ ] Spring security 
+ - [ ] Spring Data JPA
+# FrontEnd
+  - [ ] React js
+  # Deploiment 
+ - [ ] Docker et docker-compose
+ # Test
+- [ ] Sonarqueb
+# Fonctionnalités
+- Diagramme de classe 
+![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/42fce23e-cdfc-4961-8957-28b3d5f9392f)
+- Diagramme de cas d'utilisations
+  ![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/5231904e-b2e3-42ea-9455-d17a8f3a154f)
+
+
+# Video démonstratif
+
+https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/b4c0f33f-f5d1-41b1-a0e2-dce210eb4501
+
+
+
 
 This application was generated using JHipster 8.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.1.0](https://www.jhipster.tech/documentation-archive/v8.1.0).
 
