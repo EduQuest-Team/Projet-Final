@@ -250,4 +250,4 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [BrowserSync]: https://www.browsersync.io/
 [Jest]: https://facebook.github.io/jest/
 [Leaflet]: https://leafletjs.com/
-[DefinitelyTyped]: https://definitelytyped.org/
+[DefinitelyTyped]: https://definitelytyped.org/ '# Projet-Final'
