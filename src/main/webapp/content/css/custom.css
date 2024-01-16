@@ -1,4 +1,31 @@
-@charset 'UTF-8';
+@charset "UTF-8";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.flex-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  /*margin: 0 auto;*/
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px 0;
+  text-align: center;
+}
 
 :root {
   --blue: #5e72e4;
@@ -22991,7 +23018,8 @@ textarea[resize='horizontal'] {
 }
 
 .table thead th {
-  font-size: 0.65rem;
+  /*font-size: 0.65rem;*/
+  font-size: 1rem;
 
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;

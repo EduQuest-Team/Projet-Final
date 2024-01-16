@@ -70,6 +70,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(mvc.pattern("/api/stats/**")).permitAll()
                                 .requestMatchers(mvc.pattern("/api/pharmacies/**")).permitAll()
                                 .requestMatchers(mvc.pattern("/api/pharmaciens/**")).permitAll()
+                                .requestMatchers(mvc.pattern("/api/pharmacie-gardes/**")).permitAll()
 //                                .requestMatchers(mvc.pattern("/api/pharmaciens/**")).hasAuthority(AuthoritiesConstants.ADMIN)
 //                                .requestMatchers(mvc.pattern("/api/pharmaciens/**")).hasAuthority(AuthoritiesConstants.PHARMACIEN)
                                 .requestMatchers(mvc.pattern("/swagger-ui/**")).permitAll()

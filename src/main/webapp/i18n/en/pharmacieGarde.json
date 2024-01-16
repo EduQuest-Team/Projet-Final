@@ -2,7 +2,7 @@
   "pharmaAiApp": {
     "pharmacieGarde": {
       "home": {
-        "title": "Historique Pharmacie Gardes",
+        "title": "Historique des Pharmacies & Gardes",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Pharmacie Garde",
         "createOrEditLabel": "Create or edit a Pharmacie Garde",
@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Pharmacie Garde {{ id }}?"
       },
       "detail": {
-        "title": "Pharmacie Garde"
+        "title": "Historique de Pharmacie & sa Garde"
       },
       "id": "ID",
       "dateDebut": "Date Debut",

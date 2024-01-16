@@ -17,6 +17,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import Plan from 'app/modules/map/Plan';
 import Position from 'app/entities/position';
 import Pharmaciens from 'app/entities/pharmaciens/pharmaciens';
+import About from 'app/modules/about/about';
 
 const loading = <div>loading ...</div>;
 
@@ -38,6 +39,7 @@ const AppRoutes = () => {
         <Route path="logout" element={<Logout />} />
         <Route path="map" element={<Plan />} />
         <Route path="position/*" element={<Position />} />
+        <Route path="about/*" element={<About />} />
         <Route path="account">
           <Route
             path="*"

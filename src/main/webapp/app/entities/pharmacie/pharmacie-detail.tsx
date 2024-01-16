@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, Row, Col, Container } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './pharmacie.reducer';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
 export const PharmacieDetail = () => {
   const dispatch = useAppDispatch();
@@ -16,15 +18,17 @@ export const PharmacieDetail = () => {
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
+  const isPharmacien = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.PHARMACIEN]));
+  const pharmacist = useAppSelector(state => state.pharmaciens.pharmacist);
 
   const pharmacieEntity = useAppSelector(state => state.pharmacie.entity);
   return (
-    <Row>
-      <Col md="8">
-        <h2 data-cy="pharmacieDetailsHeading">
+    <Row className="detail">
+      <Col md="2">
+        <h2 data-cy="pharmacieDetailsHeading" className="text-center">
           <Translate contentKey="pharmaAiApp.pharmacie.detail.title">Pharmacie</Translate>
         </h2>
-        <dl className="jh-entity-details">
+        <dl className="jh-entity-details detail">
           <dt>
             <span id="id">
               <Translate contentKey="global.field.id">ID</Translate>
@@ -89,19 +93,30 @@ export const PharmacieDetail = () => {
               : null}
           </dd>
         </dl>
-        <Button tag={Link} to="/pharmacie" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.back">Back</Translate>
-          </span>
-        </Button>
+        {isPharmacien ? (
+          <Button tag={Link} to={`/pharmacist`} replace color="info" data-cy="entityDetailsBackButton" className="detail">
+            <FontAwesomeIcon icon="arrow-left" />{' '}
+            <span className="d-none d-md-inline">
+              <Translate contentKey="entity.action.back">Back</Translate>
+            </span>
+          </Button>
+        ) : (
+          <Button tag={Link} to="/pharmacie" replace color="info" data-cy="entityDetailsBackButton" className="detail">
+            <FontAwesomeIcon icon="arrow-left" />{' '}
+            <span className="d-none d-md-inline">
+              <Translate contentKey="entity.action.back">Back</Translate>
+            </span>
+          </Button>
+        )}
         &nbsp;
-        <Button tag={Link} to={`/pharmacie/${pharmacieEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.edit">Edit</Translate>
-          </span>
-        </Button>
+        {isPharmacien && (
+          <Button tag={Link} to={`/pharmacie/${pharmacieEntity.id}/edit`} replace color="primary" className="detail">
+            <FontAwesomeIcon icon="pencil-alt" />{' '}
+            <span className="d-none d-md-inline">
+              <Translate contentKey="entity.action.edit">Edit</Translate>
+            </span>
+          </Button>
+        )}
       </Col>
     </Row>
   );

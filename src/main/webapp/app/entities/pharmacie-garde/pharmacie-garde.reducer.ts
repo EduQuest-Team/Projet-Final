@@ -89,6 +89,7 @@ export const PharmacieGardeSlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = {};
       })
+
       .addMatcher(isFulfilled(getEntities), (state, action) => {
         const { data } = action.payload;
 
@@ -111,11 +112,7 @@ export const PharmacieGardeSlice = createEntitySlice({
         state.updateSuccess = true;
         state.entity = action.payload.data;
       })
-      .addMatcher(isPending(getEntities, getEntity), state => {
-        state.errorMessage = null;
-        state.updateSuccess = false;
-        state.loading = true;
-      })
+
       .addMatcher(isPending(createEntity, updateEntity, partialUpdateEntity, deleteEntity), state => {
         state.errorMessage = null;
         state.updateSuccess = false;

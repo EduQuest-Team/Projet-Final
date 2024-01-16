@@ -9,6 +9,8 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntities, updateEntity } from './pharmacie.reducer';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
 export const Pharmacie = () => {
   const dispatch = useAppDispatch();
@@ -105,11 +107,11 @@ export const Pharmacie = () => {
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             <Translate contentKey="pharmaAiApp.pharmacie.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to="/pharmacie/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
-            <FontAwesomeIcon icon="plus" />
-            &nbsp;
-            <Translate contentKey="pharmaAiApp.pharmacie.home.createLabel">Create new Pharmacie</Translate>
-          </Link>
+          {/*<Link to="/pharmacie/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">*/}
+          {/*  <FontAwesomeIcon icon="plus" />*/}
+          {/*  &nbsp;*/}
+          {/*  <Translate contentKey="pharmaAiApp.pharmacie.home.createLabel">Create new Pharmacie</Translate>*/}
+          {/*</Link>*/}
         </div>
       </h2>
       <div className="table-responsive">
@@ -204,37 +206,37 @@ export const Pharmacie = () => {
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/pharmacie/${pharmacie.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                      <Button tag={Link} to={`/pharmacie/${pharmacie.id}`} color="primary" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
                         </span>
                       </Button>
-                      <Button
-                        tag={Link}
-                        to={`/pharmacie/${pharmacie.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                        data-cy="entityEditButton"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
-                      </Button>
-                      <Button
-                        onClick={() =>
-                          (window.location.href = `/pharmacie/${pharmacie.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`)
-                        }
-                        color="danger"
-                        size="sm"
-                        data-cy="entityDeleteButton"
-                      >
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
-                      </Button>
+                      {/*<Button*/}
+                      {/*  tag={Link}*/}
+                      {/*  to={`/pharmacie/${pharmacie.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}*/}
+                      {/*  color="primary"*/}
+                      {/*  size="sm"*/}
+                      {/*  data-cy="entityEditButton"*/}
+                      {/*>*/}
+                      {/*  <FontAwesomeIcon icon="pencil-alt" />{' '}*/}
+                      {/*  <span className="d-none d-md-inline">*/}
+                      {/*    <Translate contentKey="entity.action.edit">Edit</Translate>*/}
+                      {/*  </span>*/}
+                      {/*</Button>*/}
+                      {/*<Button*/}
+                      {/*  onClick={() =>*/}
+                      {/*    (window.location.href = `/pharmacie/${pharmacie.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`)*/}
+                      {/*  }*/}
+                      {/*  color="danger"*/}
+                      {/*  size="sm"*/}
+                      {/*  data-cy="entityDeleteButton"*/}
+                      {/*>*/}
+                      {/*  <FontAwesomeIcon icon="trash" />{' '}*/}
+                      {/*  <span className="d-none d-md-inline">*/}
+                      {/*    <Translate contentKey="entity.action.delete">Delete</Translate>*/}
+                      {/*  </span>*/}
+                      {/*</Button>*/}
                     </div>
                   </td>
                 </tr>

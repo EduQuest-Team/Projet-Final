@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Welcome in PharmaAI platform !",
+    "title": "Welcome in PharmaAI Platform",
     "subtitle": "This is your Gate for Pharmacies Locations",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."

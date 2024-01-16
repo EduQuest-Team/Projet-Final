@@ -5,12 +5,24 @@ import MenuItem from 'app/shared/layout/menus/menu-item';
 import { useAppSelector } from 'app/config/store';
 import { AUTHORITIES } from 'app/config/constants';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import {
+  faCity,
+  faZap,
+  faRoad,
+  faMedkit,
+  faPersonMilitaryPointing,
+  faUserNurse,
+  faFilter,
+  faClockRotateLeft,
+  faHospital,
+} from '@fortawesome/free-solid-svg-icons'; // Assuming you want to use the map-marker icon
 
 const EntitiesMenu = () => {
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
   const isPharmacien = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.PHARMACIEN]));
   const isUser = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.USER]));
   const isAnonymous = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ANONYMOUS]));
+  const pharmacist = useAppSelector(state => state.pharmaciens.pharmacist);
 
   return (
     <>
@@ -19,44 +31,42 @@ const EntitiesMenu = () => {
         <>
           {isAdmin && (
             <>
-              <MenuItem icon="asterisk" to="/ville">
+              <MenuItem icon={faCity} to="/ville">
                 <Translate contentKey="global.menu.entities.ville" />
               </MenuItem>
-              <MenuItem icon="asterisk" to="/zone">
+              <MenuItem icon={faRoad} to="/zone">
                 <Translate contentKey="global.menu.entities.zone" />
               </MenuItem>
-              <MenuItem icon="asterisk" to="/garde">
+              <MenuItem icon={faPersonMilitaryPointing} to="/garde">
                 <Translate contentKey="global.menu.entities.garde" />
               </MenuItem>
-              <MenuItem icon="asterisk" to="/pharmacie">
+              <MenuItem icon={faMedkit} to="/pharmacie">
                 <Translate contentKey="global.menu.entities.pharmacie" />
               </MenuItem>
-              {/*<MenuItem icon="asterisk" to="/historique">*/}
-              {/*    <Translate contentKey="global.menu.entities.historique"/>*/}
-              {/*</MenuItem>*/}
-              <MenuItem icon="asterisk" to="/pharmacien">
+              <MenuItem icon={faUserNurse} to="/pharmacien">
                 <Translate contentKey="global.menu.entities.pharmacien" />
               </MenuItem>
-              <MenuItem icon="asterisk" to="/pharmaciens">
-                Pharmaciens
+              <MenuItem icon={faFilter} to="/pharmaciens">
+                Filtrage Pharmaciens
               </MenuItem>
-              <MenuItem icon="asterisk" to="/pharmacie-garde">
-                {/*<Translate contentKey="global.menu.entities.pharmacieGarde"/>*/}
+              <MenuItem icon={faClockRotateLeft} to="/pharmacie-garde">
                 <Translate contentKey="global.menu.entities.historique" />
               </MenuItem>
             </>
           )}
-          {/*{isPharmacien ?*/}
           {isPharmacien && (
             <>
-              <MenuItem icon="asterisk" to="/historique">
-                <Translate contentKey="global.menu.entities.historique" />
+              <MenuItem icon={faUserNurse} to={`/pharmacist/${pharmacist.id}/profile`}>
+                View Profile
               </MenuItem>
-              <MenuItem icon="asterisk" to="/pharmacie">
-                <Translate contentKey="global.menu.entities.pharmacie" />
+              <MenuItem icon={faMedkit} to={`/pharmacist/${pharmacist.id}/pharmacy`}>
+                View Pharmacy
               </MenuItem>
-              <MenuItem icon="asterisk" to="/pharmacy">
-                MyPharmacie
+              <MenuItem icon={faHospital} to={`/pharmacist/${pharmacist.id}/guard`}>
+                Mention a Guard
+              </MenuItem>
+              <MenuItem icon={faClockRotateLeft} to={`/pharmacist/${pharmacist.id}/history`}>
+                History of Guard
               </MenuItem>
             </>
           )}
@@ -73,6 +83,9 @@ const EntitiesMenu = () => {
           </MenuItem>
           <MenuItem icon="asterisk" to="/map">
             {/*<Translate contentKey="global.menu.entities.map" />*/}Maps
+          </MenuItem>
+          <MenuItem icon="asterisk" to="/about">
+            About
           </MenuItem>
         </>
       )}

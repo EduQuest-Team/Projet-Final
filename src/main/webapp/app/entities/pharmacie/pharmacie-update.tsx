@@ -44,7 +44,9 @@ export const PharmacieUpdate = () => {
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
 
   const handleClose = () => {
-    navigate('/pharmacie' + location.search);
+    {
+      isPharmacien ? navigate(`/pharmacist` + location.search) : navigate('/pharmacie' + location.search);
+    }
   };
 
   useEffect(() => {
@@ -101,6 +103,9 @@ export const PharmacieUpdate = () => {
           zone: pharmacieEntity?.zone?.id,
           gardes: pharmacieEntity?.gardes?.map(e => e.id.toString()),
         };
+
+  const pharmacist = useAppSelector(state => state.pharmaciens.pharmacist);
+  const isPharmacien = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.PHARMACIEN]));
 
   return (
     <div>
@@ -197,13 +202,23 @@ export const PharmacieUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/pharmacie" replace color="info">
-                <FontAwesomeIcon icon="arrow-left" />
-                &nbsp;
-                <span className="d-none d-md-inline">
-                  <Translate contentKey="entity.action.back">Back</Translate>
-                </span>
-              </Button>
+              {isPharmacien ? (
+                <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to={`/pharmacist`} replace color="info">
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
+                  <span className="d-none d-md-inline">
+                    <Translate contentKey="entity.action.back">Back</Translate>
+                  </span>
+                </Button>
+              ) : (
+                <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/pharmacie" replace color="info">
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
+                  <span className="d-none d-md-inline">
+                    <Translate contentKey="entity.action.back">Back</Translate>
+                  </span>
+                </Button>
+              )}
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />

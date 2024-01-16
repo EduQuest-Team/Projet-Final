@@ -22,7 +22,7 @@
       "prenom": "Prenom",
       "email": "Email",
       "password": "Password",
-      "pharmacie": "Pharmacie",
+      "pharmacie": "Pharmacie ID",
       "historique": "Historique"
     }
   }

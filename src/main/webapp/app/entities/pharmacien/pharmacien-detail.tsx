@@ -7,24 +7,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './pharmacien.reducer';
+import { getPharmacyByPharmacistId } from 'app/entities/pharmaciens/pharmaciens.reducer';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
 export const PharmacienDetail = () => {
   const dispatch = useAppDispatch();
 
   const { id } = useParams<'id'>();
 
+  const pharmacie = useAppSelector(state => state.pharmaciens.pharmacie);
+
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
 
+  useEffect(() => {
+    dispatch(getPharmacyByPharmacistId({ pharmacistId: id }));
+  }, []);
+
   const pharmacienEntity = useAppSelector(state => state.pharmacien.entity);
   return (
-    <Row>
-      <Col md="8">
-        <h2 data-cy="pharmacienDetailsHeading">
+    <Row className="detail">
+      <Col md="2">
+        <h2 data-cy="pharmacienDetailsHeading" className="text-center">
           <Translate contentKey="pharmaAiApp.pharmacien.detail.title">Pharmacien</Translate>
         </h2>
-        <dl className="jh-entity-details">
+        <dl className="jh-entity-details detail">
           <dt>
             <span id="id">
               <Translate contentKey="global.field.id">ID</Translate>
@@ -49,30 +58,33 @@ export const PharmacienDetail = () => {
             </span>
           </dt>
           <dd>{pharmacienEntity.email}</dd>
-          <dt>
-            <span id="password">
-              <Translate contentKey="pharmaAiApp.pharmacien.password">Password</Translate>
-            </span>
-          </dt>
-          <dd>{pharmacienEntity.password}</dd>
+          {/*<dt>*/}
+          {/*  <span id="password">*/}
+          {/*    <Translate contentKey="pharmaAiApp.pharmacien.password">Password</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
+          {/*<dd>{pharmacienEntity.password}</dd>*/}
           <dt>
             <Translate contentKey="pharmaAiApp.pharmacien.pharmacie">Pharmacie</Translate>
           </dt>
-          <dd>{pharmacienEntity.pharmacie ? pharmacienEntity.pharmacie.id : ''}</dd>
+          {/*<dd>{pharmacienEntity.pharmacie ? pharmacienEntity.pharmacie.id : ''}</dd>*/}
+          {pharmacie.map((p, i) => (
+            <dd>{p.nom}</dd>
+          ))}
         </dl>
-        <Button tag={Link} to="/pharmacien" replace color="info" data-cy="entityDetailsBackButton">
+        <Button tag={Link} to="/pharmacien" replace color="info" data-cy="entityDetailsBackButton" className="detail">
           <FontAwesomeIcon icon="arrow-left" />{' '}
           <span className="d-none d-md-inline">
             <Translate contentKey="entity.action.back">Back</Translate>
           </span>
         </Button>
         &nbsp;
-        <Button tag={Link} to={`/pharmacien/${pharmacienEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.edit">Edit</Translate>
-          </span>
-        </Button>
+        {/*<Button tag={Link} to={`/pharmacien/${pharmacienEntity.id}/edit`} replace color="primary">*/}
+        {/*  <FontAwesomeIcon icon="pencil-alt" />{' '}*/}
+        {/*  <span className="d-none d-md-inline">*/}
+        {/*    <Translate contentKey="entity.action.edit">Edit</Translate>*/}
+        {/*  </span>*/}
+        {/*</Button>*/}
       </Col>
     </Row>
   );

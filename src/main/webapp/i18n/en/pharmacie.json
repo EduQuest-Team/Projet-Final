@@ -24,7 +24,7 @@
       "latitude": "Latitude",
       "longitude": "Longitude",
       "status": "Status",
-      "zone": "Zone",
+      "zone": "Zone ID",
       "garde": "Garde",
       "pharmaciegarde": "Pharmaciegarde",
       "pharmacien": "Pharmacien",
