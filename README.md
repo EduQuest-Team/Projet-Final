@@ -22,10 +22,7 @@
 
 # Video démonstratif
 
-https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/b4c0f33f-f5d1-41b1-a0e2-dce210eb4501
-
-
-
+https://github.com/Oussama-Errahimi20032/Projet-Final/blob/master/demo/2024-01-16%2023-21-04.mp4
 
 This application was generated using JHipster 8.1.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.1.0](https://www.jhipster.tech/documentation-archive/v8.1.0).
 
