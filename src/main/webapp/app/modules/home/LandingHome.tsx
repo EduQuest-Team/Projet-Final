@@ -13,7 +13,7 @@ const LandingHome = () => {
 
   return (
     <>
-      <div className="bg-no-repeat bg-cover opacity-80 w-100 flex-box relative">
+      <div className="bg bg-no-repeat bg-cover opacity-80 w-100 flex-box relative">
         <div className="flex-box w-100 flex-column flex-md-row">
           <div className="text-center overflow-hidden w-100 py-10 d-flex-box flex-column scroll-smooth">
             <div className="d-flex-box w-100 overflow-hidden opacity-100">

@@ -10,8 +10,9 @@ function Cards({ data }) {
           <Carousel.Item key={item.id}>
             <Card style={{ width: '18rem', margin: '5px' }}>
               <Card.Body>
+                <Card.Img src={`data:image/jpeg;base64,${item.image}`}></Card.Img>
                 <Card.Title>{item.nom}</Card.Title>
-                {/*<Card.Subtitle className="mb-2 text-muted">{item.garde}</Card.Subtitle>*/}
+                <Card.Subtitle className="mb-2 text-muted">{item.garde}</Card.Subtitle>
                 <Card.Text>{item.adresse}</Card.Text>
               </Card.Body>
             </Card>

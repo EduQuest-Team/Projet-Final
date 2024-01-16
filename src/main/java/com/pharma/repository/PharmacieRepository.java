@@ -38,8 +38,7 @@ public interface PharmacieRepository extends PharmacieRepositoryWithBagRelations
     }
 
     @Query(
-        "SELECT distinct p FROM Pharmacie p, Garde g join p.zone z join z.ville v " +
-        " WHERE z.id = :zoneId AND z.ville.id = :villeId AND g.id = 1 or g.id = 0 AND p.status = true"
+        "SELECT distinct p FROM Pharmacie p, Garde g join p.zone z on  z.id = :zoneId join z.ville v ON v.id = :villeId WHERE g.id = :gardeId AND p.status = true"
     )
     List<Pharmacie> getPharmaciesByVilleAndZoneAndGarde(
         @Param("gardeId") Long gardeId,
