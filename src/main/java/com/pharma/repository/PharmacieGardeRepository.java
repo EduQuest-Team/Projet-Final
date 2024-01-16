@@ -29,6 +29,5 @@ public interface PharmacieGardeRepository extends PharmacieGardeRepositoryWithBa
         return this.fetchBagRelationships(this.findAll(pageable));
     }
 
-    @Override
-    List<PharmacieGarde> findAllById(Iterable<Long> longs);
+    List<PharmacieGarde> findByPharmaciesId(Long id);
 }

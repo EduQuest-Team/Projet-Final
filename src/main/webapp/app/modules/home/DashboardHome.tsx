@@ -87,7 +87,7 @@ const DashboardHome = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <div className="header-body mt-3">
+          <div className="header-body mt-6 mb-5">
             <AdminCards {...countStats} />
           </div>
           <div className="row">
@@ -100,10 +100,8 @@ const DashboardHome = () => {
             <div className="col-xl-6">
               <BarChart title="Number of Pharmacies Per Zone" subtitle="Overview" chartData={PharmaciesPerZoneChart} />
             </div>
-          </div>
-          <div className="row">
             <div className="col-xl-6">
-              <LineChart title="Learning curve" subtitle="Overview" />
+              <LineChart title="Latitude of Pharmacies Per Pharmacist" subtitle="Overview" />
             </div>
           </div>
         </>

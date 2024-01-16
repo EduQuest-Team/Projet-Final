@@ -3,59 +3,97 @@ import React from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardText, CardImg, Button } from 'reactstrap';
 import './landingpage.scss';
 import { Translate } from 'react-jhipster';
+import TypewriterComponent from 'typewriter-effect';
+import { useNavigate } from 'react-router-dom';
+// @ts-ignore
+import { Play } from 'lucide-react';
 
 const LandingHome = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-      <Col>
-        <Row className="">
-          <h1 className="display-4">
-            <Translate contentKey="home.title">Welcome in PharmaAI!</Translate>
-          </h1>
-          <p className="lead">
-            <Translate contentKey="home.subtitle">This is your Gate for Pharmacies Locations</Translate>
-          </p>
-          <Col>
-            <div className="d-flex justify-content-center justify-items-center mt-4">
-              <h4 className="align-self-center heading-title text-warning mb-0">
-                Scan To View On <br /> Your Mobile Device
-              </h4>
-              <div
-                style={{
-                  width: '250px',
-                  minWidth: '250px',
-                  height: '250px',
-                  position: 'relative',
-                  padding: '10px',
-                  borderRadius: '15px',
-                  background: '#fff',
-                  boxShadow: '0px 25px 40px 0px rgba(0, 0, 0, 0.15)',
-                  marginLeft: '30px',
-                }}
-              >
-                <img src="/content/images/uploads/qrcode.png" alt="Barcode" className="img-fluid" />
+      <div className="bg-no-repeat bg-cover opacity-80 w-100 flex-box relative">
+        <div className="flex-box w-100 flex-column flex-md-row">
+          <div className="text-center overflow-hidden w-100 py-10 d-flex-box flex-column scroll-smooth">
+            <div className="d-flex-box w-100 overflow-hidden opacity-100">
+              <div className="d-flex-box">
+                <div className="px-6 text-center text-white md:px-12 font-Bruno d-flex-box flex-column opacity-100">
+                  <div className="wlcm mb-2 text-8xl font-weight-900 text-transparent bg-clip-text ">
+                    Welcome <br /> to
+                    <h2 className="text-5xl supt drop-shadow-sm shadow-black">
+                      Pharma
+                      <span className="subt">AI</span>
+                    </h2>
+                  </div>
+                  <p className="mb-6 font-weight-light text-primary font-weight-light drop-shadow-xl opacity-100">
+                    Say goodbye to traditional Pharmacist Management & Pharmacies Location!
+                    <br />
+                    Our AI-Platform powered ensures precise and efficient real-time pharmacies management, engagement and generation
+                    personalization for pharmacists about their guards across 100+ smart countries and beautiful cities.
+                    <br />
+                    Join the revolution and experience the future of modern Pharmacies with PharmaAI. This is your Gate for Pharmacies
+                    Locations
+                  </p>
+                  <h2 className="tpw text-2xl pb-6 font-weight-bold text-transparent ">
+                    <TypewriterComponent
+                      options={{
+                        strings: ['#PharmaAI', '#Map_Location', '#Pharmacists_Management'],
+                        autoStart: true,
+                        loop: true,
+                      }}
+                    />
+                  </h2>
+                  <div className="mb-8 w-10 flex-box border rounded-lg shadow-lg shadow-sm--hover shadowred z-100 cursor-pointer inline-flex transition ease-linear text-base font-weight-normal text-center text-white bg-info hover-bg-hot-pink">
+                    <a className="" onClick={() => navigate('/map')}>
+                      <p className="pl-3 p-2 flex-box text-center font-weight-bolder text-xl w-100">
+                        <Play className="w-3 fa-text-height mr-2" fill="currentColor" />
+                        Explore the Map Now
+                      </p>
+                    </a>
+                    <div
+                      style={{
+                        width: '50px',
+                        minWidth: '20px',
+                        height: '50px',
+                        position: 'relative',
+                        padding: '2px',
+                        borderRadius: '15px',
+                        background: '#fff',
+                        boxShadow: '0px 25px 40px 0px rgba(0, 0, 0, 0.15)',
+                        marginLeft: '30px',
+                      }}
+                    >
+                      <img src="/content/images/uploads/qrcode.png" alt="Barcode" className="img-fluid" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="d-flex m-5 justify-content-end">
-              <Button size="lg" className="btn btn-success">
-                Check Demo
-              </Button>
+          </div>
+          <Col md={4} className="mb-1 d-flex justify-content-center">
+            <div className="phone-mockup">
+              <PhoneMockup>
+                <img src="/content/images/uploads/app.png" alt="Mobile App Image" className="device-screen" />
+              </PhoneMockup>
             </div>
           </Col>
+        </div>
+      </div>
 
+      <Col>
+        <Row className="my-5">
           <Col>
-            {/* Features */}
             <div>
-              <h1>EduDental</h1>
               <Row>
                 <div className="col">
                   <div className="card card-stats">
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h5 className="card-title text-uppercase text-muted mb-0">Practice Work Assignments</h5>
+                          <h5 className="card-title text-uppercase text-muted mb-0">REAL-TIME PHARMACY MANAGEMENT</h5>
                           <span className="h4 font-weight-bold mb-0">
-                            Assign and manage practice works for students to enhance their practical skills.
+                            Empower pharmacists with the ability to access and manage their pharmacy information in real-time.{' '}
                           </span>
                         </div>
                         <div className="col-auto">
@@ -74,9 +112,9 @@ const LandingHome = () => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h5 className="card-title text-uppercase text-muted mb-0">Real-Time Taper Angle Calculator</h5>
+                          <h5 className="card-title text-uppercase text-muted mb-0">USER-FRIENDLY PHARMACY LOCATOR</h5>
                           <span className="h4 font-weight-bold mb-0">
-                            Empower students to calculate taper angles for dental preparations in real-time.
+                            Enable users to explore and locate pharmacies on a map for convenient access to healthcare services.{' '}
                           </span>
                         </div>
                         <div className="col-auto">
@@ -95,9 +133,9 @@ const LandingHome = () => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h5 className="card-title text-uppercase text-muted mb-0">Profile and Progress Tracking</h5>
+                          <h5 className="card-title text-uppercase text-muted mb-0">ADMINISTRATION MADE EASY</h5>
                           <span className="h4 font-weight-bold mb-0">
-                            Enable students to track their progress and manage their profiles within the app.
+                            Streamline platform management for administrators, providing robust tools for efficient administration.{' '}
                           </span>
                         </div>
                         <div className="col-auto">
@@ -116,9 +154,10 @@ const LandingHome = () => {
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h5 className="card-title text-uppercase text-muted mb-0">Interactive Learning Modules</h5>
+                          <h5 className="card-title text-uppercase text-muted mb-0">EXPLORE PHARMACIES NEAR YOU</h5>
                           <span className="h4 font-weight-bold mb-0">
-                            Engage students with interactive learning modules on dental anatomy, procedures, and techniques.
+                            Discover and explore nearby pharmacies easily, ensuring convenient access to healthcare services wherever you
+                            are.{' '}
                           </span>
                         </div>
                         <div className="col-auto">
@@ -135,14 +174,6 @@ const LandingHome = () => {
           </Col>
         </Row>
       </Col>
-      <Col md={4} className="mb-4 d-flex justify-content-center">
-        <div className="phone-mockup">
-          <PhoneMockup>
-            <img src="/content/images/uploads/home.png" alt="Mobile App Image" className="device-screen" />
-          </PhoneMockup>
-        </div>
-      </Col>
-      {/* <Col md={2}></Col> */}
     </>
   );
 };
@@ -150,17 +181,4 @@ const LandingHome = () => {
 export default LandingHome;
 
 {
-  /* <div className="card">
-                <img className="card-img-top" src="http://localhost:5500/assets/img/theme/img-1-1000x900.jpg" alt="Image placeholder" />
-                <div className="card-body">
-                  <h5 className="h2 card-title mb-0">Get started with Argon</h5>
-                  <small className="text-muted">by John Snow on Oct 29th at 10:23 AM</small>
-                  <p className="card-text mt-4">
-                    Argon is a great free UI package based on Bootstrap 4 that includes the most important components and features.
-                  </p>
-                  <a href="#!" className="btn btn-link px-0">
-                    View article
-                  </a>
-                </div>
-              </div> */
 }

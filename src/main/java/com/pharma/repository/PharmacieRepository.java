@@ -1,9 +1,6 @@
 package com.pharma.repository;
 
-import com.pharma.domain.Pharmacie;
-import com.pharma.domain.Pharmacien;
-import com.pharma.domain.Ville;
-import com.pharma.domain.Zone;
+import com.pharma.domain.*;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
@@ -41,11 +38,12 @@ public interface PharmacieRepository extends PharmacieRepositoryWithBagRelations
     }
 
     @Query(
-        "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND( p.gardes.size = 0 OR pg.gardes.size = 1 )" +
-        // + "AND (pg.garde.type = :J or pg.garde.type = :N) "
-        "AND p.status = true"
+        //            "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND( p.gardes.size = 0 OR pg.gardes.size = 1 ) AND (pg.garde.type = :J or pg.garde.type = :N) "
+        "select Distinct p from Pharmacie p, PharmacieGarde pg, Zone z, Ville v Where p.zone.id = z.id AND z.ville.id = v.id AND z = :zone AND v = :ville AND (pg.gardes.type = :garde) "
+        //        "AND p.status = true"
     )
-    default List<Pharmacie> getPharmaciesByVilleAndZone(@Param("ville") Ville ville, @Param("zone") Zone zone) {
+    //    default List<Pharmacie> getPharmaciesByVilleAndZone(@Param("ville") Ville ville, @Param("zone") Zone zone, @Param("garde") Garde garde) {
+    default List<Pharmacie> getPharmaciesByVilleAndZone(@Param("ville") Ville ville, @Param("zone") Zone zone, @Param("garde") Long garde) {
         return this.fetchBagRelationships(this.findAll());
     }
 

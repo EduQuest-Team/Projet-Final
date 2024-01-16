@@ -65,16 +65,14 @@ const PharmacistPharmacy = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(getPharmacyByPharmacistId({ pharmacistId: id }));
-  }, []);
-
-  useEffect(() => {
     if (!loading) {
       setIsLoading(false);
-      // getEntity(pharmacist.pharmacie.id)
-      // setCompleted(true);
     }
   }, [loading]);
+
+  useEffect(() => {
+    dispatch(getPharmacyByPharmacistId({ pharmacistId: id }));
+  }, []);
 
   return (
     <div className="container-fluid">
@@ -102,38 +100,42 @@ const PharmacistPharmacy = () => {
                     <th>View</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {pharmacie.map((pharmacie, i) => (
-                    <tr key={`entity-${i}`} data-cy="entityTable">
-                      <td className="table-user">
-                        <b>{pharmacie.id}</b>
-                      </td>
-                      <td className="table-actions">
-                        <span className="font-weight-bold">{pharmacie.nom}</span>
-                      </td>
-                      <td>
-                        <img src={`data:png;base64,${pharmacie.image}`} style={{ maxHeight: '60px' }} alt="img" />
-                      </td>
-                      <td>
-                        <span className="font-weight-bold">{pharmacie.adresse}</span>
-                      </td>
+                {pharmacist ? (
+                  <tbody>
+                    {pharmacie.map((pharmacie, i) => (
+                      <tr key={`entity-${i}`} data-cy="entityTable">
+                        <td className="table-user">
+                          <b>{pharmacie.id}</b>
+                        </td>
+                        <td className="table-actions">
+                          <span className="font-weight-bold">{pharmacie.nom}</span>
+                        </td>
+                        <td>
+                          <img src={`data:png;base64,${pharmacie.image}`} style={{ maxHeight: '60px' }} alt="img" />
+                        </td>
+                        <td>
+                          <span className="font-weight-bold">{pharmacie.adresse}</span>
+                        </td>
 
-                      <td className="table-actions">
-                        <a
-                          href={`/pharmacie/${pharmacie.id}`}
-                          style={{
-                            fontSize: '1.3rem',
-                          }}
-                          className="table-action"
-                          data-toggle="tooltip"
-                          data-original-title="Edit Pharmacy"
-                        >
-                          <i className="fas fa-user-edit"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                        <td className="table-actions">
+                          <a
+                            href={`/pharmacie/${pharmacie.id}`}
+                            style={{
+                              fontSize: '1.3rem',
+                            }}
+                            className="table-action"
+                            data-toggle="tooltip"
+                            data-original-title="Edit Pharmacy"
+                          >
+                            <i className="fas fa-user-edit"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ) : (
+                  !loading && <div className="alert alert-warning">No Pharmacy Profile found</div>
+                )}
               </table>
             </div>
           </div>

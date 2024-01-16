@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
 import { Translate, TextFormat, getSortState } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,7 @@ import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { getEntities } from './pharmacie-garde.reducer';
+import { getPharmacyGuard } from './pharmacist.reducer';
 
 export const PharmacieGarde = () => {
   const dispatch = useAppDispatch();
@@ -20,15 +20,24 @@ export const PharmacieGarde = () => {
   const [sortState, setSortState] = useState(overrideSortStateWithQueryParams(getSortState(pageLocation, 'id'), pageLocation.search));
 
   const pharmacieGardeList = useAppSelector(state => state.pharmacieGarde.entities);
+  const pharmacyGardeList = useAppSelector(state => state.pharmacyGarde.pharmacieGuard);
   const gardes = useAppSelector(state => state.garde.entity);
   const loading = useAppSelector(state => state.pharmacieGarde.loading);
+  const { id } = useParams<'id'>();
+  const pharmacie = useAppSelector(state => state.pharmaciens.pharmacie);
 
   const getAllEntities = () => {
-    dispatch(
-      getEntities({
-        sort: `${sortState.sort},${sortState.order}`,
-      }),
-    );
+    if (pharmacie) {
+      dispatch(
+        getPharmacyGuard(1),
+        // getPharmacyGuard(pharmacie[0].id),
+        // getPharmacyGuard(id),
+      );
+    }
+    // dispatch(
+    //     getPharmacyGuard(pharmacie[0].id),
+    //     // getPharmacyGuard(id),
+    // );
   };
 
   const sortEntities = () => {
@@ -82,7 +91,7 @@ export const PharmacieGarde = () => {
         </div>
       </h2>
       <div className="table-responsive">
-        {pharmacieGardeList && pharmacieGardeList.length > 0 ? (
+        {pharmacyGardeList && pharmacyGardeList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
@@ -98,10 +107,7 @@ export const PharmacieGarde = () => {
                   <Translate contentKey="pharmaAiApp.pharmacieGarde.dateFin">Date Fin</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('dateFin')} />
                 </th>
-                <th>
-                  <Translate contentKey="pharmaAiApp.pharmacieGarde.pharmacie">Pharmacie</Translate>
-                  <FontAwesomeIcon icon="sort" />
-                </th>
+
                 <th>
                   <Translate contentKey="pharmaAiApp.pharmacieGarde.garde">Garde</Translate>
                   <FontAwesomeIcon icon="sort" />
@@ -109,8 +115,9 @@ export const PharmacieGarde = () => {
                 <th />
               </tr>
             </thead>
+
             <tbody>
-              {pharmacieGardeList.map((pharmacieGarde, i) => (
+              {pharmacyGardeList.map((pharmacieGarde, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
                   <td>
                     <Button tag={Link} to={`/pharmacie-garde/${pharmacieGarde.id}`} color="link" size="sm">
@@ -127,28 +134,21 @@ export const PharmacieGarde = () => {
                       <TextFormat type="date" value={pharmacieGarde.dateFin} format={APP_LOCAL_DATE_FORMAT} />
                     ) : null}
                   </td>
+
                   <td>
-                    {pharmacieGarde.pharmacies
-                      ? pharmacieGarde.pharmacies.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/pharmacie/${val.id}`}>{val.nom}</Link>
-                            {j === pharmacieGarde.pharmacies.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
-                  </td>
-                  <td>
-                    {pharmacieGarde.gardes
-                      ? pharmacieGarde.gardes.map((val, j) => (
-                          <span key={j}>
-                            <Link to={`/garde/${val.id}`}>
-                              {/*{val.id}*/}
-                              {val.type ? 'Day' : 'Night'}
-                            </Link>
-                            {j === pharmacieGarde.gardes.length - 1 ? '' : ', '}
-                          </span>
-                        ))
-                      : null}
+                    {pharmacieGarde.gardes ? 'Day' : 'Night'}
+                    {/*          {pharmacieGarde.gardes*/}
+                    {/*              ? pharmacieGarde.gardes.map((val, j) => (*/}
+                    {/*                  <span key={j}>*/}
+                    {/*  <Link to={`/garde/${val.id}`}>*/}
+                    {/*      /!*{val.type ? 'Day' : 'Night'}*!/*/}
+                    {/*      {val.id ? 'Day' : 'Night'}*/}
+                    {/*      /!*{val.id ? 'Day' : 'Night'}*!/*/}
+                    {/*  </Link>*/}
+                    {/*                      {j === pharmacieGarde.gardes.length - 1 ? '' : ', '}*/}
+                    {/*</span>*/}
+                    {/*              ))*/}
+                    {/*              : null}*/}
                   </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
@@ -194,11 +194,7 @@ export const PharmacieGarde = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && (
-            <div className="alert alert-warning">
-              <Translate contentKey="pharmaAiApp.pharmacieGarde.home.notFound">No Pharmacie Gardes found</Translate>
-            </div>
-          )
+          !loading && <div className="alert alert-warning">No History Gardes found</div>
         )}
       </div>
     </div>

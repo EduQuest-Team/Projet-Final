@@ -19,12 +19,12 @@ export const VilleDetail = () => {
 
   const villeEntity = useAppSelector(state => state.ville.entity);
   return (
-    <Row>
-      <Col md="8">
+    <Row className="detail">
+      <Col md="2">
         <h2 data-cy="villeDetailsHeading">
           <Translate contentKey="pharmaAiApp.ville.detail.title">Ville</Translate>
         </h2>
-        <dl className="jh-entity-details">
+        <dl className="jh-entity-details detail">
           <dt>
             <span id="id">
               <Translate contentKey="global.field.id">ID</Translate>

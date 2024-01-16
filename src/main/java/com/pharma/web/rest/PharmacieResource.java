@@ -1,9 +1,7 @@
 package com.pharma.web.rest;
 
-import com.pharma.domain.Pharmacie;
-import com.pharma.domain.Pharmacien;
-import com.pharma.domain.Ville;
-import com.pharma.domain.Zone;
+import com.pharma.domain.*;
+import com.pharma.repository.GardeRepository;
 import com.pharma.repository.PharmacieRepository;
 import com.pharma.repository.PharmacienRepository;
 import com.pharma.security.AuthoritiesConstants;
@@ -251,34 +249,15 @@ public class PharmacieResource {
         zone.setId(zoneId);
         Ville ville = new Ville();
         ville.setId(villeId);
+        //        Garde garde = new Garde();
+        //        garde.setId(gardeId);
         return pharmacieRepository.getPharmaciesByVilleAndZone(
             ville,
-            zone
-            // , j ? GardeType.J : GardeType.N,
-            // n ? GardeType.N : GardeType.J
+            zone,
+            gardeId
+            //                        j ? garde.type() : GardeType.N,
+            //             n ? GardeType.N : GardeType.J
         );
-        // pharmacieRouter.get('/pharmacies/:garde/:zone/:city', async (req, res) => {
-        // const garde = req.params.garde;
-        // const zone = req.params.zone;
-        // const city = req.params.city;
-
-        // try {
-        // const pharmacies = await Pharmacie.find({ garde: garde, zone: zone })
-        // .populate({
-        // path: 'zone',
-        // match: { city: city }
-        // })
-        // .exec();
-
-        // const filteredPharmacies = pharmacies.filter((pharmacy) => {
-        // return pharmacy.zone !== null;
-        // });
-
-        // res.json(filteredPharmacies);
-        // } catch (err) {
-        // console.error(err.message);
-        // res.status(500).send('Server Error');
-        // }
     }
 
     /**

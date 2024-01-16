@@ -41,10 +41,12 @@ export const Home = () => {
                   <Col md="3" className="pad">
                     <span className="hipster rounded" />
                   </Col>
-                  <Col md="9">
-                    <h1 className="display-4 d-flex">
-                      <Translate contentKey="home.title">Welcome, </Translate>
-                      <span>{`${account.firstName} ${account.lastName}`}</span>
+                  <Col md="9" className="flex-column">
+                    <h1 className="display-2 flex-box d-flex text-center my-4 mb-3">
+                      <Translate contentKey="home.title">Welcome, </Translate>&nbsp;
+                    </h1>
+                    <h1 className="display-5 d-flex flex-box text-center">
+                      <span>{` ${account.firstName}`} !</span>
                     </h1>
                     <DashboardHome />
                   </Col>
@@ -53,13 +55,14 @@ export const Home = () => {
               {isPharmacien && (
                 <>
                   <Col md="3" className="pad">
-                    <span className="hipster rounded" />
+                    <span className="pharmacist rounded" />
                   </Col>
-                  <Col md="9">
-                    <h1 className="display-4 d-flex">
-                      <Translate contentKey="home.title">Welcome, </Translate>
-                      &nbsp;
-                      {account.lastName && <span>{`${account.lastName} `}</span>}
+                  <Col md="9" className="flex-column">
+                    <h1 className="display-2 flex-box d-flex text-center my-4 mb-3">
+                      <Translate contentKey="home.title">Welcome, </Translate>&nbsp;
+                    </h1>
+                    <h1 className="display-5 d-flex flex-box text-center">
+                      <span>{` ${account.firstName}`} !</span>
                     </h1>
                     <PharmacistHome />
                   </Col>
@@ -71,11 +74,11 @@ export const Home = () => {
           )}
           {account?.login ? (
             <div>
-              <Alert color="success">
-                <Translate contentKey="home.logged.message" interpolate={{ username: account.login }}>
-                  You are logged in as user {account.login}.
-                </Translate>
-              </Alert>
+              {/*<Alert color="success">*/}
+              {/*  <Translate contentKey="home.logged.message" interpolate={{ username: account.login }}>*/}
+              {/*    You are logged in as user {account.login}.*/}
+              {/*  </Translate>*/}
+              {/*</Alert>*/}
             </div>
           ) : (
             <div>
@@ -92,12 +95,12 @@ export const Home = () => {
               {/*  </Translate>*/}
               {/*</Alert>*/}
 
-              <Alert color="warning">
-                <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;
-                <Link to="/account/register" className="alert-link">
-                  <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
-                </Link>
-              </Alert>
+              {/*<Alert color="warning">*/}
+              {/*  <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;*/}
+              {/*  <Link to="/account/register" className="alert-link">*/}
+              {/*    <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>*/}
+              {/*  </Link>*/}
+              {/*</Alert>*/}
             </div>
           )}
           {/*<p>*/}

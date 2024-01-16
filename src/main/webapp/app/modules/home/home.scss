@@ -5,6 +5,13 @@ Main page styles
   display: inline-block;
   width: 100%;
   height: 497px;
-  background: url('/content/images/uploads/doctor.png') no-repeat center top;
+  background: url('/content/images/uploads/admin.jpg') no-repeat center top;
+  background-size: contain;
+}
+.pharmacist {
+  display: inline-block;
+  width: 100%;
+  height: 497px;
+  background: url('/content/images/uploads/pharmacien.jpg') no-repeat center top;
   background-size: contain;
 }

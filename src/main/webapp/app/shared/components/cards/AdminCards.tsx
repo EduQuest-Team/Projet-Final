@@ -8,7 +8,7 @@ type AdminCardsProps = {
 
 const AdminCards = ({ villeCount, zoneCount, pharmacieCount }: AdminCardsProps) => {
   return (
-    <div className="row">
+    <div className="row flex-box">
       <div className="col-xl-3 col-md-6">
         <div className="card card-stats">
           <div className="card-body">

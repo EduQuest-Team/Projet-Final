@@ -10,6 +10,7 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntities, reset } from './pharmacien.reducer';
+import { getPharmacyByPharmacistId } from 'app/entities/pharmaciens/pharmaciens.reducer';
 
 export const Pharmacien = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ export const Pharmacien = () => {
   const [sorting, setSorting] = useState(false);
 
   const pharmacienList = useAppSelector(state => state.pharmacien.entities);
+  const pharmacien = useAppSelector(state => state.pharmacien.entity);
+  const pharmacie = useAppSelector(state => state.pharmaciens.pharmacie);
   const loading = useAppSelector(state => state.pharmacien.loading);
   const links = useAppSelector(state => state.pharmacien.links);
   const updateSuccess = useAppSelector(state => state.pharmacien.updateSuccess);
@@ -109,11 +112,11 @@ export const Pharmacien = () => {
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             <Translate contentKey="pharmaAiApp.pharmacien.home.refreshListLabel">Refresh List</Translate>
           </Button>
-          <Link to="/pharmacien/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
-            <FontAwesomeIcon icon="plus" />
-            &nbsp;
-            <Translate contentKey="pharmaAiApp.pharmacien.home.createLabel">Create new Pharmacien</Translate>
-          </Link>
+          {/*<Link to="/pharmacien/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">*/}
+          {/*  <FontAwesomeIcon icon="plus" />*/}
+          {/*  &nbsp;*/}
+          {/*  <Translate contentKey="pharmaAiApp.pharmacien.home.createLabel">Create new Pharmacien</Translate>*/}
+          {/*</Link>*/}
         </div>
       </h2>
       <div className="table-responsive">
@@ -142,12 +145,13 @@ export const Pharmacien = () => {
                     <Translate contentKey="pharmaAiApp.pharmacien.email">Email</Translate>{' '}
                     <FontAwesomeIcon icon={getSortIconByFieldName('email')} />
                   </th>
-                  <th className="hand" onClick={sort('password')}>
-                    <Translate contentKey="pharmaAiApp.pharmacien.password">Password</Translate>{' '}
-                    <FontAwesomeIcon icon={getSortIconByFieldName('password')} />
-                  </th>
+                  {/*<th className="hand" onClick={sort('password')}>*/}
+                  {/*  <Translate contentKey="pharmaAiApp.pharmacien.password">Password</Translate>{' '}*/}
+                  {/*  <FontAwesomeIcon icon={getSortIconByFieldName('password')} />*/}
+                  {/*</th>*/}
                   <th>
-                    <Translate contentKey="pharmaAiApp.pharmacien.pharmacie">Pharmacie</Translate> <FontAwesomeIcon icon="sort" />
+                    <Translate contentKey="pharmaAiApp.pharmacien.pharmacie">Pharmacie ID</Translate>
+                    <FontAwesomeIcon icon="sort" />
                   </th>
                   <th />
                 </tr>
@@ -163,35 +167,35 @@ export const Pharmacien = () => {
                     <td>{pharmacien.nom}</td>
                     <td>{pharmacien.prenom}</td>
                     <td>{pharmacien.email}</td>
-                    <td>{pharmacien.password}</td>
+                    {/*<td>{pharmacien.password}</td>*/}
                     <td>
                       {pharmacien.pharmacie ? <Link to={`/pharmacie/${pharmacien.pharmacie.id}`}>{pharmacien.pharmacie.id}</Link> : ''}
                     </td>
                     <td className="text-end">
                       <div className="btn-group flex-btn-group-container">
-                        <Button tag={Link} to={`/pharmacien/${pharmacien.id}`} color="info" size="sm" data-cy="entityDetailsButton">
+                        <Button tag={Link} to={`/pharmacien/${pharmacien.id}`} color="primary" size="sm" data-cy="entityDetailsButton">
                           <FontAwesomeIcon icon="eye" />{' '}
                           <span className="d-none d-md-inline">
                             <Translate contentKey="entity.action.view">View</Translate>
                           </span>
                         </Button>
-                        <Button tag={Link} to={`/pharmacien/${pharmacien.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                          <FontAwesomeIcon icon="pencil-alt" />{' '}
-                          <span className="d-none d-md-inline">
-                            <Translate contentKey="entity.action.edit">Edit</Translate>
-                          </span>
-                        </Button>
-                        <Button
-                          onClick={() => (window.location.href = `/pharmacien/${pharmacien.id}/delete`)}
-                          color="danger"
-                          size="sm"
-                          data-cy="entityDeleteButton"
-                        >
-                          <FontAwesomeIcon icon="trash" />{' '}
-                          <span className="d-none d-md-inline">
-                            <Translate contentKey="entity.action.delete">Delete</Translate>
-                          </span>
-                        </Button>
+                        {/*<Button tag={Link} to={`/pharmacien/${pharmacien.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">*/}
+                        {/*  <FontAwesomeIcon icon="pencil-alt" />{' '}*/}
+                        {/*  <span className="d-none d-md-inline">*/}
+                        {/*    <Translate contentKey="entity.action.edit">Edit</Translate>*/}
+                        {/*  </span>*/}
+                        {/*</Button>*/}
+                        {/*<Button*/}
+                        {/*  onClick={() => (window.location.href = `/pharmacien/${pharmacien.id}/delete`)}*/}
+                        {/*  color="danger"*/}
+                        {/*  size="sm"*/}
+                        {/*  data-cy="entityDeleteButton"*/}
+                        {/*>*/}
+                        {/*  <FontAwesomeIcon icon="trash" />{' '}*/}
+                        {/*  <span className="d-none d-md-inline">*/}
+                        {/*    <Translate contentKey="entity.action.delete">Delete</Translate>*/}
+                        {/*  </span>*/}
+                        {/*</Button>*/}
                       </div>
                     </td>
                   </tr>

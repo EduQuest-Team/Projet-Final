@@ -67,7 +67,7 @@ const Pharmaciens = () => {
       <Row className="mt-2">
         <Col>
           <div className="mb-3">
-            <Label className="h4">Select an Ville:</Label>
+            <Label className="h4">Select a City:</Label>
             <Input
               value={ville}
               onChange={event => {

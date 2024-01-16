@@ -197,8 +197,8 @@ public class PharmacieGardeResource {
             .build();
     }
 
-    @GetMapping
-    public ResponseEntity<Void> getPharmacieGardeByPharmacie(@PathVariable("id") Long id) {
-        pharmacieGardeRepository.findAllById(id);
+    @GetMapping("/ph-garde/{id}")
+    public List<PharmacieGarde> getPharmacieGardeByPharmacie(@PathVariable("id") Long id) {
+        return pharmacieGardeRepository.findByPharmaciesId(id);
     }
 }

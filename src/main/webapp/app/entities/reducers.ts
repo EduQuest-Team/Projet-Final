@@ -7,9 +7,11 @@ import ville from 'app/entities/ville/ville.reducer';
 import historique from 'app/entities/historique/historique.reducer';
 import position from 'app/entities/position/position.reducer';
 import pharmaciens from 'app/entities/pharmaciens/pharmaciens.reducer';
+import pharmacyGarde from 'app/entities/pharmacist-home/pharmacist.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
+  pharmacyGarde,
   pharmaciens,
   pharmacie,
   garde,

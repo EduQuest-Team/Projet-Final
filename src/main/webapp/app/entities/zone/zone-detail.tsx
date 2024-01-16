@@ -19,12 +19,12 @@ export const ZoneDetail = () => {
 
   const zoneEntity = useAppSelector(state => state.zone.entity);
   return (
-    <Row>
-      <Col md="8">
+    <Row className="detail">
+      <Col md="2">
         <h2 data-cy="zoneDetailsHeading">
           <Translate contentKey="pharmaAiApp.zone.detail.title">Zone</Translate>
         </h2>
-        <dl className="jh-entity-details">
+        <dl className="jh-entity-details detail">
           <dt>
             <span id="id">
               <Translate contentKey="global.field.id">ID</Translate>
@@ -38,7 +38,7 @@ export const ZoneDetail = () => {
           </dt>
           <dd>{zoneEntity.nom}</dd>
           <dt>
-            <Translate contentKey="pharmaAiApp.zone.ville">Ville</Translate>
+            <Translate contentKey="pharmaAiApp.zone.ville">Ville Id</Translate>
           </dt>
           <dd>{zoneEntity.ville ? zoneEntity.ville.id : ''}</dd>
         </dl>
