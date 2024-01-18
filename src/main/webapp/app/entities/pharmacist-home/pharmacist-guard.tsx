@@ -61,7 +61,7 @@ export const PharmacieGuard = () => {
 
   const myArray = ['1', '2', '', '3'];
   const result = mapIdList(myArray);
-  console.log(result);
+  // console.log(result);
 
   // eslint-disable-next-line complexity
   const saveEntity = values => {

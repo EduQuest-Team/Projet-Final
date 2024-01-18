@@ -48,11 +48,23 @@ const LineChart = ({ subtitle, title }: ChartCardProps) => {
     return () => {};
   }, [loading]);
 
-  const handleChange = async event => {
-    console.log(event.target.value);
-    const resp = await axios.get<any>(`/api/stats/pharmacies/${event.target.value}`);
-    console.log(resp.data);
-    setChartData(resp.data);
+  // const handleChange = async (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(event.target.value);
+    async () => {
+      const resp = await axios.get<any>(`/api/stats/pharmacies/${event.target.value}`);
+      // console.log(resp.data);
+      setChartData(resp.data);
+    };
+    // try {
+    //   const resp = await axios.get<any>(`/api/stats/pharmacies/${event.target.value}`);
+    //   // console.log(resp.data);
+    //   setChartData(resp.data);
+    //   return Promise.resolve(); // or return something meaningful if needed
+    // } catch (error) {
+    //   // console.error("Error fetching data:", error);
+    //   return Promise.reject(error); // or handle the error accordingly
+    // }
   };
 
   return (
@@ -72,10 +84,10 @@ const LineChart = ({ subtitle, title }: ChartCardProps) => {
               onChange={handleChange}
             >
               {pharmacienList &&
-                pharmacienList.map((pharmacien, i) => (
-                  <option value={pharmacien.id} key={pharmacien.id}>
-                    {`${pharmacien.nom} ${pharmacien.prenom}`}
-                    {/*{`${pharmacien.user?.firstName} ${pharmacien.user?.lastName}`}*/}
+                pharmacienList.map((pharmacist, i) => (
+                  <option value={pharmacist.id} key={pharmacist.id}>
+                    {`${pharmacist.nom} ${pharmacist.prenom}`}
+                    {/*{`${pharmacist.user?.firstName} ${pharmacist.user?.lastName}`}*/}
                   </option>
                 ))}
             </Input>

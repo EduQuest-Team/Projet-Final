@@ -26,15 +26,17 @@ const PharmacistHome = () => {
   const [completed, setCompleted] = useState(false);
   const pharmacie = useAppSelector(state => state.pharmacie.entity);
 
-  const [userId, setUserId] = useState<number>(account.id);
+  // const [userId, setUserId] = useState<number>(account.id);
+  const [userId, setUserId] = useState(account.id);
 
   const handleFetch = () => {
     // console.log(zone, ville);
-    console.log(userId);
+    // console.log(userId);
     setUserId(account.id);
     setIsLoading(true);
     setCompleted(false);
-    dispatch(getPharmacistByUserId({ userId: userId }));
+    // dispatch(getPharmacistByUserId({ userId: userId }));
+    dispatch(getPharmacistByUserId(userId));
   };
 
   useEffect(() => {

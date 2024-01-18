@@ -72,7 +72,7 @@ const Pharmaciens = () => {
               value={ville}
               onChange={event => {
                 setVille(event.target.value);
-                const zones = zoneList.filter(zone => zone.ville.id === parseInt(event.target.value, 5));
+                const zones = zoneList.filter(z => z.ville.id === parseInt(event.target.value, 5));
                 setFilteredVilleList(zones);
                 if (zones.length > 0) {
                   setZone(zones[0].id);
@@ -86,9 +86,9 @@ const Pharmaciens = () => {
               type="select"
             >
               {villeList &&
-                villeList.map((ville, i) => (
-                  <option value={ville.id} key={ville.id}>
-                    {ville.nom}
+                villeList.map((v, i) => (
+                  <option value={v.id} key={v.id}>
+                    {v.nom}
                   </option>
                 ))}
             </Input>
@@ -109,9 +109,9 @@ const Pharmaciens = () => {
               }}
             >
               {filteredVilleList &&
-                filteredVilleList.map((zone, i) => (
-                  <option value={zone.id} key={zone.id}>
-                    {zone.nom}
+                filteredVilleList.map((z, i) => (
+                  <option value={z.id} key={z.id}>
+                    {z.nom}
                   </option>
                 ))}
             </Input>

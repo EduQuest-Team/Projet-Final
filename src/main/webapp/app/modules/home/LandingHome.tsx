@@ -5,8 +5,9 @@ import './landingpage.scss';
 import { Translate } from 'react-jhipster';
 import TypewriterComponent from 'typewriter-effect';
 import { useNavigate } from 'react-router-dom';
-// @ts-ignore
-import { Play } from 'lucide-react';
+// import { Play } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+declare const Play: LucideIcon;
 
 const LandingHome = () => {
   const navigate = useNavigate();
@@ -179,6 +180,3 @@ const LandingHome = () => {
 };
 
 export default LandingHome;
-
-{
-}

@@ -1,7 +1,12 @@
 import React from 'react';
-// @ts-ignore
-import { Github, Linkedin } from 'lucide-react';
+// import * as LucideIcon from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+
+// import { Github, Linkedin } from 'lucide-react';
 import { supervisor, team } from 'app/modules/about/index';
+
+declare const Github: LucideIcon;
+declare const Linkedin: LucideIcon;
 
 const About = () => {
   return (
@@ -16,15 +21,15 @@ const About = () => {
               <img className="mx-auto mb-4 w-36 h-36 rounded-circle border border-success" src={person.image} alt="img" />
               <h3 className="mb-1 text-2xl font-weight-bold tracking-tight text-card-title">{person.name}</h3>
               <p className="py-2 text-dark">{person.job}</p>
-              <ul className="flex-box justify-center-l mt-4 space-x-4">
-                <a href={person.github} className="text-black hover:text-white">
+              <div className="flex-box justify-center-l mt-4 space-x-4">
+                <a title="github" href={person.github} className="text-black hover:text-white rounded-circle">
                   <Github />
                 </a>
 
-                <a href={person.linkedIn} className="text-[#3e66d3] hover:text-white">
+                <a title="linkedin" href={person.linkedIn} className="text-[#3e66d3] hover:text-white rounded-circle">
                   <Linkedin />
                 </a>
-              </ul>
+              </div>
             </div>
           ))}
         </div>

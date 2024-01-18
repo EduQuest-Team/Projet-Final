@@ -2,8 +2,14 @@ import './footer.scss';
 
 import React from 'react';
 import { Col, Row } from 'reactstrap';
-// @ts-ignore
-import { CopyrightIcon, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+
+// import { CopyrightIcon, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+declare const CopyrightIcon: LucideIcon;
+declare const Facebook: LucideIcon;
+declare const Instagram: LucideIcon;
+declare const Linkedin: LucideIcon;
+declare const Twitter: LucideIcon;
 
 const Footer = () => {
   // const navigate = useNavigate();

@@ -69,7 +69,7 @@ export const PharmacienDetail = () => {
           </dt>
           {/*<dd>{pharmacienEntity.pharmacie ? pharmacienEntity.pharmacie.id : ''}</dd>*/}
           {pharmacie.map((p, i) => (
-            <dd>{p.nom}</dd>
+            <dd key={p.id}>{p.nom}</dd>
           ))}
         </dl>
         <Button tag={Link} to="/pharmacien" replace color="info" data-cy="entityDetailsBackButton" className="detail">

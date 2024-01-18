@@ -23,7 +23,7 @@ export const Pharmacien = () => {
   const [sorting, setSorting] = useState(false);
 
   const pharmacienList = useAppSelector(state => state.pharmacien.entities);
-  const pharmacien = useAppSelector(state => state.pharmacien.entity);
+  // const pharmacien = useAppSelector(state => state.pharmacien.entity);
   const pharmacie = useAppSelector(state => state.pharmaciens.pharmacie);
   const loading = useAppSelector(state => state.pharmacien.loading);
   const links = useAppSelector(state => state.pharmacien.links);

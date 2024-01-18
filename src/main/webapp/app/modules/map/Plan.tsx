@@ -114,9 +114,9 @@ const Plan = () => {
       fetch(`${URL}/zones/ville/${state.city.value}`)
         // fetch(`${URL}/zones`)
         .then(response => response.json())
-        .then(data => {
-          if (Array.isArray(data)) {
-            const options = data.map(item => ({
+        .then(res => {
+          if (Array.isArray(res)) {
+            const options = res.map(item => ({
               value: item.id,
               //label: item.name,
               label: item.nom,

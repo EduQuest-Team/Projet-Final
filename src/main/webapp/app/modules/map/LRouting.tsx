@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
-// import L from 'leaflet'; // Import L from leaflet to start using the plugin
-import 'leaflet'; // Import L from leaflet to start using the plugin
+// import L from 'leaflet'; // Import L from leafconst to start using the plugin
+import 'leaflet'; // Import L from leafconst to start using the plugin
 import { useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.js';
+
 import 'leaflet-routing-machine';
 import 'leaflet-control-geocoder';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
@@ -13,7 +16,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'; // Import plugin
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.js';
 
-declare let L;
+declare const L;
 
 const LRouting = ({ data }) => {
   // const [currentLocation, setCurrentLocation] = useState([33.2456782, -8.4990917]);
@@ -45,10 +48,10 @@ const LRouting = ({ data }) => {
     });
     // const marker = L.marker([33.2500431, -8.5040995], {icon: DefaultIcon}).addTo(map);
 
-    // let marker = L.marker(currentLocation, {icon: Icon});
-    let marker = L.marker([], { icon: Icon });
-    // let marker1 = L.marker(currentLocation, {icon: DefaultIcon});
-    let marker1 = L.marker([], { icon: DefaultIcon });
+    // const marker = L.marker(currentLocation, {icon: Icon});
+    const marker = L.marker([], { icon: Icon });
+    // const marker1 = L.marker(currentLocation, {icon: DefaultIcon});
+    const marker1 = L.marker([], { icon: DefaultIcon });
     //
     // {
     //     currentLocation &&
@@ -61,10 +64,10 @@ const LRouting = ({ data }) => {
         defaultMarkGeocode: false,
       })
         .on('markgeocode', function (e) {
-          // let bbox = e.geocode.bbox;
-          let lating = e.geocode.center;
+          // const bbox = e.geocode.bbox;
+          const lating = e.geocode.center;
           L.marker(lating).addTo(map).bindPopup(e.geocode.name).openPopup();
-          // let poly = L.polygon([
+          // const poly = L.polygon([
           //     bbox.getSouthEast(),
           //     bbox.getNorthEast(),
           //     bbox.getNorthWest(),
@@ -75,7 +78,7 @@ const LRouting = ({ data }) => {
         })
         .addTo(map);
     // map.on("click", (e) => {
-    // let route = L.Routing.control({
+    // const route = L.Routing.control({
     {
       // currentLocation &&
       // L.Routing.control({
@@ -123,15 +126,15 @@ const LRouting = ({ data }) => {
     // }
     const success = pos => {
       if (pos && pos.coords) {
-        let lat = pos.coords.latitude;
-        let long = pos.coords.longitude;
+        const lat = pos.coords.latitude;
+        const long = pos.coords.longitude;
         // const {latitude, longitude} = pos.coords;
 
-        let accuracy = pos.coords.accuracy;
+        const accuracy = pos.coords.accuracy;
         // L.marker([lat, long], {icon: DefaultIcon}).addTo(map)
 
         marker1.setLatLng([lat, long]);
-        let circle = L.circle([lat, long], { radius: accuracy });
+        const circle = L.circle([lat, long], { radius: accuracy });
 
         // setCurrentLocation([{latitude: lat, longitude: long}]);
         // setCurrentLocation(prevLocation => [
@@ -256,10 +259,10 @@ const LRouting = ({ data }) => {
 
   // function getPosition(position) {
   //     // console.log(position)
-  //     let lat = position.coords.latitude;
-  //     let long = position.coords.longitude;
-  //     let accuracy = position.coords.accuracy;
-  //     let marker1, circle1;
+  //     const lat = position.coords.latitude;
+  //     const long = position.coords.longitude;
+  //     const accuracy = position.coords.accuracy;
+  //     const marker1, circle1;
   //     const {latitude, longitude} = position.coords;
   //
   //
@@ -274,7 +277,7 @@ const LRouting = ({ data }) => {
   //     marker1 = L.marker([lat, long]);
   //     circle1 = L.circle([lat, long], {radius: accuracy});
   //
-  //     let featureGroup = L.featureGroup([marker1, circle1]).addTo(map);
+  //     const featureGroup = L.featureGroup([marker1, circle1]).addTo(map);
   //
   //     map.fitBounds(featureGroup.getBounds());
   //

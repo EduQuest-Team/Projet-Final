@@ -192,11 +192,11 @@ export const Pharmacie = () => {
                   <td>
                     {pharmacie.gardes ? (
                       <Link to={`/garde/${pharmacie.gardes.id}`}>
-                        {pharmacie.gardes.map((val, i) => (
+                        {pharmacie.gardes.map((val, j: number) => (
                           <span key={val.id}>
-                            {val.id == 1 && 'Day'}
-                            {val.id == 2 && 'Night'}
-                            {pharmacie.gardes && i === pharmacie.gardes.length - 1 ? '' : ', '}
+                            {val.id === 1 && 'Day'}
+                            {val.id === 2 && 'Night'}
+                            {pharmacie.gardes && j === pharmacie.gardes.length - 1 ? '' : ', '}
                           </span>
                         ))}
                       </Link>

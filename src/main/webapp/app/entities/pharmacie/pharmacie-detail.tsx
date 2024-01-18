@@ -52,7 +52,7 @@ export const PharmacieDetail = () => {
               <Translate contentKey="pharmaAiApp.pharmacie.image">Image</Translate>
             </span>
           </dt>
-          {/*<dd>{pharmacieEntity.image}</dd>*/}
+          {/* <dd>{pharmacieEntity.image}</dd> */}
           <img alt="PharmaImage" src={`data:image/png;base64,${pharmacieEntity.image}`} style={{ maxHeight: '120px' }} />
           <dt>
             <span id="latitude">
@@ -83,10 +83,10 @@ export const PharmacieDetail = () => {
             {pharmacieEntity.gardes
               ? pharmacieEntity.gardes.map((val, i) => (
                   <span key={val.id}>
-                    {/*<a>{val.id}</a> &nbsp;*/}
-                    {val.id == 1 && 'Day'}
-                    {val.id == 2 && 'Night'}
-                    {/*<a>{val.type}</a>*/}
+                    {/* <a>{val.id}</a> &nbsp;*/}
+                    {val.id === 1 && 'Day'}
+                    {val.id === 2 && 'Night'}
+                    {/* <a>{val.type}</a>*/}
                     {pharmacieEntity.gardes && i === pharmacieEntity.gardes.length - 1 ? '' : ', '}
                   </span>
                 ))

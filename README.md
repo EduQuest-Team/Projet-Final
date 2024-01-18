@@ -211,6 +211,8 @@ To achieve this, first build a docker image of your app by running:
 
 ```
 npm run java:docker
+mvnw -ntp verify -DskipTests -Pprod jib:dockerBuild
+mvnw -Pprod verify jib:dockerBuild
 ```
 
 Or build a arm64 docker image when using an arm64 processor os like MacOS with M1 processor family running:
@@ -251,3 +253,5 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Jest]: https://facebook.github.io/jest/
 [Leaflet]: https://leafletjs.com/
 [DefinitelyTyped]: https://definitelytyped.org/
+
+Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free @typescript-eslint/ban-ts-comment

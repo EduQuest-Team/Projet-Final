@@ -55,7 +55,6 @@ const Header = (props: IHeaderProps) => {
 
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
   const isUser = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.USER]));
-  // @ts-ignore
   return (
     <div id="app-header">
       {renderDevRibbon()}
@@ -67,7 +66,6 @@ const Header = (props: IHeaderProps) => {
           <Nav id="header-tabs" className="ms-auto" navbar>
             <Home />
             {/*{props.isAuthenticated && <EntitiesMenu />}*/}
-            {}
             {!props.isAuthenticated && <Maps />}
             {isUser && <EntitiesMenu />}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
@@ -80,14 +78,10 @@ const Header = (props: IHeaderProps) => {
     </div>
   );
 };
-// @ts-ignore
 const Maps = () => (
   <NavItem>
     <NavLink tag={Link} to="/map" className="d-flex align-items-center">
-      {/*<FontAwesomeIcon icon="map-marker"/>
-       */}
       <FontAwesomeIcon icon={faMap} className="me-2" />
-
       <span>Map</span>
     </NavLink>
   </NavItem>
@@ -96,7 +90,6 @@ const About = () => (
   <NavItem>
     <NavLink tag={Link} to="/about" className="d-flex align-items-center">
       <FontAwesomeIcon icon="book" />
-
       <span>About</span>
     </NavLink>
   </NavItem>

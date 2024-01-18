@@ -102,24 +102,24 @@ const PharmacistPharmacy = () => {
                 </thead>
                 {pharmacist ? (
                   <tbody>
-                    {pharmacie.map((pharmacie, i) => (
+                    {pharmacie.map((pharmacy, i) => (
                       <tr key={`entity-${i}`} data-cy="entityTable">
                         <td className="table-user">
-                          <b>{pharmacie.id}</b>
+                          <b>{pharmacy.id}</b>
                         </td>
                         <td className="table-actions">
-                          <span className="font-weight-bold">{pharmacie.nom}</span>
+                          <span className="font-weight-bold">{pharmacy.nom}</span>
                         </td>
                         <td>
-                          <img src={`data:png;base64,${pharmacie.image}`} style={{ maxHeight: '60px' }} alt="img" />
+                          <img src={`data:png;base64,${pharmacy.image}`} style={{ maxHeight: '60px' }} alt="img" />
                         </td>
                         <td>
-                          <span className="font-weight-bold">{pharmacie.adresse}</span>
+                          <span className="font-weight-bold">{pharmacy.adresse}</span>
                         </td>
 
                         <td className="table-actions">
                           <a
-                            href={`/pharmacie/${pharmacie.id}`}
+                            href={`/pharmacie/${pharmacy.id}`}
                             style={{
                               fontSize: '1.3rem',
                             }}
