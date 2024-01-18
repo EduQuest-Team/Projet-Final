@@ -20,6 +20,8 @@
   ![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/5231904e-b2e3-42ea-9455-d17a8f3a154f)
 # Docker 
 ![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/5316071e-430a-468d-95de-8d7123c2330b)
+![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/7b1f57a7-41aa-4d35-9334-6279cf7aa48c)
+
 # Test avec SonarQube
 ![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/8ea63446-1625-4f8c-9f52-4a722c585c63)
 ![image](https://github.com/Oussama-Errahimi20032/Projet-Final/assets/147452642/6fe4cf1b-e627-442d-a007-665b2bcfb51a)
