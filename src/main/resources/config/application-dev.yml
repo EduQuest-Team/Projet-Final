@@ -32,7 +32,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/pharmaAi?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/pharmacy?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
     username: root
     password:
     hikari:
@@ -108,3 +108,5 @@ jhipster:
 # ===================================================================
 
 # application:
+# docker tag local-image:tagname new-repo:tagname   docker tag pharmaai:latest dockerman27/pharma-ai:latest
+# docker push new-repo:tagname    docker push dockerman27/pharma-ai:latest
