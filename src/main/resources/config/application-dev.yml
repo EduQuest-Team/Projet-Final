@@ -32,9 +32,11 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/pharmacy?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
+    # url: jdbc:mysql://localhost:3306/pharmacy?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
+    url: jdbc:mysql://monorail.proxy.rlwy.net:10535/railway?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
     username: root
-    password:
+    # password:
+    password: A65Ach-33CeFhh-FHDH33BhEC1bBDBGb
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -110,3 +112,4 @@ jhipster:
 # application:
 # docker tag local-image:tagname new-repo:tagname   docker tag pharmaai:latest dockerman27/pharma-ai:latest
 # docker push new-repo:tagname    docker push dockerman27/pharma-ai:latest
+# mysql://root:A65Ach-33CeFhh-FHDH33BhEC1bBDBGb@monorail.proxy.rlwy.net:10535/railway
