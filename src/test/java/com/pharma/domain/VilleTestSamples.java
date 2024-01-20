@@ -14,7 +14,7 @@ public class VilleTestSamples {
     }
 
     public static Ville getVilleSample2() {
-        return new Ville().id(1L).nom("nom2").image(null);
+        return new Ville().id(2L).nom("nom2").image(null);
     }
 
     public static Ville getVilleRandomSampleGenerator() {

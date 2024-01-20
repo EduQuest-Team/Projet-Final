@@ -252,6 +252,12 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [BrowserSync]: https://www.browsersync.io/
 [Jest]: https://facebook.github.io/jest/
 [Leaflet]: https://leafletjs.com/
+
+<<<<<<< HEAD
 [DefinitelyTyped]: https://definitelytyped.org/
 
-Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free @typescript-eslint/ban-ts-comment
+# Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free @typescript-eslint/ban-ts-comment
+
+[DefinitelyTyped]: https://definitelytyped.org/ '# Projet-Final'
+
+> > > > > > > 18f83e31d8d522cb7738be7ba1e8381e9c9f2336
