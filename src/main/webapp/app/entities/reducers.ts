@@ -4,8 +4,6 @@ import pharmacieGarde from 'app/entities/pharmacie-garde/pharmacie-garde.reducer
 import pharmacien from 'app/entities/pharmacien/pharmacien.reducer';
 import zone from 'app/entities/zone/zone.reducer';
 import ville from 'app/entities/ville/ville.reducer';
-import historique from 'app/entities/historique/historique.reducer';
-import position from 'app/entities/position/position.reducer';
 import pharmaciens from 'app/entities/pharmaciens/pharmaciens.reducer';
 import pharmacyGarde from 'app/entities/pharmacist-home/pharmacist.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
@@ -19,8 +17,6 @@ const entitiesReducers = {
   pharmacien,
   zone,
   ville,
-  historique,
-  position,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

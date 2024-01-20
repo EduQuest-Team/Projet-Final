@@ -59,16 +59,12 @@ public class Pharmacie implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pharmacies")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "pharmacies", "gardes", "historique" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "pharmacies", "gardes" }, allowSetters = true)
     private Set<PharmacieGarde> pharmaciegardes = new HashSet<>();
-
-    @JsonIgnoreProperties(value = { "pharmacie", "historique" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pharmacie")
-    private Pharmacien pharmacien;
 
     @JsonIgnoreProperties(value = { "pharmacie" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "pharmacie")
-    private Position position;
+    private Pharmacien pharmacien;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -246,25 +242,6 @@ public class Pharmacie implements Serializable {
 
     public Pharmacie pharmacien(Pharmacien pharmacien) {
         this.setPharmacien(pharmacien);
-        return this;
-    }
-
-    public Position getPosition() {
-        return this.position;
-    }
-
-    public void setPosition(Position position) {
-        if (this.position != null) {
-            this.position.setPharmacie(null);
-        }
-        if (position != null) {
-            position.setPharmacie(this);
-        }
-        this.position = position;
-    }
-
-    public Pharmacie position(Position position) {
-        this.setPosition(position);
         return this;
     }
 

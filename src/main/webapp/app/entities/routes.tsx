@@ -9,7 +9,6 @@ import PharmacieGarde from './pharmacie-garde';
 import Pharmacien from './pharmacien';
 import Zone from './zone';
 import Ville from './ville';
-import Historique from './historique';
 import Pharmaciens from './pharmaciens';
 import Profile from 'app/modules/profile';
 import PharmacistHome from './pharmacist-home';
@@ -26,7 +25,6 @@ export default () => {
         <Route path="pharmacien/*" element={<Pharmacien />} />
         <Route path="zone/*" element={<Zone />} />
         <Route path="ville/*" element={<Ville />} />
-        <Route path="historique/*" element={<Historique />} />
         <Route path="pharmaciens/*" element={<Pharmaciens />} />
         <Route path="pharmacist/*" element={<PharmacistHome />} />
         <Route path="profile/*" element={<Profile />} />

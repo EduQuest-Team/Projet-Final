@@ -1,4 +1,6 @@
+import 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.js';
 import React, { useEffect, useReducer, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { DNA } from 'react-loader-spinner';

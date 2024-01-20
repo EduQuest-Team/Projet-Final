@@ -1,11 +1,7 @@
-id;nom
-1;daily indeed
-2;whereas
-3;which
-4;frilly quizzical surrounds
-5;slash following stravaig
-6;positively
-7;yawningly warmly
-8;spectacular
-9;interestingly rush affect
-10;ultimately
+id;nom;ville_id
+1;Quartier Ghita;1
+2;Quartier El Massira;2
+3;Quartier Soumia;3
+4;Quartier Elhouda;4
+5;Quartier Taybaa;5
+

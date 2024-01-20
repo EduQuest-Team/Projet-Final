@@ -24,8 +24,9 @@ public class Ville implements Serializable {
     @Column(name = "nom")
     private String nom;
 
-    @Column(name = "image")
-    private String image;
+    @Lob
+    @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
+    private byte[] image;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -55,16 +56,16 @@ public class Ville implements Serializable {
         this.nom = nom;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return this.image;
     }
 
-    public Ville image(String image) {
+    public Ville image(byte[] image) {
         this.setImage(image);
         return this;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

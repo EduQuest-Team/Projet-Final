@@ -206,13 +206,7 @@ public class PharmacieResource {
 
         if ("position-is-null".equals(filter)) {
             log.debug("REST request to get all Pharmacies where position is null");
-            return new ResponseEntity<>(
-                StreamSupport
-                    .stream(pharmacieRepository.findAll().spliterator(), false)
-                    .filter(pharmacie -> pharmacie.getPosition() == null)
-                    .toList(),
-                HttpStatus.OK
-            );
+            return new ResponseEntity<>(StreamSupport.stream(pharmacieRepository.findAll().spliterator(), false).toList(), HttpStatus.OK);
         }
         log.debug("REST request to get a page of Pharmacies");
         Page<Pharmacie> page;

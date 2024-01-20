@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 // import L from 'leaflet'; // Import L from leafconst to start using the plugin
 import 'leaflet'; // Import L from leafconst to start using the plugin
-import { useMap } from 'react-leaflet';
+import { useMap, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 
@@ -15,6 +15,10 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
 
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.css'; // Import plugin
 import 'leaflet.locatecontrol/dist/L.Control.Locate.min.js';
+
+// import { Marker } from 'react-leaflet';
+// import { Control, Geocoder } from 'leaflet-control-geocoder';
+// import { Routing } from 'leaflet-routing-machine';
 
 declare const L;
 

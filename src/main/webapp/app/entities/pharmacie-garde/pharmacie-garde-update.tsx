@@ -12,8 +12,6 @@ import { IPharmacie } from 'app/shared/model/pharmacie.model';
 import { getEntities as getPharmacies } from 'app/entities/pharmacie/pharmacie.reducer';
 import { IGarde } from 'app/shared/model/garde.model';
 import { getEntities as getGardes } from 'app/entities/garde/garde.reducer';
-import { IHistorique } from 'app/shared/model/historique.model';
-import { getEntities as getHistoriques } from 'app/entities/historique/historique.reducer';
 import { IPharmacieGarde } from 'app/shared/model/pharmacie-garde.model';
 import { getEntity, updateEntity, createEntity, reset } from './pharmacie-garde.reducer';
 
@@ -27,7 +25,6 @@ export const PharmacieGardeUpdate = () => {
 
   const pharmacies = useAppSelector(state => state.pharmacie.entities);
   const gardes = useAppSelector(state => state.garde.entities);
-  const historiques = useAppSelector(state => state.historique.entities);
   const pharmacieGardeEntity = useAppSelector(state => state.pharmacieGarde.entity);
   const loading = useAppSelector(state => state.pharmacieGarde.loading);
   const updating = useAppSelector(state => state.pharmacieGarde.updating);
@@ -46,7 +43,6 @@ export const PharmacieGardeUpdate = () => {
 
     dispatch(getPharmacies({}));
     dispatch(getGardes({}));
-    dispatch(getHistoriques({}));
   }, []);
 
   useEffect(() => {

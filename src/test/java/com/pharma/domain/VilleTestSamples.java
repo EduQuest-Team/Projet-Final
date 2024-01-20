@@ -10,14 +10,34 @@ public class VilleTestSamples {
     private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static Ville getVilleSample1() {
-        return new Ville().id(1L).nom("nom1").image("image1");
+        return new Ville().id(1L).nom("nom1").image(null);
     }
 
     public static Ville getVilleSample2() {
-        return new Ville().id(2L).nom("nom2").image("image2");
+        return new Ville().id(1L).nom("nom2").image(null);
     }
 
     public static Ville getVilleRandomSampleGenerator() {
-        return new Ville().id(longCount.incrementAndGet()).nom(UUID.randomUUID().toString()).image(UUID.randomUUID().toString());
+        Ville ville = new Ville();
+        ville.setId(longCount.incrementAndGet());
+        ville.setNom(UUID.randomUUID().toString());
+
+        // Generate a random image
+        byte[] imageBytes = generateRandomImage();
+
+        // Convert byte array to Blob
+        ville.setImage(imageBytes);
+        return ville;
+    }
+
+    private static byte[] generateRandomImage() {
+        // Generate random image bytes here
+        // Replace this with your own logic to generate random image bytes
+
+        byte[] randomImageBytes = new byte[1024]; // Example: 1024 bytes
+
+        new Random().nextBytes(randomImageBytes);
+
+        return randomImageBytes;
     }
 }

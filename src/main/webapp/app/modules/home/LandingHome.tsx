@@ -6,8 +6,11 @@ import { Translate } from 'react-jhipster';
 import TypewriterComponent from 'typewriter-effect';
 import { useNavigate } from 'react-router-dom';
 // import { Play } from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
-declare const Play: LucideIcon;
+// import { LucideIcon } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+// declare const Play: LucideIcon;
 
 const LandingHome = () => {
   const navigate = useNavigate();
@@ -48,7 +51,8 @@ const LandingHome = () => {
                   <div className="mb-8 w-10 flex-box border rounded-lg shadow-lg shadow-sm--hover shadowred z-100 cursor-pointer inline-flex transition ease-linear text-base font-weight-normal text-center text-white bg-info hover-bg-hot-pink">
                     <a className="" onClick={() => navigate('/map')}>
                       <p className="pl-3 p-2 flex-box text-center font-weight-bolder text-xl w-100">
-                        <Play className="w-3 fa-text-height mr-2" fill="currentColor" />
+                        {/* <Play className="w-3 fa-text-height mr-2" fill="currentColor" /> */}
+                        <FontAwesomeIcon icon={faPlay} className="w-3 fa-text-height mr-2" />
                         Explore the Map Now
                       </p>
                     </a>

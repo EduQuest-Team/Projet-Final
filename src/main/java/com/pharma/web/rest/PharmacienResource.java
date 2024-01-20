@@ -177,16 +177,16 @@ public class PharmacienResource {
         @org.springdoc.core.annotations.ParameterObject Pageable pageable,
         @RequestParam(name = "filter", required = false) String filter
     ) {
-        if ("historique-is-null".equals(filter)) {
-            log.debug("REST request to get all Pharmaciens where historique is null");
-            return new ResponseEntity<>(
-                StreamSupport
-                    .stream(pharmacienRepository.findAll().spliterator(), false)
-                    .filter(pharmacien -> pharmacien.getHistorique() == null)
-                    .toList(),
-                HttpStatus.OK
-            );
-        }
+        // if ("historique-is-null".equals(filter)) {
+        //     log.debug("REST request to get all Pharmaciens where historique is null");
+        //     return new ResponseEntity<>(
+        //         StreamSupport
+        //             .stream(pharmacienRepository.findAll().spliterator(), false)
+        //             .filter(pharmacien -> pharmacien.getHistorique() == null)
+        //             .toList(),
+        //         HttpStatus.OK
+        //     );
+        // }
         log.debug("REST request to get a page of Pharmaciens");
         Page<Pharmacien> page = pharmacienRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

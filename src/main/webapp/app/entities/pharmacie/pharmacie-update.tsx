@@ -16,8 +16,6 @@ import { IPharmacieGarde } from 'app/shared/model/pharmacie-garde.model';
 import { getEntities as getPharmacieGardes } from 'app/entities/pharmacie-garde/pharmacie-garde.reducer';
 import { IPharmacien } from 'app/shared/model/pharmacien.model';
 import { getEntities as getPharmaciens } from 'app/entities/pharmacien/pharmacien.reducer';
-import { IPosition } from 'app/shared/model/position.model';
-import { getEntities as getPositions } from 'app/entities/position/position.reducer';
 import { IPharmacie } from 'app/shared/model/pharmacie.model';
 import { getEntity, updateEntity, createEntity, reset } from './pharmacie.reducer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
@@ -36,7 +34,6 @@ export const PharmacieUpdate = () => {
   const gardes = useAppSelector(state => state.garde.entities);
   const pharmacieGardes = useAppSelector(state => state.pharmacieGarde.entities);
   const pharmaciens = useAppSelector(state => state.pharmacien.entities);
-  const positions = useAppSelector(state => state.position.entities);
   const pharmacieEntity = useAppSelector(state => state.pharmacie.entity);
   const loading = useAppSelector(state => state.pharmacie.loading);
   const updating = useAppSelector(state => state.pharmacie.updating);
@@ -60,7 +57,6 @@ export const PharmacieUpdate = () => {
     dispatch(getGardes({}));
     dispatch(getPharmacieGardes({}));
     dispatch(getPharmaciens({}));
-    dispatch(getPositions({}));
   }, []);
 
   useEffect(() => {

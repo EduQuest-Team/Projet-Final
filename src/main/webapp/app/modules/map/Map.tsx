@@ -1,5 +1,8 @@
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.js';
 import { MapContainer, MapContainerProps, Marker, Popup, TileLayer, TileLayerProps } from 'react-leaflet';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';

@@ -153,13 +153,12 @@ public class PharmacieGardeResource {
         @RequestParam(name = "filter", required = false) String filter,
         @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
     ) {
-        if ("historique-is-null".equals(filter)) {
-            log.debug("REST request to get all PharmacieGardes where historique is null");
-            return StreamSupport
-                .stream(pharmacieGardeRepository.findAll().spliterator(), false)
-                .filter(pharmacieGarde -> pharmacieGarde.getHistorique() == null)
-                .toList();
-        }
+        // // if ("historique-is-null".equals(filter)) {
+        //     log.debug("REST request to get all PharmacieGardes where historique is null");
+        //     return StreamSupport
+        //         .stream(pharmacieGardeRepository.findAll().spliterator(), false)
+        //         .toList();
+        // // }
         log.debug("REST request to get all PharmacieGardes");
         if (eagerload) {
             return pharmacieGardeRepository.findAllWithEagerRelationships();

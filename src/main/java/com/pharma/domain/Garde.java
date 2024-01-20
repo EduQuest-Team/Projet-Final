@@ -34,7 +34,7 @@ public class Garde implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "gardes")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "pharmacies", "gardes", "historique" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "pharmacies", "gardes" }, allowSetters = true)
     private Set<PharmacieGarde> pharmaciegardes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

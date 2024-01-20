@@ -1,12 +1,14 @@
 import React from 'react';
 // import * as LucideIcon from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
+// import { LucideIcon } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 // import { Github, Linkedin } from 'lucide-react';
 import { supervisor, team } from 'app/modules/about/index';
 
-declare const Github: LucideIcon;
-declare const Linkedin: LucideIcon;
+// declare const Github: LucideIcon;
+// declare const Linkedin: LucideIcon;
 
 const About = () => {
   return (
@@ -23,11 +25,13 @@ const About = () => {
               <p className="py-2 text-dark">{person.job}</p>
               <div className="flex-box justify-center-l mt-4 space-x-4">
                 <a title="github" href={person.github} className="text-black hover:text-white rounded-circle">
-                  <Github />
+                  {/* <Github /> */}
+                  <FontAwesomeIcon icon={faGithub} size="xl" />
                 </a>
 
                 <a title="linkedin" href={person.linkedIn} className="text-[#3e66d3] hover:text-white rounded-circle">
-                  <Linkedin />
+                  {/* <Linkedin /> */}
+                  <FontAwesomeIcon icon={faLinkedin} size="xl" />
                 </a>
               </div>
             </div>

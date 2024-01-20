@@ -1,6 +1,5 @@
 package com.pharma.repository;
 
-import com.pharma.domain.Pharmacie;
 import com.pharma.domain.PharmacieGarde;
 import java.util.List;
 import java.util.Optional;

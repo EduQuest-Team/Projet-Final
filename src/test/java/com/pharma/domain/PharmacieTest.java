@@ -4,7 +4,7 @@ import static com.pharma.domain.GardeTestSamples.*;
 import static com.pharma.domain.PharmacieGardeTestSamples.*;
 import static com.pharma.domain.PharmacieTestSamples.*;
 import static com.pharma.domain.PharmacienTestSamples.*;
-import static com.pharma.domain.PositionTestSamples.*;
+// import static com.pharma.domain.PositionTestSamples.*;
 import static com.pharma.domain.ZoneTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -94,18 +94,13 @@ class PharmacieTest {
         assertThat(pharmacie.getPharmacien()).isNull();
         assertThat(pharmacienBack.getPharmacie()).isNull();
     }
+    // @Test
+    // void positionTest() throws Exception {
+    //     Pharmacie pharmacie = getPharmacieRandomSampleGenerator();
+    //     Position positionBack = getPositionRandomSampleGenerator();
 
-    @Test
-    void positionTest() throws Exception {
-        Pharmacie pharmacie = getPharmacieRandomSampleGenerator();
-        Position positionBack = getPositionRandomSampleGenerator();
+    //     assertThat(positionBack.getPharmacie()).isEqualTo(pharmacie);
 
-        pharmacie.setPosition(positionBack);
-        assertThat(pharmacie.getPosition()).isEqualTo(positionBack);
-        assertThat(positionBack.getPharmacie()).isEqualTo(pharmacie);
-
-        pharmacie.position(null);
-        assertThat(pharmacie.getPosition()).isNull();
-        assertThat(positionBack.getPharmacie()).isNull();
-    }
+    //     assertThat(positionBack.getPharmacie()).isNull();
+    // }
 }

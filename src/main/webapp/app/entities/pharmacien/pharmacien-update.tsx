@@ -10,8 +10,6 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IPharmacie } from 'app/shared/model/pharmacie.model';
 import { getEntities as getPharmacies } from 'app/entities/pharmacie/pharmacie.reducer';
-import { IHistorique } from 'app/shared/model/historique.model';
-import { getEntities as getHistoriques } from 'app/entities/historique/historique.reducer';
 import { IPharmacien } from 'app/shared/model/pharmacien.model';
 import { getEntity, updateEntity, createEntity, reset } from './pharmacien.reducer';
 
@@ -24,7 +22,6 @@ export const PharmacienUpdate = () => {
   const isNew = id === undefined;
 
   const pharmacies = useAppSelector(state => state.pharmacie.entities);
-  const historiques = useAppSelector(state => state.historique.entities);
   const pharmacienEntity = useAppSelector(state => state.pharmacien.entity);
   const loading = useAppSelector(state => state.pharmacien.loading);
   const updating = useAppSelector(state => state.pharmacien.updating);
@@ -38,9 +35,7 @@ export const PharmacienUpdate = () => {
     if (!isNew) {
       dispatch(getEntity(id));
     }
-
     dispatch(getPharmacies({}));
-    dispatch(getHistoriques({}));
   }, []);
 
   useEffect(() => {

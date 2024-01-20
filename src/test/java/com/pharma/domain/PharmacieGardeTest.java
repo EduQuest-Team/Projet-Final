@@ -1,7 +1,7 @@
 package com.pharma.domain;
 
 import static com.pharma.domain.GardeTestSamples.*;
-import static com.pharma.domain.HistoriqueTestSamples.*;
+// import static com.pharma.domain.HistoriqueTestSamples.*;
 import static com.pharma.domain.PharmacieGardeTestSamples.*;
 import static com.pharma.domain.PharmacieTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,18 +62,13 @@ class PharmacieGardeTest {
         pharmacieGarde.setGardes(new HashSet<>());
         assertThat(pharmacieGarde.getGardes()).doesNotContain(gardeBack);
     }
+    // @Test
+    // void historiqueTest() throws Exception {
+    //     PharmacieGarde pharmacieGarde = getPharmacieGardeRandomSampleGenerator();
+    //     Historique historiqueBack = getHistoriqueRandomSampleGenerator();
 
-    @Test
-    void historiqueTest() throws Exception {
-        PharmacieGarde pharmacieGarde = getPharmacieGardeRandomSampleGenerator();
-        Historique historiqueBack = getHistoriqueRandomSampleGenerator();
+    //     assertThat(historiqueBack.getPharmaciegarde()).isEqualTo(pharmacieGarde);
 
-        pharmacieGarde.setHistorique(historiqueBack);
-        assertThat(pharmacieGarde.getHistorique()).isEqualTo(historiqueBack);
-        assertThat(historiqueBack.getPharmaciegarde()).isEqualTo(pharmacieGarde);
-
-        pharmacieGarde.historique(null);
-        assertThat(pharmacieGarde.getHistorique()).isNull();
-        assertThat(historiqueBack.getPharmaciegarde()).isNull();
-    }
+    //     assertThat(historiqueBack.getPharmaciegarde()).isNull();
+    // }
 }

@@ -1,6 +1,6 @@
 package com.pharma.domain;
 
-import static com.pharma.domain.HistoriqueTestSamples.*;
+// import static com.pharma.domain.HistoriqueTestSamples.*;
 import static com.pharma.domain.PharmacieTestSamples.*;
 import static com.pharma.domain.PharmacienTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,18 +35,17 @@ class PharmacienTest {
         pharmacien.pharmacie(null);
         assertThat(pharmacien.getPharmacie()).isNull();
     }
+    // @Test
+    // void historiqueTest() throws Exception {
+    //     Pharmacien pharmacien = getPharmacienRandomSampleGenerator();
+    //     Historique historiqueBack = getHistoriqueRandomSampleGenerator();
 
-    @Test
-    void historiqueTest() throws Exception {
-        Pharmacien pharmacien = getPharmacienRandomSampleGenerator();
-        Historique historiqueBack = getHistoriqueRandomSampleGenerator();
+    //     pharmacien.setHistorique(historiqueBack);
+    //     assertThat(pharmacien.getHistorique()).isEqualTo(historiqueBack);
+    //     assertThat(historiqueBack.getPharmacien()).isEqualTo(pharmacien);
 
-        pharmacien.setHistorique(historiqueBack);
-        assertThat(pharmacien.getHistorique()).isEqualTo(historiqueBack);
-        assertThat(historiqueBack.getPharmacien()).isEqualTo(pharmacien);
-
-        pharmacien.historique(null);
-        assertThat(pharmacien.getHistorique()).isNull();
-        assertThat(historiqueBack.getPharmacien()).isNull();
-    }
+    //     pharmacien.historique(null);
+    //     assertThat(pharmacien.getHistorique()).isNull();
+    //     assertThat(historiqueBack.getPharmacien()).isNull();
+    // }
 }

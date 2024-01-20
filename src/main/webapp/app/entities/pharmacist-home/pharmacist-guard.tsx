@@ -9,7 +9,6 @@ import { getEntities as getZones } from 'app/entities/zone/zone.reducer';
 import { getEntities as getGardes } from 'app/entities/garde/garde.reducer';
 import { getEntities as getPharmacieGardes } from 'app/entities/pharmacie-garde/pharmacie-garde.reducer';
 import { getEntities as getPharmaciens } from 'app/entities/pharmacien/pharmacien.reducer';
-import { getEntities as getPositions } from 'app/entities/position/position.reducer';
 import { createEntity, updateEntity } from 'app/entities/pharmacie/pharmacie.reducer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';

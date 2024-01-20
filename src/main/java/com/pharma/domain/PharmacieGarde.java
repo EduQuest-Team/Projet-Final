@@ -51,10 +51,6 @@ public class PharmacieGarde implements Serializable {
     @JsonIgnoreProperties(value = { "pharmacies", "pharmaciegardes" }, allowSetters = true)
     private Set<Garde> gardes = new HashSet<>();
 
-    @JsonIgnoreProperties(value = { "pharmaciegarde", "pharmacien" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pharmaciegarde")
-    private Historique historique;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -139,25 +135,6 @@ public class PharmacieGarde implements Serializable {
 
     public PharmacieGarde removeGarde(Garde garde) {
         this.gardes.remove(garde);
-        return this;
-    }
-
-    public Historique getHistorique() {
-        return this.historique;
-    }
-
-    public void setHistorique(Historique historique) {
-        if (this.historique != null) {
-            this.historique.setPharmaciegarde(null);
-        }
-        if (historique != null) {
-            historique.setPharmaciegarde(this);
-        }
-        this.historique = historique;
-    }
-
-    public PharmacieGarde historique(Historique historique) {
-        this.setHistorique(historique);
         return this;
     }
 

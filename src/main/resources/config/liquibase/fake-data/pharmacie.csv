@@ -1,11 +1,6 @@
-id;nom;adresse;image;latitude;longitude;status
-1;loosely;fooey wording fly;null;16521.19;17311.99;true
-2;deafening towards amount;subtle striped pfft;null;9458.09;16205.66;false
-3;every abnormally bah;coke injunction day;null;7399.85;2554.99;true
-4;if considering;con;null;12041;21585.91;false
-5;parliament;pike notoriety;null;21474.31;1054.63;true
-6;parcel hm instead;worried;null;1470.59;14499.55;false
-7;although atop hm;who seriously;null;17718.75;25221.96;true
-8;husband easy-going concerned;astride scaly brightly;null;11243.8;23891.77;false
-9;minus;meantime courteous;null;25425.44;18047.25;false
-10;identical phew french;but bakeware canoe;null;10216.66;9196.88;true
+id;nom;adresse;image;latitude;longitude;status;zone_id
+1;Pharmacie Des Doukkala;25, Av M'Hamed Errafii, 24000, Morocco;fake-data/blob/hipster.png;33.2500431;-8.5040995;true;1
+2;Pharmacie route de Marrakech;Lotissement Amahrach, El Jadida, Morocco 59;fake-data/blob/hipster.png;33.221904;-8.4919703;false;2
+3;Pharmacie Bouaddi;Centre ibn badiss, avenue ibn badiss a côté de la, El Jadida 24000;fake-data/blob/hipster.png;33.2388457;-8.5078869;true;3
+4;Pharmacie Hajji;Lot El Manar, Rue Lahjel, El Jadida, El Jadida 24000;fake-data/blob/hipster.png;33.2470926;-8.5278791;false;4
+5;Pharmacie Dyar Al Mansour;pike notoriety;fake-data/blob/hipster.png;33.2285205;-8.5247167;true;5

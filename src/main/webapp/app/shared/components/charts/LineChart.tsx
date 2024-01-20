@@ -48,8 +48,8 @@ const LineChart = ({ subtitle, title }: ChartCardProps) => {
     return () => {};
   }, [loading]);
 
-  // const handleChange = async (event) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = event => {
+    // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(event.target.value);
     async () => {
       const resp = await axios.get<any>(`/api/stats/pharmacies/${event.target.value}`);

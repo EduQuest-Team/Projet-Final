@@ -167,7 +167,7 @@ export const Pharmacie = () => {
                   <td>{pharmacie.nom}</td>
                   <td>{pharmacie.adresse}</td>
                   <td>
-                    <img src={`data:image/jpeg;base64,${pharmacie.image}`} alt="PharmaImg" width="100px" height="100px" />
+                    <img src={`data:image/png;base64,${pharmacie.image}`} alt="PharmaImg" width="100px" height="100px" />
                   </td>
 
                   <td>{pharmacie.latitude}</td>
