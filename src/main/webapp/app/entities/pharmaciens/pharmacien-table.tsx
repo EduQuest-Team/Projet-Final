@@ -1,4 +1,6 @@
 import React from 'react';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const PharmacienTable = ({ pharmaciens }: { pharmaciens: any }) => {
   return (
@@ -26,9 +28,13 @@ const PharmacienTable = ({ pharmaciens }: { pharmaciens: any }) => {
                   <tr key={i}>
                     <td className="table-user">
                       {pharmacien.user.imageUrl ? (
-                        <img src={`/content/images/uploads/${pharmacien.user.imageUrl}`} className="avatar rounded-circle mr-3" />
+                        <img
+                          src={`/content/images/uploads/${pharmacien.user.imageUrl}`}
+                          className="avatar rounded-circle mr-3"
+                          alt="userImg"
+                        />
                       ) : (
-                        <img src={`/content/images/uploads/user.png`} className="avatar rounded-circle mr-3" />
+                        <img src={`/content/images/uploads/user.png`} className="avatar rounded-circle mr-3" alt="userImg" />
                       )}
                       {pharmacien.user.firstName && pharmacien.user.lastName && (
                         <b>{`${pharmacien.user.firstName} ${pharmacien.user.lastName}`}</b>
@@ -48,9 +54,10 @@ const PharmacienTable = ({ pharmaciens }: { pharmaciens: any }) => {
                         }}
                         className="table-action"
                         data-toggle="tooltip"
-                        data-original-title="Edit product"
+                        data-original-title="Edit Pharmacist"
                       >
-                        <i className="fas fa-user-edit"></i>
+                        <FontAwesomeIcon icon={faEye} /> <span className="d-none d-md-inline">View Profile</span>
+                        {/* <i className="fas fa-user-edit"></i> */}
                       </a>
                     </td>
                   </tr>

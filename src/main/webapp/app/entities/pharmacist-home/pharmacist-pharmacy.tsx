@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getPharmacyByPharmacistId } from 'app/entities/pharmaciens/pharmaciens.reducer';
 
-import { getEntity } from 'app/entities/pharmacien/pharmacien.reducer';
+// import { getEntity } from 'app/entities/pharmacien/pharmacien.reducer';
 import LoadingSpinner from 'app/shared/components/LoadingSpinner';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
@@ -17,6 +17,9 @@ function formatDateString(inputDateString: string): string {
 
   return dateObject.toLocaleString('en-US', options);
 }
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 // function formatInstantString(inputInstant: string): string {
 //   const currentInstant = new Date(inputInstant);
@@ -127,7 +130,7 @@ const PharmacistPharmacy = () => {
                             data-toggle="tooltip"
                             data-original-title="Edit Pharmacy"
                           >
-                            <i className="fas fa-user-edit"></i>
+                            <FontAwesomeIcon icon={faEye} /> <span className="d-none d-md-inline">View Pharmacy</span>
                           </a>
                         </td>
                       </tr>

@@ -18,7 +18,8 @@ function formatDateString(inputDateString: string): string {
 
   return dateObject.toLocaleString('en-US', options);
 }
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 // function formatInstantString(inputInstant: string): string {
 //   const currentInstant = new Date(inputInstant);
 //
@@ -64,9 +65,11 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(getEntity(id));
-    dispatch(getPharmacyByPharmacistId({ pharmacistId: id }));
-  }, []);
+    if (id) {
+      dispatch(getEntity(id));
+      dispatch(getPharmacyByPharmacistId({ pharmacistId: id }));
+    }
+  }, [id, dispatch, getEntity, getPharmacyByPharmacistId]);
 
   useEffect(() => {
     if (!loading) {
@@ -92,9 +95,9 @@ const Profile = () => {
                 <div className="card-profile-image">
                   <a href="#">
                     {pharmacien.user?.imageUrl ? (
-                      <img src={`/content/images/uploads/${pharmacien.user?.imageUrl}`} className="rounded-circle" />
+                      <img src={`/content/images/uploads/${pharmacien.user?.imageUrl}`} className="rounded-circle" alt="userImg" />
                     ) : (
-                      <img src={`/content/images/uploads/pharmacist.png`} className="rounded-circle" />
+                      <img src={`/content/images/uploads/pharmacist.png`} className="rounded-circle" alt="userImg" />
                     )}
                   </a>
                 </div>
@@ -152,7 +155,7 @@ const Profile = () => {
                       <th>Nom</th>
                       <th>Image</th>
                       <th>Adresse</th>
-                      <th>View</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -181,7 +184,8 @@ const Profile = () => {
                             data-toggle="tooltip"
                             data-original-title="Edit Pharmacy"
                           >
-                            <i className="fas fa-user-edit"></i>
+                            <FontAwesomeIcon icon={faEye} /> <span className="d-none d-md-inline">View Pharmacy</span>
+                            {/* <i className="fas fa-user-edit"></i> */}
                           </a>
                         </td>
                       </tr>

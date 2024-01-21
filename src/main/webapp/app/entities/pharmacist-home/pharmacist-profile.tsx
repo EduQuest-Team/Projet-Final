@@ -77,9 +77,9 @@ const PharmacistProfile = () => {
                     <div className="card-profile-image">
                       <a href="#">
                         {pharmacist.user?.imageUrl ? (
-                          <img src={`/content/images/uploads/${pharmacist.user?.imageUrl}`} className="rounded-circle" />
+                          <img src={`/content/images/uploads/${pharmacist.user?.imageUrl}`} className="rounded-circle" alt="pharmacist" />
                         ) : (
-                          <img src={`/content/images/uploads/pharmacist.png`} className="rounded-circle" />
+                          <img src={`/content/images/uploads/pharmacist.png`} className="rounded-circle" alt="pharmacist" />
                         )}
                       </a>
                     </div>

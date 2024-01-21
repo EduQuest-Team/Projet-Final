@@ -1,9 +1,11 @@
 import './home.scss';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import { Row, Col, Alert } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppSelector } from 'app/config/store';
 import LoadingSpinner from 'app/shared/components/LoadingSpinner';
@@ -12,6 +14,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import LandingHome from 'app/modules/home/LandingHome';
 import DashboardHome from 'app/modules/home/DashboardHome';
 import PharmacistHome from 'app/entities/pharmacist-home';
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 
 export const Home = () => {
   const loading = useAppSelector(state => state.authentication.loading);
@@ -23,6 +26,10 @@ export const Home = () => {
   const isPharmacien = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.PHARMACIEN]));
   const isUser = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.USER]));
 
+  // const [userId, setUserId] = useState(account.id);
+  // const handleSyncList = () => {
+  //   console.log(account.id);
+  // };
   return (
     <Row>
       {/*<Col md="3" className="pad">*/}
@@ -64,7 +71,13 @@ export const Home = () => {
                     <h1 className="display-5 d-flex flex-box text-center">
                       <span>{` ${account.firstName}`} !</span>
                     </h1>
-                    <PharmacistHome />
+                    <Link to={`/pharmacist/${account.id}`} className="alert-link">
+                      <Button className="flex-box" color="info" disabled={loading}>
+                        <FontAwesomeIcon icon={faClipboard} spin={loading} /> Get Started
+                      </Button>
+                    </Link>
+                    {/* {account.id && <PharmacistHome />} */}
+                    {/* <PharmacistHome userId={userId} /> */}
                   </Col>
                 </>
               )}

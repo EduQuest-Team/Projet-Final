@@ -34,7 +34,7 @@ export const getPharmacyByPharmacistId = createAsyncThunk(
 export const getPharmacistByUserId = createAsyncThunk(
   'pharmaciens/get_pharmacist_by_userId',
 
-  async ({ userId }: { userId: any }) => axios.get<any>(`${apiUrl}/user/${userId}`),
+  async ({ userId }: { userId: string | number }) => axios.get<any>(`${apiUrl}/user/${userId}`),
   // async ({ userId }: { userId: string | number }) => axios.get<any>(`${apiUrl}/user/${userId}`),
   // async ({ userId }: { userId: string | number }) => axios.get<any>(`${apiUrl}/user/${userId}`),
   // async () => axios.get<any>(`${apiUrl}/user/${account.id}`),

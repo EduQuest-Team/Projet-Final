@@ -13,8 +13,11 @@ import Pharmaciens from './pharmaciens';
 import Profile from 'app/modules/profile';
 import PharmacistHome from './pharmacist-home';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
-
+// export interface IPharmacistProps {
+//   userId: string | number;
+// }
 export default () => {
+  // export default (props: IPharmacistProps) => {
   return (
     <div>
       <ErrorBoundaryRoutes>

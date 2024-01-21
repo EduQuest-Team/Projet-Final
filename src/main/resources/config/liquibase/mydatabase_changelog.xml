@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet author="brigh (generated)" id="1705687998719-1">
         <createTable tableName="garde">
-            <column name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="type" type="BIT"/>
@@ -72,7 +72,7 @@
     </changeSet>
     <changeSet author="brigh (generated)" id="1705687998719-5">
         <createTable tableName="jhi_user_authority">
-            <column name="user_id" type="BIGINT">
+            <column autoIncrement="true" name="user_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="authority_name" type="VARCHAR(50)">
@@ -90,7 +90,7 @@
     </changeSet>
     <changeSet author="brigh (generated)" id="1705687998719-6">
         <createTable tableName="pharmacie">
-            <column name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="nom" type="VARCHAR(255)"/>
@@ -118,7 +118,7 @@
     </changeSet>
     <changeSet author="brigh (generated)" id="1705687998719-7">
         <createTable tableName="pharmacie_garde">
-            <column name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column defaultValueComputed="NULL" name="date_debut" type="date"/>
@@ -136,7 +136,7 @@
     </changeSet>
     <changeSet author="brigh (generated)" id="1705687998719-8">
         <createTable tableName="pharmacien">
-            <column name="id" type="BIGINT">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="nom" type="VARCHAR(255)"/>
@@ -196,8 +196,8 @@
     </changeSet>
     <changeSet author="brigh (generated)" id="1705687998719-13">
         <createTable tableName="ville">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="nom" type="VARCHAR(255)"/>
             <column defaultValueComputed="NULL" name="image" type="BLOB"/>
@@ -214,8 +214,8 @@
     </changeSet>
     <changeSet author="brigh (generated)" id="1705687998719-14">
         <createTable tableName="zone">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="nom" type="VARCHAR(255)"/>
             <column defaultValueComputed="NULL" name="ville_id" type="BIGINT"/>
